@@ -21,7 +21,7 @@ public GitHub avatar is stored locally; fonts and QR images are served locally t
 Only the owner-provided Bitcoin mainnet address is currently configured:
 
 ```text
-bc1q26ra8ngf5wlmpt37f2cwzehu40w04ptfa8vs47
+bc1q7flpdhcm59jdz83gfzk0rf5gc36k32q0td6m6v
 ```
 
 BTC uses ordinary on-chain payments. Lightning is deliberately on hold because
@@ -105,11 +105,9 @@ If a repository already has funding configuration, preserve its other funding
 providers and merge the custom URL (GitHub supports at most four custom URLs).
 Add a README link using `integrations/README-snippet.md`. Do not duplicate wallet
 addresses in those repositories. Activate public links once the site is live.
-Funding links are prepared locally in the Solution members `spk-ocular`,
-`outwall`, `spk-mail`, and `spk-cockpit`; README links are also prepared where
-a README exists. These integration edits are not committed or published while
-the canonical site is unavailable. Other repositories still need the shared
-default below or a repository-specific funding file.
+Repository integration is on hold at the owner’s request. Do not change other
+projects or publish funding links until explicitly asked. Previously prepared
+local integration edits have been removed.
 
 For automatic Sponsor buttons on all eligible personal repositories, the same
 funding file can live in a public **`Sipaha/.github`** repository. Existing

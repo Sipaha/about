@@ -8,7 +8,7 @@ const site = JSON.parse(
 test("owner-provided Bitcoin address passes mainnet checksum validation", () =>
   assert.equal(
     validateSite(structuredClone(site)).wallets[0].address,
-    "bc1q26ra8ngf5wlmpt37f2cwzehu40w04ptfa8vs47",
+    "bc1q7flpdhcm59jdz83gfzk0rf5gc36k32q0td6m6v",
   ));
 test("a one-character address typo blocks publishing", () => {
   const s = structuredClone(site);

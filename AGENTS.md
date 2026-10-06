@@ -4,7 +4,9 @@ Read README.md before changing the site. Public payment configuration is
 src/site.json; locale copy is src/content.mjs. Do not invent wallet addresses,
 Boosty profiles, balances, donor counts, or claims about payment safety.
 Never request or store private keys or recovery phrases. Lightning is on hold.
-Do not change another project’s funding policy when linking to this site.
+Repository integration is on hold: do not edit other projects or publish funding
+links without a new explicit request. Do not change another project’s funding
+policy when linking to this site.
 
 Keep the site static, accessible without JavaScript, free of tracking and external
 runtime requests. Maintain RU/EN and light/dark parity. QR data and copied data
