@@ -11,6 +11,8 @@ no tracking, optional cloud use, and speed. AI assists design, implementation,
 and testing; donations help fund these tools. The owner-approved public contact
 is sipahabk@gmail.com, with no promise to answer every message. The page does not
 advertise job seeking. Keep this content equivalent in Russian and English.
+The Russian introduction keeps «и работа, и хобби» together with nonbreaking
+spaces to avoid leaving a conjunction at the end of a line.
 
 Featured projects are SPK Ocular, the owner’s Mattermost desktop client
 (`Sipaha/spk-mm-client`), and SPK Mail. Outwall is omitted at the owner’s request.
