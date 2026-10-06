@@ -44,7 +44,8 @@ certified by native speakers. Key/shape parity and browser checks catch omission
 and rendering problems, not every stylistic issue. Persian is deferred until an
 adequate terminology and language-review process is available; this is not a claim
 that AI necessarily translates every Persian text poorly. Do not publish a language
-with known unresolved mistranslations to inflate the selector.
+with known unresolved mistranslations to inflate the selector. See the
+[translation policy](docs/localization.md).
 
 [Shared SPK principles](docs/spk-principles.md) record the owner's language-accessibility
 direction. [Market research](docs/markets-2026-10-06.md) separates source evidence
@@ -56,6 +57,10 @@ still `donate`; this does not affect the repository or public site URL.
 
 GitHub Pages must use **GitHub Actions** as its source. The previous deployment
 was blocked by disabled Pages; publishing requires that setting to be enabled.
+On 2026-10-06, [run 37483024816](https://github.com/Sipaha/about/actions/runs/37483024816)
+verified the eight-language build successfully, but deployment returned HTTP 404
+and requested that Pages be enabled. The public repository API still reported
+`has_pages: false`. The site is therefore not claimed publicly live.
 
 ## Content and payment details
 
