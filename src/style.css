@@ -691,6 +691,8 @@ button:active,
   margin-top: 16px;
 }
 .contact-email {
+  display: inline-block;
+  margin-bottom: 8px;
   color: var(--accent);
   font-size: 20px;
   text-decoration: underline;
@@ -698,10 +700,13 @@ button:active,
 }
 .contact-section {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 470px);
-  align-items: center;
-  gap: 70px;
+  grid-template-columns: 200px minmax(0, 1fr);
+  align-items: baseline;
+  gap: 40px;
   padding: 10px 0 36px;
+}
+.contact-section h2 {
+  margin-bottom: 0;
 }
 .support-layout {
   display: grid;
