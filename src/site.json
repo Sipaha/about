@@ -26,11 +26,11 @@
       "ru": "Kubernetes и Docker в одном рабочем пространстве."
     },
     {
-      "name": "Mattermost",
+      "name": "SPK MM Client",
       "url": "https://github.com/Sipaha/spk-mm-client",
       "icon": "chats",
-      "en": "My lightweight desktop client for Mattermost.",
-      "ru": "Мой лёгкий настольный клиент для Mattermost."
+      "en": "A lightweight desktop client for Mattermost.",
+      "ru": "Лёгкий настольный клиент для Mattermost."
     },
     {
       "name": "SPK Mail",
