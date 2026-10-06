@@ -16,6 +16,7 @@ The introduction has a deliberate line break after the professional title.
 naturally; Russian conjunctions stay with the following word.
 
 Featured projects are SPK Ocular, SPK MM Client (`Sipaha/spk-mm-client`), and SPK Mail.
+SPK Ocular links to its product website: https://sipaha.github.io/spk-ocular/.
 Project descriptions address a broad audience and avoid possessives such as “my”.
 The footer says “Free software for everyone” and omits payment-method and
 privacy slogans. Boosty remains a possible future option awaiting a public profile link. Outwall is omitted at the owner’s request.

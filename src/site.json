@@ -20,7 +20,7 @@
   "projects": [
     {
       "name": "SPK Ocular",
-      "url": "https://github.com/Sipaha/spk-ocular",
+      "url": "https://sipaha.github.io/spk-ocular/",
       "icon": "stack",
       "en": "Kubernetes and Docker in one desktop workspace.",
       "ru": "Kubernetes и Docker в одном рабочем пространстве."
