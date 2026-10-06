@@ -38,18 +38,14 @@ profile. Edit `src/content.mjs` for Russian and English copy. There is no runtim
 API, analytics, wallet connection, checkout, or private-key handling. The owner’s
 public GitHub avatar is stored locally; fonts and QR images are served locally too.
 
-Only the owner-provided Bitcoin mainnet address is currently configured:
+Owner-approved methods: BTC on Bitcoin (ordinary on-chain payments), USDT on
+TON, USDT on TRON, and ETH on Ethereum. Exact addresses are in `src/site.json`.
+The supplied TON mainnet CRC16 and TRON Base58Check checks passed; Ethereum
+syntax is validated by the build. Checks do not prove wallet ownership.
+Each method displays its network explicitly.
 
-```text
-bc1q7flpdhcm59jdz83gfzk0rf5gc36k32q0td6m6v
-```
-
-BTC uses ordinary on-chain payments. Lightning is deliberately on hold because
-the owner does not want to periodically claim payments. ETH, TON/Gram, USDT, and
-Boosty remain unconfigured until the owner supplies their public addresses or
-profile link. Never substitute sample addresses or create payment accounts on the
-owner’s behalf. Adding a non-empty method to the configuration renders it in both
-languages; absent methods are not advertised.
+Lightning remains on hold. Toncoin/GRAM and Boosty remain unconfigured.
+Never substitute sample addresses or create payment accounts on the owner's behalf.
 
 Each wallet has `id`, `coin`, `name`, `network`, and `address`. Use an explicit
 network name such as `Ethereum`, `Bitcoin`, `TON`, or `TRON`. The build validates

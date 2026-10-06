@@ -15,6 +15,27 @@
       "name": "Bitcoin",
       "network": "Bitcoin",
       "address": "bc1q7flpdhcm59jdz83gfzk0rf5gc36k32q0td6m6v"
+    },
+    {
+      "id": "usdt-ton",
+      "coin": "USDT",
+      "name": "Tether",
+      "network": "TON",
+      "address": "UQBNj7zUW281X687f0wwvSvnRVSfs_EDlr_FvB7LVLO4yYOi"
+    },
+    {
+      "id": "usdt-tron",
+      "coin": "USDT",
+      "name": "Tether",
+      "network": "TRON",
+      "address": "TGC2K67vvX93eSK1JFNfMaq2eEy1WDKhpL"
+    },
+    {
+      "id": "eth",
+      "coin": "ETH",
+      "name": "Ethereum",
+      "network": "Ethereum",
+      "address": "0xA4268dC41A31974731309f8c33Fcf9457F78Fa6E"
     }
   ],
   "projects": [

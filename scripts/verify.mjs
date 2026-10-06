@@ -121,11 +121,13 @@ try {
           path: resolve(scratch, `${lang}-${theme}-${width}.png`),
           fullPage: true,
         });
-        await page.locator("[data-copy]").first().click();
-        assert.equal(
-          await page.evaluate(() => navigator.clipboard.readText()),
-          site.wallets[0].address,
-        );
+        for (const [index, wallet] of site.wallets.entries()) {
+          await page.locator("[data-copy]").nth(index).click();
+          assert.equal(
+            await page.evaluate(() => navigator.clipboard.readText()),
+            wallet.address,
+          );
+        }
         assert.match(
           await page.locator("[role=status]").first().innerText(),
           lang === "ru" ? /скопирован/ : /copied/,
