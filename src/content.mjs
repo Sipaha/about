@@ -22,7 +22,8 @@ export const content = {
     lead: "Системный архитектор и разработчик. Для меня программирование — и работа, и хобби.",
     profile: "Мой GitHub",
     support: "Поддержать разработку",
-    supportLead: "Если вам близка эта идея, вы можете поддержать разработку.",
+    supportLead:
+      "Поддержите создание качественного бесплатного софта, доступного всем.",
     network: "Сеть",
     address: "Адрес получения",
     copy: "Скопировать адрес",
@@ -73,7 +74,8 @@ export const content = {
     lead: "Systems architect and developer. Programming is both my work and my hobby.",
     profile: "Find me on GitHub",
     support: "Support development",
-    supportLead: "If you share this vision, you can support development.",
+    supportLead:
+      "Support the creation of quality free software available to everyone.",
     network: "Network",
     address: "Receiving address",
     copy: "Copy address",

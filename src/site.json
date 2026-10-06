@@ -26,11 +26,11 @@
       "ru": "Kubernetes и Docker в одном рабочем пространстве."
     },
     {
-      "name": "Outwall",
-      "url": "https://github.com/Sipaha/outwall",
-      "icon": "shield-check",
-      "en": "Controlled API access for AI agents, with secrets kept private.",
-      "ru": "Доступ ИИ-агентов к API с защитой секретов и контролем запросов."
+      "name": "Mattermost",
+      "url": "https://github.com/Sipaha/spk-mm-client",
+      "icon": "chats",
+      "en": "My lightweight desktop client for Mattermost.",
+      "ru": "Мой лёгкий настольный клиент для Mattermost."
     },
     {
       "name": "SPK Mail",
