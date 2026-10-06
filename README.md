@@ -14,8 +14,7 @@ advertise job seeking. Keep this content equivalent in Russian and English.
 
 Featured projects are SPK Ocular, the owner’s Mattermost desktop client
 (`Sipaha/spk-mm-client`), and SPK Mail. Outwall is omitted at the owner’s request.
-The Mattermost repository is readable with the owner’s SSH access, but its public
-URL returned HTTP 404 on 2026-10-06; visitors need repository access until it is public.
+The Mattermost repository is public; anonymous access was verified on 2026-10-06.
 The support section explicitly names its purpose: quality free software available
 to everyone. Avoid references such as “this idea” that require reading earlier sections.
 
