@@ -19,27 +19,27 @@
 }
 :root {
   color-scheme: light;
-  --bg: #f7f8f5;
-  --surface: #fffefa;
-  --text: #252c28;
-  --muted: #5e6860;
-  --line: #d9dfd6;
-  --accent: #356143;
-  --accent-soft: #e6eddf;
-  --button-text: #fffefa;
+  --bg: #f7f7f8;
+  --surface: #fdfdfe;
+  --text: #24262b;
+  --muted: #60636c;
+  --line: #dedfe4;
+  --accent: #315caa;
+  --accent-soft: #e9eef8;
+  --button-text: #fdfdfe;
   --focus: #376fc0;
   --radius: 16px;
 }
 :root[data-theme="dark"] {
   color-scheme: dark;
-  --bg: #191f1b;
-  --surface: #222b24;
-  --text: #eef2e9;
-  --muted: #b1bdb1;
-  --line: #3d483f;
-  --accent: #b8d4a8;
-  --accent-soft: #303f30;
-  --button-text: #1c2b1c;
+  --bg: #191a1e;
+  --surface: #23252b;
+  --text: #eff0f4;
+  --muted: #b5b8c2;
+  --line: #3c3f49;
+  --accent: #a9c5ff;
+  --accent-soft: #2b3449;
+  --button-text: #18243b;
   --focus: #9dbff4;
 }
 * {
@@ -229,7 +229,7 @@ h1 span {
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  box-shadow: 0 8px 32px #253b2710;
+  box-shadow: 0 8px 32px #20283810;
   align-self: start;
 }
 .support h2 {

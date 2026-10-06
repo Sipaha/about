@@ -118,7 +118,7 @@ another GitHub repository or change unrelated project settings.
 ## Design and assets
 
 Profile-first page: introduction, about, projects, contact, then optional support.
-Restrained green accent with a responsive layout. Design
+Neutral gray surfaces and a restrained blue accent with a responsive layout. Design
 variance 4, motion intensity 2, visual density 4. Auto light/dark theme with manual
 override. Native CSS; no UI framework is needed for a static personal page.
 Manrope is self-hosted. Phosphor icons are bundled inline; Bitcoin QR codes are

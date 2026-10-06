@@ -62,7 +62,7 @@ for (const w of site.wallets) {
       type: "svg",
       errorCorrectionLevel: "M",
       margin: 4,
-      color: { dark: "#17231cff", light: "#ffffffff" },
+      color: { dark: "#20232aff", light: "#ffffffff" },
     }),
   );
 }
