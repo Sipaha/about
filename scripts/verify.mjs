@@ -7,6 +7,8 @@ import { resolve } from "node:path";
 import assert from "node:assert/strict";
 import { PNG } from "pngjs";
 import jsQR from "jsqr";
+import { languages, pagePath } from "../src/languages.mjs";
+import { content } from "../src/content.mjs";
 const require = createRequire(import.meta.url);
 const site = JSON.parse(
   await readFile(new URL("../src/site.json", import.meta.url), "utf8"),
@@ -15,6 +17,8 @@ const scratch = resolve(
   process.env.ABOUT_SCRATCH || "../.agents/tmp/about/verify",
 );
 await mkdir(scratch, { recursive: true });
+process.env.TMPDIR = resolve(scratch, "tmp");
+await mkdir(process.env.TMPDIR, { recursive: true });
 const server = createServer();
 await new Promise((r) => server.listen(0, "127.0.0.1", r));
 const port = server.address().port;
@@ -38,7 +42,7 @@ try {
     headless: true,
     args: ["--no-sandbox"],
   });
-  for (const lang of ["ru", "en"])
+  for (const { code: lang } of languages)
     for (const theme of ["light", "dark"])
       for (const width of [375, 768, 1440]) {
         const context = await browser.newContext({
@@ -51,11 +55,11 @@ try {
         const requests = [];
         page.on("pageerror", (e) => errors.push(e.message));
         page.on("request", (r) => requests.push(r.url()));
-        await page.goto(origin + base + (lang === "en" ? "en/" : ""));
+        await page.goto(origin + pagePath(lang, base));
         await page.evaluate(() => document.fonts.ready);
         assert.equal(
           await page.locator('link[rel="canonical"]').getAttribute("href"),
-          site.url + (lang === "en" ? "en/" : ""),
+          site.url + (lang === "ru" ? "" : `${lang}/`),
         );
         assert(await page.locator("#profile-title").isVisible());
         assert(
@@ -130,7 +134,7 @@ try {
         }
         assert.match(
           await page.locator("[role=status]").first().innerText(),
-          lang === "ru" ? /скопирован/ : /copied/,
+          new RegExp(content[lang].copied),
         );
         await page.locator("[data-theme-toggle]").click();
         await page.reload();
@@ -139,6 +143,9 @@ try {
           theme === "light" ? "dark" : "light",
         );
         await page.locator(".language").click();
+        await page
+          .locator(`[data-language="${lang === "ru" ? "en" : "ru"}"]`)
+          .click();
         assert.equal(
           await page.locator("html").getAttribute("lang"),
           lang === "ru" ? "en" : "ru",
@@ -154,6 +161,71 @@ try {
         console.log(summaries.at(-1));
         await context.close();
       }
+  for (const { code } of languages) {
+    const context = await browser.newContext({
+      locale: code === "zh" ? "zh-CN" : code,
+      reducedMotion: "reduce",
+    });
+    await context.addInitScript(() =>
+      Object.defineProperty(navigator, "webdriver", { get: () => false }),
+    );
+    const page = await context.newPage();
+    await page.goto(origin + base + "?ref=test#support");
+    assert.equal(
+      page.url(),
+      origin + pagePath(code, base) + "?ref=test#support",
+    );
+    await page.locator(".language").click();
+    await page.locator('[data-language="de"]').click();
+    assert.equal(
+      page.url(),
+      origin + pagePath("de", base) + "?ref=test#support",
+    );
+    await page.goto(origin + base);
+    assert.equal(await page.locator("html").getAttribute("lang"), "de");
+    await page.goto(origin + pagePath("ja", base));
+    assert.equal(await page.locator("html").getAttribute("lang"), "ja");
+    await page.locator(".language").click();
+    await page.keyboard.press("Escape");
+    assert.equal(await page.locator(".language-options").isVisible(), false);
+    await context.close();
+  }
+  for (const javaScriptEnabled of [true, false]) {
+    const context = await browser.newContext({
+      locale: "pt-BR",
+      javaScriptEnabled,
+    });
+    if (javaScriptEnabled)
+      await context.addInitScript(() => {
+        Object.defineProperty(navigator, "webdriver", { get: () => false });
+        Object.defineProperty(window, "localStorage", {
+          get: () => {
+            throw Error("Disabled");
+          },
+        });
+      });
+    const page = await context.newPage();
+    await page.goto(origin + base);
+    assert.equal(
+      await page.locator("html").getAttribute("lang"),
+      javaScriptEnabled ? "pt" : "ru",
+    );
+    await page.locator(".language").click();
+    await page.locator('[data-language="zh"]').click();
+    assert.equal(await page.locator("html").getAttribute("lang"), "zh");
+    await context.close();
+  }
+  const unsupported = await browser.newContext({ locale: "fa-IR" });
+  await unsupported.addInitScript(() =>
+    Object.defineProperty(navigator, "webdriver", { get: () => false }),
+  );
+  const up = await unsupported.newPage();
+  await up.goto(origin + base);
+  assert.equal(await up.locator("html").getAttribute("lang"), "en");
+  await unsupported.close();
+  console.log(
+    "Language detection, saved choice, direct routes, hash/query, storage denial and no-JS switching: OK",
+  );
   const fallback = await browser.newContext();
   const page = await fallback.newPage();
   await page.addInitScript(() =>
@@ -189,20 +261,24 @@ try {
   assert(await np.locator(".qr-frame img").first().isVisible());
   assert.equal(await np.locator("[data-copy]").first().isVisible(), false);
   await nojs.close();
-  const small = await browser.newContext({
-    viewport: { width: 320, height: 760 },
-    reducedMotion: "reduce",
-  });
-  const sp = await small.newPage();
-  await sp.goto(origin + base);
-  assert(
-    await sp.evaluate(() => document.documentElement.scrollWidth <= innerWidth),
-  );
-  await sp.screenshot({
-    path: resolve(scratch, "ru-light-320.png"),
-    fullPage: true,
-  });
-  await small.close();
+  for (const { code } of languages) {
+    const small = await browser.newContext({
+      viewport: { width: 320, height: 760 },
+      reducedMotion: "reduce",
+    });
+    const sp = await small.newPage();
+    await sp.goto(origin + pagePath(code, base));
+    assert(
+      await sp.evaluate(
+        () => document.documentElement.scrollWidth <= innerWidth,
+      ),
+    );
+    await sp.screenshot({
+      path: resolve(scratch, `${code}-light-320.png`),
+      fullPage: true,
+    });
+    await small.close();
+  }
   console.log(
     "Clipboard denial, no-JavaScript, 320px reduced-motion fallback: OK",
   );

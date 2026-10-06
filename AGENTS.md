@@ -10,7 +10,9 @@ links without a new explicit request. Do not change another project’s funding
 policy when linking to this site.
 
 Keep the site static, accessible without JavaScript, free of tracking and external
-runtime requests. Maintain RU/EN and light/dark parity. QR data and copied data
+runtime requests. Maintain all eight locales and light/dark parity. Natural, accurate translations
+take precedence over language count. Persian is deferred pending terminology
+and language review; no native-speaker certification is claimed. QR data and copied data
 must exactly match the public configuration. New networks require address-format
 validation and browser QR checks, not just a display label.
 

@@ -2,6 +2,7 @@ import { readFile, writeFile, mkdir, rm, cp } from "node:fs/promises";
 import QRCode from "qrcode";
 import { validateSite } from "../src/validate.mjs";
 import { content } from "../src/content.mjs";
+import { languages, pagePath, languageBootstrap } from "../src/languages.mjs";
 
 const site = validateSite(
   JSON.parse(
@@ -67,9 +68,10 @@ for (const w of site.wallets) {
   );
 }
 const themeScript = `try{const t=localStorage.getItem('about-theme');document.documentElement.dataset.theme=t==='dark'||t!=='light'&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}catch{document.documentElement.dataset.theme=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}`;
-for (const lang of ["ru", "en"]) {
+for (const meta of languages) {
+  const lang = meta.code;
   const t = content[lang];
-  const pageUrl = site.url + (lang === "en" ? "en/" : "");
+  const pageUrl = site.url + (lang === "ru" ? "" : `${lang}/`);
   const person = lang === "ru" ? site.owner.nameRu : site.owner.name;
   const wallets = await Promise.all(
     site.wallets.map(
@@ -87,13 +89,13 @@ for (const lang of ["ru", "en"]) {
   const projects = await Promise.all(
     site.projects.map(
       async (p) =>
-        `<a class="project" href="${esc(p.url)}"><span class="project-icon">${await icon(p.icon)}</span><h3>${esc(p.name)}</h3><p>${esc(p[lang])}</p>${await icon("arrow-up-right")}</a>`,
+        `<a class="project" href="${esc(p.url)}"><span class="project-icon">${await icon(p.icon)}</span><h3>${esc(p.name)}</h3><p>${esc(t.projectDescriptions?.[site.projects.indexOf(p)] ?? p[lang])}</p>${await icon("arrow-up-right")}</a>`,
     ),
   );
   const html = `<!doctype html>
-<html lang="${lang}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark"><title>${t.title}</title><meta name="description" content="${t.description}"><link rel="canonical" href="${pageUrl}"><link rel="alternate" hreflang="ru" href="${site.url}"><link rel="alternate" hreflang="en" href="${site.url}en/"><link rel="alternate" hreflang="x-default" href="${site.url}"><meta property="og:type" content="website"><meta property="og:title" content="${t.title}"><meta property="og:description" content="${t.description}"><meta property="og:url" content="${pageUrl}"><meta property="og:image" content="${site.url}assets/avatar.png"><meta property="og:locale" content="${lang === "ru" ? "ru_RU" : "en_US"}"><meta name="referrer" content="strict-origin-when-cross-origin"><link rel="icon" href="${base}assets/avatar.png"><script>${themeScript}</script><link rel="stylesheet" href="${base}assets/style.css"><script src="${base}assets/client.js" defer></script></head>
+<html lang="${lang}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark"><title>${t.title}</title><meta name="description" content="${t.description}"><link rel="canonical" href="${pageUrl}">${languages.map((l) => `<link rel="alternate" hreflang="${l.code}" href="${site.url + (l.code === "ru" ? "" : `${l.code}/`)}">`).join("")}<link rel="alternate" hreflang="x-default" href="${site.url}"><meta property="og:type" content="website"><meta property="og:title" content="${t.title}"><meta property="og:description" content="${t.description}"><meta property="og:url" content="${pageUrl}"><meta property="og:image" content="${site.url}assets/avatar.png"><meta property="og:locale" content="${meta.og}"><meta name="referrer" content="strict-origin-when-cross-origin"><link rel="icon" href="${base}assets/avatar.png"><script>${languageBootstrap({ base, storageKey: "about-language", codes: languages.map((l) => l.code) })}</script><script>${themeScript}</script><link rel="stylesheet" href="${base}assets/style.css"><script src="${base}assets/client.js" defer></script></head>
 <body><a class="skip" href="#main">${t.skip}</a>
-<header class="header wrap"><a class="identity" href="${esc(site.owner.github)}"><img src="${base}assets/avatar.png" alt="" width="38" height="38"><span>${esc(person)}</span></a><nav class="nav" aria-label="${lang === "ru" ? "Навигация" : "Navigation"}"><a class="nav-projects" href="#projects">${t.projectsNav}</a><a class="nav-support" href="#support">${t.supportNav}</a><div class="nav-tools"><a class="language" href="${lang === "ru" ? `${base}en/` : base}" lang="${lang === "ru" ? "en" : "ru"}" hreflang="${lang === "ru" ? "en" : "ru"}" aria-label="${t.language}">${lang === "ru" ? "EN" : "RU"}</a><button class="icon-button" type="button" data-theme-toggle aria-label="${t.theme}" aria-pressed="false">${await icon("moon", "moon")}${await icon("sun", "sun")}</button></div></nav></header>
+<header class="header wrap"><a class="identity" href="${esc(site.owner.github)}"><img src="${base}assets/avatar.png" alt="" width="38" height="38"><span>${esc(person)}</span></a><nav class="nav" aria-label="${t.navigation}"><a class="nav-projects" href="#projects">${t.projectsNav}</a><a class="nav-support" href="#support">${t.supportNav}</a><div class="nav-tools"><details class="language-menu"><summary class="language" aria-label="${t.languageLabel}" title="${t.languageLabel}">${meta.short}<span aria-hidden="true">⌄</span></summary><nav class="language-options" aria-label="${t.languageLabel}">${languages.map((l) => `<a href="${pagePath(l.code, base)}" lang="${l.code}" hreflang="${l.code}" data-language="${l.code}" ${l.code === lang ? 'aria-current="page"' : ""}>${l.name}</a>`).join("")}</nav></details><button class="icon-button" type="button" data-theme-toggle aria-label="${t.theme}" aria-pressed="false">${await icon("moon", "moon")}${await icon("sun", "sun")}</button></div></nav></header>
 <main id="main" class="wrap">
 <section class="profile-hero" aria-labelledby="profile-title"><div class="intro"><p class="greeting">${t.intro}</p><h1 id="profile-title">${t.headline}</h1><p class="lead">${t.lead}<br>${t.leadSecond}</p><a class="text-link" href="${esc(site.owner.github)}">${await icon("github-logo")} ${t.profile}${await icon("arrow-up-right")}</a></div><div class="profile-mark"><img src="${base}assets/avatar.png" alt="${esc(site.owner.handle)}" width="192" height="192"><span>@${esc(site.owner.handle)}</span></div></section>
 <section class="about-section" aria-labelledby="about-title"><h2 id="about-title">${t.about}</h2><p>${t.aboutText}</p><p>${t.valuesText}</p></section>
@@ -102,16 +104,17 @@ for (const lang of ["ru", "en"]) {
 <div class="support-layout" id="support"><div class="support-context"><h2>${t.support}</h2><p>${t.supportLead}</p><section class="purpose"><h3>${t.purpose}</h3><p>${t.purposeText}</p></section><section class="help"><h3>${t.other}</h3><p>${t.otherText}</p></section></div>
 <section class="support" aria-label="${t.support}">${site.boosty ? `<a class="boosty" href="${esc(site.boosty)}">${t.boosty}${await icon("arrow-up-right")}</a><p class="boosty-note">${t.boostyText}</p>${wallets.length ? `<p class="crypto-label">${t.crypto}</p>` : ""}` : ""}${wallets.join("")}<p class="optional">${t.optional}</p><noscript><style>.copy,.icon-button,.copy-status{display:none}</style><span class="no-js">${t.instruction}</span></noscript></section></div></main>
 <footer class="footer wrap"><p>${t.footer}</p><a href="https://github.com/Sipaha/about">${t.source} ↗</a></footer></body></html>`;
+  if (lang !== "ru") await mkdir(new URL(`${lang}/`, out), { recursive: true });
   await writeFile(
-    new URL(lang === "en" ? "en/index.html" : "index.html", out),
+    new URL(lang === "ru" ? "index.html" : `${lang}/index.html`, out),
     html,
   );
 }
 await writeFile(new URL(".nojekyll", out), "");
 await writeFile(
   new URL("sitemap.xml", out),
-  `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>${site.url}</loc></url><url><loc>${site.url}en/</loc></url></urlset>`,
+  `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${languages.map((l) => `<url><loc>${site.url + (l.code === "ru" ? "" : `${l.code}/`)}</loc></url>`).join("")}</urlset>`,
 );
 console.log(
-  `Built RU + EN static pages; ${site.wallets.length} verified-format wallet(s), ${site.boosty ? 1 : 0} Boosty link. No external runtime requests.`,
+  `Built ${languages.length} localized static pages; ${site.wallets.length} verified-format wallet(s), ${site.boosty ? 1 : 0} Boosty link. No external runtime requests.`,
 );

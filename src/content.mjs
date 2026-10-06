@@ -1,5 +1,19 @@
+import zh from "./locales/zh.json" with { type: "json" };
+import es from "./locales/es.json" with { type: "json" };
+import de from "./locales/de.json" with { type: "json" };
+import fr from "./locales/fr.json" with { type: "json" };
+import pt from "./locales/pt.json" with { type: "json" };
+import ja from "./locales/ja.json" with { type: "json" };
 export const content = {
+  zh,
+  es,
+  de,
+  fr,
+  pt,
+  ja,
   ru: {
+    languageLabel: "Выбрать язык",
+    navigation: "Навигация",
     title: "Павел Симонов · Системный архитектор",
     description:
       "Павел Симонов (Sipaha), системный архитектор и разработчик. Создаю бесплатные инструменты без слежки и обязательного облака.",
@@ -51,6 +65,8 @@ export const content = {
     crypto: "Или криптовалютой",
   },
   en: {
+    languageLabel: "Choose language",
+    navigation: "Navigation",
     title: "Pavel Simonov · Systems Architect",
     description:
       "Pavel Simonov (Sipaha), systems architect and developer. I build free tools without tracking or a mandatory cloud connection.",

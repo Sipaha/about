@@ -1,6 +1,6 @@
 # Pavel Simonov · About
 
-Bilingual personal website for [Pavel Simonov / Sipaha](https://github.com/Sipaha).
+Multilingual personal website for [Pavel Simonov / Sipaha](https://github.com/Sipaha).
 The page introduces the developer, presents selected projects and a contact route,
 and includes optional donation details in a secondary section (`#support`).
 
@@ -10,7 +10,7 @@ principles take priority over individual technical achievements: free software,
 no tracking, optional cloud use, and speed. AI assists design, implementation,
 and testing; donations help fund these tools. The owner-approved public contact
 is sipahabk@gmail.com, with no promise to answer every message. The page does not
-advertise job seeking. Keep this content equivalent in Russian and English.
+advertise job seeking. Keep this content equivalent in all supported languages.
 The introduction has a deliberate line break after the professional title.
 “Для меня программирование” begins the next line; narrower screens can wrap
 naturally; Russian conjunctions stay with the following word.
@@ -23,6 +23,32 @@ privacy slogans. Boosty remains a possible future option awaiting a public profi
 The Mattermost repository is public; anonymous access was verified on 2026-10-06.
 The support section explicitly names its purpose: quality free software available
 to everyone. Avoid references such as “this idea” that require reading earlier sections.
+
+## Languages and shared direction
+
+Eight complete website languages: Russian, English, simplified Chinese, Spanish,
+German, French, Brazilian Portuguese and Japanese. Russian stays at the canonical
+root for URL compatibility; others use `/about/{code}/`. The root uses an explicit
+saved choice, then ordered browser languages, then English as fallback. Direct
+localized URLs are never redirected. Bots and automated audits retain the requested
+page. Traditional Chinese is not silently presented as simplified Chinese.
+
+The native-language menu works without JavaScript. With JavaScript it remembers
+choices, preserves query/fragment and supports Escape/outside-click dismissal.
+Storage denial does not prevent navigation. Every page has canonical/hreflang
+metadata and a sitemap entry. No translation service is contacted at runtime.
+
+Translations were authored and reviewed against approved RU/EN facts, technical
+names, biography dates and payment instructions; they have not been independently
+certified by native speakers. Key/shape parity and browser checks catch omissions
+and rendering problems, not every stylistic issue. Persian is deferred until an
+adequate terminology and language-review process is available; this is not a claim
+that AI necessarily translates every Persian text poorly. Do not publish a language
+with known unresolved mistranslations to inflate the selector.
+
+[Shared SPK principles](docs/spk-principles.md) record the owner's language-accessibility
+direction. [Market research](docs/markets-2026-10-06.md) separates source evidence
+from proposed outreach priorities. These documents authorize no app changes or posts.
 
 Canonical URL: **https://sipaha.github.io/about/**; English: **https://sipaha.github.io/about/en/**.
 Repository: **https://github.com/Sipaha/about**. The local Solution directory is
@@ -88,7 +114,7 @@ npm run verify
 npm run audit
 ```
 
-`npm run verify` starts and stops its own preview server and verifies RU/EN,
+`npm run verify` starts and stops its own preview server and verifies all eight languages,
 light/dark themes, widths 375/768/1440, exact clipboard contents, QR decoding,
 WCAG AA checks with axe, no external runtime requests, theme persistence,
 language navigation, clipboard denial, JavaScript-disabled use, and 320px layout.

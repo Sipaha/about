@@ -41,3 +41,26 @@ for (const button of document.querySelectorAll("[data-copy]")) {
     }
   });
 }
+
+for (const link of document.querySelectorAll("[data-language]")) {
+  link.addEventListener("click", () => {
+    try {
+      localStorage.setItem("about-language", link.dataset.language);
+    } catch {}
+    const url = new URL(link.href);
+    url.search = location.search;
+    url.hash = location.hash;
+    link.href = url.href;
+  });
+}
+for (const menu of document.querySelectorAll(".language-menu")) {
+  menu.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      menu.open = false;
+      menu.querySelector("summary").focus();
+    }
+  });
+  document.addEventListener("click", (event) => {
+    if (!menu.contains(event.target)) menu.open = false;
+  });
+}
