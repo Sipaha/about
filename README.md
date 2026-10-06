@@ -134,6 +134,8 @@ another GitHub repository or change unrelated project settings.
 ## Design and assets
 
 Profile-first page: introduction, about, projects, contact, then optional support.
+On desktop, contact details and the invitation to write share a two-column row;
+on mobile they stack. This uses the page width and makes the email easy to find.
 Neutral gray surfaces and a restrained blue accent with a responsive layout. Design
 variance 4, motion intensity 2, visual density 4. Auto light/dark theme with manual
 override. Native CSS; no UI framework is needed for a static personal page.

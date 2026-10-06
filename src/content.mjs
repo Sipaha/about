@@ -11,10 +11,9 @@ export const content = {
       "С 2015 года работаю в Citeck: пришёл программистом, с 2018 года занимаюсь системной архитектурой. Проектирую системы и сам участвую в их реализации.",
     valuesText:
       "Создаю собственные продукты и хочу, чтобы качественный бесплатный софт был доступен всем. В своих инструментах ценю скорость, отсутствие слежки и возможность работать без обязательного подключения к облаку. Использую нейросети как помощников в проектировании, разработке и тестировании.",
-    contactSuffix:
-      "по любым темам. Не обещаю ответить на каждое письмо, но открыт к общению.",
     contact: "Связаться",
-    contactText: "Можно написать мне на",
+    contactText:
+      "Можно писать по любым темам. Не обещаю ответить на каждое письмо, но открыт к общению.",
     theme: "Переключить тему",
     language: "Read in English",
     intro: "Системный архитектор / Разработчик",
@@ -63,10 +62,9 @@ export const content = {
       "I have worked at Citeck since 2015. I joined as a programmer and moved into systems architecture in 2018. I design systems and take part in implementing them myself.",
     valuesText:
       "I build my own products and want quality free software to be available to everyone. I value speed, no tracking, and the ability to work without a mandatory cloud connection. I use AI as an assistant in design, development, and testing.",
-    contactSuffix:
-      "about any topic. I cannot promise to answer every email, but I am open to hearing from you.",
     contact: "Get in touch",
-    contactText: "You can write to me at",
+    contactText:
+      "You can write about any topic. I cannot promise to answer every email, but I am open to hearing from you.",
     theme: "Switch theme",
     language: "Читать по-русски",
     intro: "Systems architect / Developer",
