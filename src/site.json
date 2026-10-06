@@ -1,0 +1,42 @@
+{
+  "url": "https://sipaha.github.io/donate/",
+  "owner": {
+    "name": "Pavel Simonov",
+    "nameRu": "Павел Симонов",
+    "handle": "Sipaha",
+    "github": "https://github.com/Sipaha"
+  },
+  "boosty": null,
+  "wallets": [
+    {
+      "id": "btc",
+      "coin": "BTC",
+      "name": "Bitcoin",
+      "network": "Bitcoin",
+      "address": "bc1q26ra8ngf5wlmpt37f2cwzehu40w04ptfa8vs47"
+    }
+  ],
+  "projects": [
+    {
+      "name": "SPK Ocular",
+      "url": "https://github.com/Sipaha/spk-ocular",
+      "icon": "stack",
+      "en": "Kubernetes and Docker in one desktop workspace.",
+      "ru": "Kubernetes и Docker в одном рабочем пространстве."
+    },
+    {
+      "name": "Outwall",
+      "url": "https://github.com/Sipaha/outwall",
+      "icon": "shield-check",
+      "en": "Controlled API access for AI agents, with secrets kept private.",
+      "ru": "Доступ ИИ-агентов к API с защитой секретов и контролем запросов."
+    },
+    {
+      "name": "SPK Mail",
+      "url": "https://github.com/Sipaha/spk-mail",
+      "icon": "envelope-simple",
+      "en": "A lightweight email client that keeps your mail on your machine.",
+      "ru": "Лёгкий почтовый клиент, который хранит почту на твоём компьютере."
+    }
+  ]
+}
