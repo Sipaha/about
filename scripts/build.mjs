@@ -101,7 +101,7 @@ for (const lang of ["ru", "en"]) {
 <section class="contact-section" id="contact" aria-labelledby="contact-title"><h2 id="contact-title">${t.contact}</h2><div class="contact-details"><a class="contact-email" href="mailto:${esc(site.owner.email)}">${esc(site.owner.email)}</a><p>${t.contactText}</p></div></section>
 <div class="support-layout" id="support"><div class="support-context"><h2>${t.support}</h2><p>${t.supportLead}</p><section class="purpose"><h3>${t.purpose}</h3><p>${t.purposeText}</p></section><section class="help"><h3>${t.other}</h3><p>${t.otherText}</p></section></div>
 <section class="support" aria-label="${t.support}">${site.boosty ? `<a class="boosty" href="${esc(site.boosty)}">${t.boosty}${await icon("arrow-up-right")}</a><p class="boosty-note">${t.boostyText}</p>${wallets.length ? `<p class="crypto-label">${t.crypto}</p>` : ""}` : ""}${wallets.join("")}<p class="optional">${t.optional}</p><noscript><style>.copy,.icon-button,.copy-status{display:none}</style><span class="no-js">${t.instruction}</span></noscript></section></div></main>
-<footer class="footer wrap"><div><p>${t.footer}</p><p class="footer-note">${t.privacy}</p></div><a href="https://github.com/Sipaha/about">${t.source} ↗</a></footer></body></html>`;
+<footer class="footer wrap"><p>${t.footer}</p><a href="https://github.com/Sipaha/about">${t.source} ↗</a></footer></body></html>`;
   await writeFile(
     new URL(lang === "en" ? "en/index.html" : "index.html", out),
     html,

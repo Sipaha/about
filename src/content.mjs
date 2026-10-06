@@ -44,9 +44,8 @@ export const content = {
     otherText:
       "Рассказать об ошибке, предложить улучшение или поделиться проектом. Всё это тоже помогает.",
     allProjects: "Все репозитории",
-    footer: "Спасибо, что пользуешься моими проектами.",
+    footer: "Бесплатный софт для всех.",
     source: "Исходный код сайта",
-    privacy: "Без аналитики и подключения кошелька.",
     boosty: "Поддержать на Boosty",
     boostyText: "Банковской картой через Boosty",
     crypto: "Или криптовалютой",
@@ -96,9 +95,8 @@ export const content = {
     otherText:
       "Report a bug, suggest an improvement, or share a project. It all makes a difference.",
     allProjects: "All repositories",
-    footer: "Thanks for using my projects.",
+    footer: "Free software for everyone.",
     source: "Website source",
-    privacy: "No analytics or wallet connection.",
     boosty: "Support on Boosty",
     boostyText: "Pay by bank card through Boosty",
     crypto: "Or with cryptocurrency",

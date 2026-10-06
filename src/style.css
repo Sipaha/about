@@ -464,10 +464,6 @@ button:active,
 .footer p {
   margin: 0;
 }
-.footer-note {
-  font-size: 11px;
-  margin-top: 4px !important;
-}
 .footer a {
   white-space: nowrap;
 }

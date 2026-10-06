@@ -16,7 +16,9 @@ The introduction has a deliberate line break after the professional title.
 naturally; Russian conjunctions stay with the following word.
 
 Featured projects are SPK Ocular, SPK MM Client (`Sipaha/spk-mm-client`), and SPK Mail.
-Project descriptions address a broad audience and avoid possessives such as “my”. Outwall is omitted at the owner’s request.
+Project descriptions address a broad audience and avoid possessives such as “my”.
+The footer says “Free software for everyone” and omits payment-method and
+privacy slogans. Boosty remains a possible future option awaiting a public profile link. Outwall is omitted at the owner’s request.
 The Mattermost repository is public; anonymous access was verified on 2026-10-06.
 The support section explicitly names its purpose: quality free software available
 to everyone. Avoid references such as “this idea” that require reading earlier sections.
