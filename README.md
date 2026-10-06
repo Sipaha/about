@@ -5,8 +5,11 @@ A small bilingual personal website and the single source of donation details for
 
 Canonical URL: **https://sipaha.github.io/donate/** (Russian), with English at
 **https://sipaha.github.io/donate/en/**. GitHub Pages must be enabled before these
-URLs become live. The site is built locally and ready for publication; it has not
-yet been deployed.
+URLs become live. Source is published to `Sipaha/donate`; the build and browser
+verification also pass in GitHub Actions. Publication is currently blocked by
+GitHub Pages being disabled: the deployment API returns 404 and asks to enable
+Pages in repository settings. An authenticated GitHub settings session is not
+available to the agent; SSH code access cannot change this setting.
 
 ## Content and payment details
 
@@ -102,6 +105,11 @@ If a repository already has funding configuration, preserve its other funding
 providers and merge the custom URL (GitHub supports at most four custom URLs).
 Add a README link using `integrations/README-snippet.md`. Do not duplicate wallet
 addresses in those repositories. Activate public links once the site is live.
+Funding links are prepared locally in the Solution members `spk-ocular`,
+`outwall`, `spk-mail`, and `spk-cockpit`; README links are also prepared where
+a README exists. These integration edits are not committed or published while
+the canonical site is unavailable. Other repositories still need the shared
+default below or a repository-specific funding file.
 
 For automatic Sponsor buttons on all eligible personal repositories, the same
 funding file can live in a public **`Sipaha/.github`** repository. Existing
