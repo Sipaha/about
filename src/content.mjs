@@ -1,25 +1,28 @@
 export const content = {
   ru: {
-    title: "Павел Симонов · Разработчик",
+    title: "Павел Симонов · Системный архитектор",
     description:
-      "Павел Симонов (Sipaha). Инструменты для разработчиков, открытые проекты и способы поддержать мою работу.",
+      "Павел Симонов (Sipaha), системный архитектор и разработчик. Создаю бесплатные инструменты без слежки и обязательного облака.",
     skip: "К содержимому",
     projectsNav: "Проекты",
     supportNav: "Поддержать",
-    about: "О моей работе",
+    about: "Обо мне",
     aboutText:
-      "Работаю над настольными приложениями и инструментами для разработчиков: от Kubernetes и Docker до почты и доступа ИИ-агентов к API.",
+      "С 2015 года работаю в Citeck: пришёл программистом, с 2018 года занимаюсь системной архитектурой. Проектирую системы и сам участвую в их реализации.",
+    valuesText:
+      "Создаю собственные продукты и хочу, чтобы качественный бесплатный софт был доступен всем. В своих инструментах ценю скорость, отсутствие слежки и возможность работать без обязательного подключения к облаку. Использую нейросети как помощников в проектировании, разработке и тестировании.",
+    contactSuffix:
+      "по любым темам. Не обещаю ответить на каждое письмо, но открыт к общению.",
     contact: "Связаться",
-    contactText:
-      "По вопросам о проектах, ошибкам и предложениям пиши в Issues соответствующего репозитория на GitHub.",
+    contactText: "Можно написать мне на",
     theme: "Переключить тему",
     language: "Read in English",
-    intro: "Разработчик / Sipaha",
+    intro: "Системный архитектор / Разработчик",
     headline: "Павел Симонов",
-    lead: "Создаю инструменты для повседневной работы и делюсь исходным кодом. Здесь мои проекты и способы связаться со мной.",
+    lead: "Системный архитектор и разработчик. Для меня программирование — и работа, и хобби.",
     profile: "Мой GitHub",
     support: "Поддержать разработку",
-    supportLead: "Любая сумма на твоё усмотрение. Спасибо за поддержку!",
+    supportLead: "Если вам близка эта идея, вы можете поддержать разработку.",
     network: "Сеть",
     address: "Адрес получения",
     copy: "Скопировать адрес",
@@ -35,7 +38,7 @@ export const content = {
     workLead: "Открытые проекты для повседневных задач.",
     purpose: "На что идёт поддержка",
     purposeText:
-      "На инструменты разработки, включая ИИ-подписки, и дальнейшую работу над проектами.",
+      "Поддержка помогает оплачивать ИИ-инструменты и создавать больше бесплатного софта.",
     other: "Помочь можно и без доната",
     otherText:
       "Рассказать об ошибке, предложить улучшение или поделиться проектом. Всё это тоже помогает.",
@@ -48,26 +51,29 @@ export const content = {
     crypto: "Или криптовалютой",
   },
   en: {
-    title: "Pavel Simonov · Developer",
+    title: "Pavel Simonov · Systems Architect",
     description:
-      "Pavel Simonov (Sipaha). Developer tools, open-source projects, and ways to support my work.",
+      "Pavel Simonov (Sipaha), systems architect and developer. I build free tools without tracking or a mandatory cloud connection.",
     skip: "Skip to content",
     projectsNav: "Projects",
     supportNav: "Support",
-    about: "About my work",
+    about: "About me",
     aboutText:
-      "I work on desktop apps and developer tools, from Kubernetes and Docker to email and controlled API access for AI agents.",
+      "I have worked at Citeck since 2015. I joined as a programmer and moved into systems architecture in 2018. I design systems and take part in implementing them myself.",
+    valuesText:
+      "I build my own products and want quality free software to be available to everyone. I value speed, no tracking, and the ability to work without a mandatory cloud connection. I use AI as an assistant in design, development, and testing.",
+    contactSuffix:
+      "about any topic. I cannot promise to answer every email, but I am open to hearing from you.",
     contact: "Get in touch",
-    contactText:
-      "For project questions, bugs, and suggestions, open an issue in the relevant GitHub repository.",
+    contactText: "You can write to me at",
     theme: "Switch theme",
     language: "Читать по-русски",
-    intro: "Developer / Sipaha",
+    intro: "Systems architect / Developer",
     headline: "Pavel Simonov",
-    lead: "I build tools for everyday work and share the source. Here are my projects and where to find me.",
+    lead: "Systems architect and developer. Programming is both my work and my hobby.",
     profile: "Find me on GitHub",
     support: "Support development",
-    supportLead: "Give any amount that feels right. Thank you!",
+    supportLead: "If you share this vision, you can support development.",
     network: "Network",
     address: "Receiving address",
     copy: "Copy address",
@@ -83,7 +89,7 @@ export const content = {
     workLead: "Open-source projects for everyday tasks.",
     purpose: "What your support funds",
     purposeText:
-      "Development tools, including AI subscriptions, and continued work on these projects.",
+      "Your support helps pay for AI tools and create more free software.",
     other: "You can help without donating",
     otherText:
       "Report a bug, suggest an improvement, or share a project. It all makes a difference.",

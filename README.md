@@ -4,6 +4,14 @@ Bilingual personal website for [Pavel Simonov / Sipaha](https://github.com/Sipah
 The page introduces the developer, presents selected projects and a contact route,
 and includes optional donation details in a secondary section (`#support`).
 
+The profile introduces Pavel as a systems architect and developer at Citeck
+(since 2015; systems architecture since 2018). General biography and product
+principles take priority over individual technical achievements: free software,
+no tracking, optional cloud use, and speed. AI assists design, implementation,
+and testing; donations help fund these tools. The owner-approved public contact
+is sipahabk@gmail.com, with no promise to answer every message. The page does not
+advertise job seeking. Keep this content equivalent in Russian and English.
+
 Canonical URL: **https://sipaha.github.io/about/**; English: **https://sipaha.github.io/about/en/**.
 Repository: **https://github.com/Sipaha/about**. The local Solution directory is
 still `donate`; this does not affect the repository or public site URL.

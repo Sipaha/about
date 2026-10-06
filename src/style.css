@@ -687,6 +687,13 @@ button:active,
   color: var(--muted);
   margin: 0;
 }
+.about-section p + p {
+  margin-top: 16px;
+}
+.contact-section a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
 .contact-section {
   max-width: 720px;
   padding: 10px 0 48px;
