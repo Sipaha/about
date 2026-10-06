@@ -1,15 +1,15 @@
-# Support Pavel Simonov’s projects
+# Pavel Simonov · About
 
-A small bilingual personal website and the single source of donation details for
-[Sipaha’s projects](https://github.com/Sipaha).
+Bilingual personal website for [Pavel Simonov / Sipaha](https://github.com/Sipaha).
+The page introduces the developer, presents selected projects and a contact route,
+and includes optional donation details in a secondary section (`#support`).
 
-Canonical URL: **https://sipaha.github.io/donate/** (Russian), with English at
-**https://sipaha.github.io/donate/en/**. GitHub Pages must be enabled before these
-URLs become live. Source is published to `Sipaha/donate`; the build and browser
-verification also pass in GitHub Actions. Publication is currently blocked by
-GitHub Pages being disabled: the deployment API returns 404 and asks to enable
-Pages in repository settings. An authenticated GitHub settings session is not
-available to the agent; SSH code access cannot change this setting.
+Canonical URL: **https://sipaha.github.io/about/**; English: **https://sipaha.github.io/about/en/**.
+Repository: **https://github.com/Sipaha/about**. The local Solution directory is
+still `donate`; this does not affect the repository or public site URL.
+
+GitHub Pages must use **GitHub Actions** as its source. The previous deployment
+was blocked by disabled Pages; publishing requires that setting to be enabled.
 
 ## Content and payment details
 
@@ -52,7 +52,7 @@ npm ci
 npm test
 npm run build
 npm run preview
-# http://127.0.0.1:4317/donate/
+# http://127.0.0.1:4317/about/
 ```
 
 `PORT` changes the loopback preview port. Build output is `dist/`; do not hand-edit
@@ -65,7 +65,7 @@ system theme is used.
 For this Solution, keep scratch output and browser profiles inside its `.agents/tmp`:
 
 ```sh
-export TMPDIR="$(realpath ../.agents/tmp/donate)"
+export TMPDIR="$(realpath ../.agents/tmp/about)"
 mkdir -p "$TMPDIR"
 npm run verify
 # In another terminal while npm run preview is running:
@@ -76,15 +76,15 @@ npm run audit
 light/dark themes, widths 375/768/1440, exact clipboard contents, QR decoding,
 WCAG AA checks with axe, no external runtime requests, theme persistence,
 language navigation, clipboard denial, JavaScript-disabled use, and 320px layout.
-Screenshots and results default to `../.agents/tmp/donate/verify`.
+Screenshots and results default to `../.agents/tmp/about/verify`.
 Set `CHROME_PATH` if Chrome is not at `/usr/bin/google-chrome`.
-`DONATE_SCRATCH` overrides output; `SITE_URL` selects the Lighthouse target.
+`ABOUT_SCRATCH` overrides output; `SITE_URL` selects the Lighthouse target.
 
 ## Publish to GitHub Pages
 
-1. Push this repository to `Sipaha/donate`, branch `main`.
+1. Push this repository to `Sipaha/about`, branch `main`.
 2. Open **Settings → Pages → Build and deployment → Source → GitHub Actions**.
-3. Run the **Verify and deploy donation site** workflow (or push a change).
+3. Run the **Verify and deploy personal site** workflow (or push a change).
 4. Verify both public URLs and a small real payment before broadly promoting them.
 
 Pull requests run checks without deployment. Main pushes build, verify, upload a
@@ -93,12 +93,12 @@ No payment secrets or GitHub personal tokens are needed by the site or workflow.
 Change `url` in `src/site.json` if hosting changes; asset paths, canonical URLs,
 language links, and the sitemap follow it.
 
-## Link from repositories
+## Optional future repository links
 
 Use `integrations/FUNDING.yml` as `.github/FUNDING.yml` in each personal repository:
 
 ```yaml
-custom: ["https://sipaha.github.io/donate/"]
+custom: ["https://sipaha.github.io/about/#support"]
 ```
 
 If a repository already has funding configuration, preserve its other funding
@@ -117,9 +117,10 @@ another GitHub repository or change unrelated project settings.
 
 ## Design and assets
 
-Quiet developer profile, restrained green accent, responsive split layout. Design
+Profile-first page: introduction, about, projects, contact, then optional support.
+Restrained green accent with a responsive layout. Design
 variance 4, motion intensity 2, visual density 4. Auto light/dark theme with manual
-override. Native CSS; no UI framework is needed for a static donation page.
+override. Native CSS; no UI framework is needed for a static personal page.
 Manrope is self-hosted. Phosphor icons are bundled inline; Bitcoin QR codes are
 functional images generated locally. No fabricated photos, testimonials, stats,
 or balances. `THIRD_PARTY_NOTICES.md` records asset provenance and licenses.

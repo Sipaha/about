@@ -2,9 +2,7 @@ import { launch } from "chrome-launcher";
 import lighthouse from "lighthouse";
 import { mkdir, mkdtemp, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
-const dir = resolve(
-  process.env.DONATE_SCRATCH || "../.agents/tmp/donate/audit",
-);
+const dir = resolve(process.env.ABOUT_SCRATCH || "../.agents/tmp/about/audit");
 await mkdir(dir, { recursive: true });
 const profile = await mkdtemp(resolve(dir, "chrome-"));
 const chrome = await launch({
@@ -14,7 +12,7 @@ const chrome = await launch({
 });
 try {
   const result = await lighthouse(
-    process.env.SITE_URL || "http://127.0.0.1:4317/donate/",
+    process.env.SITE_URL || "http://127.0.0.1:4317/about/",
     {
       port: chrome.port,
       output: "json",

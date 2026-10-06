@@ -97,11 +97,13 @@ a:hover {
   top: 10px;
   left: 10px;
   transform: translateY(-200%);
+  visibility: hidden;
   z-index: 5;
   background: var(--surface);
   padding: 10px;
 }
 .skip:focus {
+  visibility: visible;
   transform: none;
 }
 .header {
@@ -638,5 +640,111 @@ button:active,
   *::after {
     transition: none !important;
     animation: none !important;
+  }
+}
+
+.profile-hero {
+  display: grid;
+  grid-template-columns: 1fr 240px;
+  align-items: center;
+  gap: 64px;
+  padding: 70px 0 58px;
+}
+.profile-hero h1 {
+  font-size: clamp(36px, 5vw, 62px);
+  line-height: 1.15;
+}
+.profile-hero .lead {
+  max-width: 610px;
+}
+.profile-mark {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  color: var(--muted);
+  font-size: 14px;
+}
+.profile-mark img {
+  width: 160px;
+  height: 160px;
+  border-radius: 32px;
+}
+.about-section {
+  max-width: 760px;
+  padding-bottom: 44px;
+}
+.about-section h2,
+.contact-section h2,
+.support-context > h2 {
+  font-size: 24px;
+  letter-spacing: -0.6px;
+  margin: 0 0 12px;
+}
+.about-section p,
+.contact-section p,
+.support-context > p {
+  color: var(--muted);
+  margin: 0;
+}
+.contact-section {
+  max-width: 720px;
+  padding: 10px 0 48px;
+}
+.support-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 470px);
+  gap: 70px;
+  border-top: 1px solid var(--line);
+  padding: 45px 0 60px;
+}
+.support-context .purpose {
+  margin-top: 30px;
+}
+.purpose h3,
+.help h3 {
+  font-size: 16px;
+  margin: 0 0 9px;
+}
+.support-context .help {
+  padding-top: 28px;
+}
+@media (max-width: 767px) {
+  .profile-hero {
+    grid-template-columns: 1fr;
+    padding: 38px 0 30px;
+    gap: 25px;
+  }
+  .profile-mark {
+    display: none;
+  }
+  .profile-hero h1 {
+    font-size: 36px;
+  }
+  .about-section {
+    padding-bottom: 30px;
+  }
+  .support-layout {
+    grid-template-columns: 1fr;
+    gap: 22px;
+    padding: 30px 0 40px;
+  }
+  .support-context .help {
+    padding-bottom: 0;
+  }
+  .nav {
+    gap: 10px;
+  }
+  .nav-support {
+    font-size: 12px;
+  }
+  .identity {
+    font-size: 12px;
+  }
+  .identity img {
+    display: none;
+  }
+  .contact-section {
+    padding-bottom: 30px;
   }
 }

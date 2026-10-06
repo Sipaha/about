@@ -1,4 +1,4 @@
-name: Verify and deploy donation site
+name: Verify and deploy personal site
 on:
   push:
     branches: [main]
@@ -7,7 +7,7 @@ on:
 permissions:
   contents: read
 concurrency:
-  group: donation-pages-${{ github.ref }}
+  group: about-pages-${{ github.ref }}
   cancel-in-progress: true
 jobs:
   build:
@@ -25,12 +25,12 @@ jobs:
         run: npm run verify
         env:
           CHROME_PATH: /usr/bin/google-chrome
-          DONATE_SCRATCH: ${{ runner.temp }}/donate-verify
+          ABOUT_SCRATCH: ${{ runner.temp }}/about-verify
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: browser-verification
-          path: ${{ runner.temp }}/donate-verify
+          path: ${{ runner.temp }}/about-verify
       - uses: actions/upload-pages-artifact@v3
         if: github.event_name != 'pull_request'
         with:

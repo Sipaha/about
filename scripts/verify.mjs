@@ -12,7 +12,7 @@ const site = JSON.parse(
   await readFile(new URL("../src/site.json", import.meta.url), "utf8"),
 );
 const scratch = resolve(
-  process.env.DONATE_SCRATCH || "../.agents/tmp/donate/verify",
+  process.env.ABOUT_SCRATCH || "../.agents/tmp/about/verify",
 );
 await mkdir(scratch, { recursive: true });
 const server = createServer();
@@ -53,6 +53,24 @@ try {
         page.on("request", (r) => requests.push(r.url()));
         await page.goto(origin + base + (lang === "en" ? "en/" : ""));
         await page.evaluate(() => document.fonts.ready);
+        assert.equal(
+          await page.locator('link[rel="canonical"]').getAttribute("href"),
+          site.url + (lang === "en" ? "en/" : ""),
+        );
+        assert(await page.locator("#profile-title").isVisible());
+        assert(
+          await page.evaluate(
+            () =>
+              document.querySelector("#projects").offsetTop <
+              document.querySelector("#support").offsetTop,
+          ),
+        );
+        await page.locator(".nav-support").click();
+        assert.equal(new URL(page.url()).hash, "#support");
+        await page.evaluate(() =>
+          window.scrollTo({ top: 0, behavior: "instant" }),
+        );
+
         assert.equal(await page.locator("html").getAttribute("lang"), lang);
         assert.equal(
           await page.locator("html").getAttribute("data-theme"),

@@ -1,15 +1,22 @@
 export const content = {
   ru: {
-    title: "Поддержать проекты · Павел Симонов",
+    title: "Павел Симонов · Разработчик",
     description:
-      "Поддержать разработку проектов Павла Симонова (Sipaha). Публичные адреса, сети и QR-коды для донатов в одном месте.",
+      "Павел Симонов (Sipaha). Инструменты для разработчиков, открытые проекты и способы поддержать мою работу.",
     skip: "К содержимому",
     projectsNav: "Проекты",
+    supportNav: "Поддержать",
+    about: "О моей работе",
+    aboutText:
+      "Работаю над настольными приложениями и инструментами для разработчиков: от Kubernetes и Docker до почты и доступа ИИ-агентов к API.",
+    contact: "Связаться",
+    contactText:
+      "По вопросам о проектах, ошибкам и предложениям пиши в Issues соответствующего репозитория на GitHub.",
     theme: "Переключить тему",
     language: "Read in English",
-    intro: "Привет, я Павел.",
-    headline: "Делаю инструменты\nдля своей работы.",
-    lead: "И делюсь ими с вами. Если мои проекты помогают тебе, можно поддержать их развитие.",
+    intro: "Разработчик / Sipaha",
+    headline: "Павел Симонов",
+    lead: "Создаю инструменты для повседневной работы и делюсь исходным кодом. Здесь мои проекты и способы связаться со мной.",
     profile: "Мой GitHub",
     support: "Поддержать разработку",
     supportLead: "Любая сумма на твоё усмотрение. Спасибо за поддержку!",
@@ -41,16 +48,23 @@ export const content = {
     crypto: "Или криптовалютой",
   },
   en: {
-    title: "Support my projects · Pavel Simonov",
+    title: "Pavel Simonov · Developer",
     description:
-      "Support open-source projects by Pavel Simonov (Sipaha). Donation addresses, networks, and QR codes in one place.",
+      "Pavel Simonov (Sipaha). Developer tools, open-source projects, and ways to support my work.",
     skip: "Skip to content",
     projectsNav: "Projects",
+    supportNav: "Support",
+    about: "About my work",
+    aboutText:
+      "I work on desktop apps and developer tools, from Kubernetes and Docker to email and controlled API access for AI agents.",
+    contact: "Get in touch",
+    contactText:
+      "For project questions, bugs, and suggestions, open an issue in the relevant GitHub repository.",
     theme: "Switch theme",
     language: "Читать по-русски",
-    intro: "Hi, I’m Pavel.",
-    headline: "Tools I build.\nTools you can use.",
-    lead: "I build tools for my everyday work and share them. If they help you, you can support their development.",
+    intro: "Developer / Sipaha",
+    headline: "Pavel Simonov",
+    lead: "I build tools for everyday work and share the source. Here are my projects and where to find me.",
     profile: "Find me on GitHub",
     support: "Support development",
     supportLead: "Give any amount that feels right. Thank you!",

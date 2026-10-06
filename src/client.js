@@ -9,7 +9,7 @@ themeButton.addEventListener("click", () => {
   const dark = document.documentElement.dataset.theme !== "dark";
   applyTheme(dark);
   try {
-    localStorage.setItem("donate-theme", dark ? "dark" : "light");
+    localStorage.setItem("about-theme", dark ? "dark" : "light");
   } catch {
     /* Storage is optional. */
   }
@@ -17,7 +17,7 @@ themeButton.addEventListener("click", () => {
 mode.addEventListener("change", ({ matches }) => {
   let preference;
   try {
-    preference = localStorage.getItem("donate-theme");
+    preference = localStorage.getItem("about-theme");
   } catch {
     /* Storage is optional. */
   }
