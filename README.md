@@ -35,7 +35,8 @@ page. Traditional Chinese is not silently presented as simplified Chinese.
 
 The native-language menu works without JavaScript. With JavaScript it remembers
 choices, preserves query/fragment and supports Escape/outside-click dismissal.
-Storage denial does not prevent navigation. Every page has canonical/hreflang
+Storage denial does not prevent navigation: an explicit `?lang=ru` preserves a
+manual Russian choice on the legacy root when preference storage is unavailable. Every page has canonical/hreflang
 metadata and a sitemap entry. No translation service is contacted at runtime.
 
 Translations were authored and reviewed against approved RU/EN facts, technical

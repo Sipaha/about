@@ -213,6 +213,11 @@ try {
     await page.locator(".language").click();
     await page.locator('[data-language="zh"]').click();
     assert.equal(await page.locator("html").getAttribute("lang"), "zh");
+    await page.locator(".language").click();
+    await page.locator('[data-language="ru"]').click();
+    assert.equal(await page.locator("html").getAttribute("lang"), "ru");
+    await page.reload();
+    assert.equal(await page.locator("html").getAttribute("lang"), "ru");
     await context.close();
   }
   const unsupported = await browser.newContext({ locale: "fa-IR" });

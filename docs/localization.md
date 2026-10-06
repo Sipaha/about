@@ -30,7 +30,9 @@ Keep the deliberate introduction line break and equivalent meaning across locale
 owns RU/EN and imports full JSON dictionaries in `src/locales/`. A new locale
 requires complete copy and all three project descriptions before being advertised.
 The root matches saved preference, ordered browser languages and English fallback;
-explicit non-root language URLs always win. Traditional Chinese is not silently
+explicit non-root language URLs always win. When storage is unavailable, a
+manual Russian choice uses `?lang=ru` on the canonical root to override browser
+detection. Other choices remove this marker while preserving unrelated parameters. Traditional Chinese is not silently
 mapped to simplified Chinese. The link menu remains usable with JavaScript or
 storage disabled. No translation service is contacted at runtime.
 

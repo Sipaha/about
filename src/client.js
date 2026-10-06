@@ -44,12 +44,20 @@ for (const button of document.querySelectorAll("[data-copy]")) {
 
 for (const link of document.querySelectorAll("[data-language]")) {
   link.addEventListener("click", () => {
+    let saved = false;
     try {
       localStorage.setItem("about-language", link.dataset.language);
-    } catch {}
+      saved = localStorage.getItem("about-language") === link.dataset.language;
+    } catch {
+      /* An explicit URL choice still works. */
+    }
     const url = new URL(link.href);
     url.search = location.search;
     url.hash = location.hash;
+    if (link.dataset.language === "ru" && !saved)
+      url.searchParams.set("lang", "ru");
+    else if (url.searchParams.get("lang") === "ru")
+      url.searchParams.delete("lang");
     link.href = url.href;
   });
 }

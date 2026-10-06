@@ -86,3 +86,15 @@ test("explicit language URLs, crawlers and automation are not redirected", () =>
   assert.equal(languageTarget({ ...input, userAgent: "Googlebot" }), null);
   assert.equal(languageTarget({ ...input, webdriver: true }), null);
 });
+
+test("an explicit Russian query wins over browser language without storage", () => {
+  assert.equal(
+    languageTarget({
+      ...input,
+      stored: null,
+      languages: ["zh-CN"],
+      search: "?ref=test&lang=ru",
+    }),
+    null,
+  );
+});
