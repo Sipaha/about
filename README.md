@@ -11,8 +11,9 @@ no tracking, optional cloud use, and speed. AI assists design, implementation,
 and testing; donations help fund these tools. The owner-approved public contact
 is sipahabk@gmail.com, with no promise to answer every message. The page does not
 advertise job seeking. Keep this content equivalent in Russian and English.
-The Russian introduction keeps «и работа, и хобби» together with nonbreaking
-spaces to avoid leaving a conjunction at the end of a line.
+The introduction has a deliberate line break after the professional title.
+“Для меня программирование” begins the next line; narrower screens can wrap
+naturally; Russian conjunctions stay with the following word.
 
 Featured projects are SPK Ocular, SPK MM Client (`Sipaha/spk-mm-client`), and SPK Mail.
 Project descriptions address a broad audience and avoid possessives such as “my”. Outwall is omitted at the owner’s request.

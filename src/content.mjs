@@ -18,7 +18,8 @@ export const content = {
     language: "Read in English",
     intro: "Системный архитектор / Разработчик",
     headline: "Павел Симонов",
-    lead: "Системный архитектор и разработчик. Для меня программирование — и работа, и хобби.",
+    lead: "Системный архитектор и разработчик.",
+    leadSecond: "Для меня программирование — и работа, и хобби.",
     profile: "Мой GitHub",
     support: "Поддержать разработку",
     supportLead:
@@ -69,7 +70,8 @@ export const content = {
     language: "Читать по-русски",
     intro: "Systems architect / Developer",
     headline: "Pavel Simonov",
-    lead: "Systems architect and developer. Programming is both my work and my hobby.",
+    lead: "Systems architect and developer.",
+    leadSecond: "Programming is both my work and my hobby.",
     profile: "Find me on GitHub",
     support: "Support development",
     supportLead:
