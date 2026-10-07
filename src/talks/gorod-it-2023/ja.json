@@ -14,7 +14,6 @@
   "allVideo": "講演の動画",
   "imageNote": "元のスライド画像はロシア語のままです。文字起こしは選択した言語で読めます。コードと API の識別子は翻訳していません。",
   "codeLabel": "スライドの例",
-  "codeNote": "JSON の例では、欠けていたカンマと閉じ括弧だけを補っています。フィールドと値は変更していません。",
   "questionsTitle": "講演後の質疑応答",
   "slideStatus": "スライド {current} / {total}：{title}",
   "selectSlide": "スライドを選ぶ",

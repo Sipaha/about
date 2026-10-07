@@ -14,7 +14,6 @@
   "allVideo": "Vollständige Aufzeichnung",
   "imageNote": "Die Originalfolien bleiben auf Russisch. Der Vortragstext ist in der gewählten Sprache verfügbar; Code und API-Bezeichner werden nicht übersetzt.",
   "codeLabel": "Beispiel aus der Folie",
-  "codeNote": "In JSON-Beispielen wurden nur fehlende Kommas und schließende Klammern ergänzt. Felder und Werte sind unverändert.",
   "questionsTitle": "Fragen nach dem Vortrag",
   "slideStatus": "Folie {current} von {total}: {title}",
   "selectSlide": "Folie auswählen",

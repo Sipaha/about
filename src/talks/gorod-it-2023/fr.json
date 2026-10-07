@@ -14,7 +14,6 @@
   "allVideo": "Enregistrement complet",
   "imageNote": "Les images originales restent en russe. La transcription est disponible dans la langue choisie ; le code et les identifiants de l’API ne sont pas traduits.",
   "codeLabel": "Exemple de la diapositive",
-  "codeNote": "Dans les exemples JSON, seules les virgules et les délimiteurs de fermeture manquants ont été rétablis. Les champs et les valeurs sont conservés.",
   "questionsTitle": "Questions après la conférence",
   "slideStatus": "Diapositive {current} sur {total} : {title}",
   "selectSlide": "Choisir une diapositive",

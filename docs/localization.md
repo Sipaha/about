@@ -50,7 +50,8 @@ API identifier, code value and explicitly unclear passage. Original slide images
 remain Russian and must be labeled accordingly. Do not present this text as a
 verbatim audio-verified transcript or as translated audio. Topic timestamps are
 not claims of exact visual slide transitions. Shared code examples are language
-independent; obvious JSON punctuation repairs are explained on the page.
+independent; obvious JSON punctuation repairs are recorded in project documentation,
+without an extra service note in the reader.
 
 `source.json` contains provenance and time ranges, not an unedited caption dump.
 The owner requested removal of the raw duplicate after adaptation; `ru.json` is

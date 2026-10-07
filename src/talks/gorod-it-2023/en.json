@@ -14,7 +14,6 @@
   "allVideo": "Full talk recording",
   "imageNote": "The original slide images remain in Russian. The transcript is available in the selected language; code and API identifiers are not translated.",
   "codeLabel": "Example from the slide",
-  "codeNote": "Only missing commas and closing brackets have been repaired in JSON examples. Fields and values are unchanged.",
   "questionsTitle": "Questions after the talk",
   "slideStatus": "Slide {current} of {total}: {title}",
   "selectSlide": "Choose a slide",

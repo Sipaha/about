@@ -171,6 +171,12 @@ npm run preview
 # http://127.0.0.1:4317/about/
 ```
 
+CSS and browser scripts use content-hashed filenames in every generated home
+and reader page. A new page therefore requests the matching assets after an
+update, even when a previous stylesheet is cached. Browser verification includes
+a warm-cache upgrade, not only clean sessions. Legacy asset URLs remain available
+for previously opened pages.
+
 `PORT` changes the loopback preview port. Build output is `dist/`; do not hand-edit
 it. This is a static HTML/CSS site with a small progressive-enhancement script for
 theme selection and copying. Donation addresses, QR codes, and language links

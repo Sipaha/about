@@ -1,5 +1,6 @@
 import { readFile, writeFile, mkdir, rm, cp } from "node:fs/promises";
 import QRCode from "qrcode";
+import { createHash } from "node:crypto";
 import { buildTalkPages } from "./build-talk.mjs";
 import { validateSite } from "../src/validate.mjs";
 import { content } from "../src/content.mjs";
@@ -46,8 +47,16 @@ await rm(out, { recursive: true, force: true });
 await mkdir(new URL("en/", out), { recursive: true });
 await cp(new URL("public/", root), out, { recursive: true });
 await mkdir(new URL("assets/", out), { recursive: true });
-for (const file of ["style.css", "client.js", "talk-reader.js"])
-  await cp(new URL(`src/${file}`, root), new URL(`assets/${file}`, out));
+const assets = {};
+for (const file of ["style.css", "client.js", "talk-reader.js"]) {
+  const bytes = await readFile(new URL(`src/${file}`, root));
+  const hash = createHash("sha256").update(bytes).digest("hex").slice(0, 16);
+  const versioned = file.replace(/(\.[^.]+)$/, `.${hash}$1`);
+  await writeFile(new URL(`assets/${versioned}`, out), bytes);
+  // Keep legacy URLs available for previously opened pages.
+  await writeFile(new URL(`assets/${file}`, out), bytes);
+  assets[file] = `${base}assets/${versioned}`;
+}
 for (const font of ["manrope", "noto-sans"])
   for (const subset of ["latin", "cyrillic"])
     await cp(
@@ -107,7 +116,7 @@ for (const meta of languages) {
     }),
   );
   const html = `<!doctype html>
-<html lang="${lang}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark"><title>${t.title}</title><meta name="description" content="${t.description}"><link rel="canonical" href="${pageUrl}">${languages.map((l) => `<link rel="alternate" hreflang="${l.code}" href="${site.url + (l.code === "ru" ? "" : `${l.code}/`)}">`).join("")}<link rel="alternate" hreflang="x-default" href="${site.url}"><meta property="og:type" content="website"><meta property="og:title" content="${t.title}"><meta property="og:description" content="${t.description}"><meta property="og:url" content="${pageUrl}"><meta property="og:image" content="${site.url}assets/portrait.jpg"><meta property="og:locale" content="${meta.og}"><meta name="referrer" content="strict-origin-when-cross-origin"><link rel="icon" href="${base}assets/avatar.png"><script>${languageBootstrap({ base, storageKey: "about-language", codes: languages.map((l) => l.code) })}</script><script>${themeScript}</script><link rel="stylesheet" href="${base}assets/style.css"><script src="${base}assets/client.js" defer></script></head>
+<html lang="${lang}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark"><title>${t.title}</title><meta name="description" content="${t.description}"><link rel="canonical" href="${pageUrl}">${languages.map((l) => `<link rel="alternate" hreflang="${l.code}" href="${site.url + (l.code === "ru" ? "" : `${l.code}/`)}">`).join("")}<link rel="alternate" hreflang="x-default" href="${site.url}"><meta property="og:type" content="website"><meta property="og:title" content="${t.title}"><meta property="og:description" content="${t.description}"><meta property="og:url" content="${pageUrl}"><meta property="og:image" content="${site.url}assets/portrait.jpg"><meta property="og:locale" content="${meta.og}"><meta name="referrer" content="strict-origin-when-cross-origin"><link rel="icon" href="${base}assets/avatar.png"><script>${languageBootstrap({ base, storageKey: "about-language", codes: languages.map((l) => l.code) })}</script><script>${themeScript}</script><link rel="stylesheet" href="${assets["style.css"]}"><script src="${assets["client.js"]}" defer></script></head>
 <body><a class="skip" href="#main">${t.skip}</a>
 <header class="header wrap"><a class="identity" href="${esc(site.owner.github)}"><span>${esc(person)}</span></a><nav class="nav" aria-label="${t.navigation}"><a class="nav-projects" href="#projects">${t.projectsNav}</a><a class="nav-support" href="#support">${t.supportNav}</a><div class="nav-tools"><details class="language-menu"><summary class="language" aria-label="${t.languageLabel}" title="${t.languageLabel}"><span class="language-code">${meta.short}</span>${await icon("caret-down", "language-caret")}</summary><nav class="language-options" aria-label="${t.languageLabel}">${languages.map((l) => `<a href="${pagePath(l.code, base)}" lang="${l.code}" hreflang="${l.code}" data-language="${l.code}" ${l.code === lang ? 'aria-current="page"' : ""}>${l.name}</a>`).join("")}</nav></details><button class="icon-button" type="button" data-theme-toggle aria-label="${t.theme}" aria-pressed="false">${await icon("moon", "moon")}${await icon("sun", "sun")}</button></div></nav></header>
 <main id="main" class="wrap">
@@ -133,6 +142,7 @@ const talkURLs = await buildTalkPages({
   icon,
   esc,
   themeScript,
+  assets,
 });
 await writeFile(new URL(".nojekyll", out), "");
 await writeFile(

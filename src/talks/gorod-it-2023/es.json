@@ -14,7 +14,6 @@
   "allVideo": "Grabación completa",
   "imageNote": "Las imágenes originales permanecen en ruso. La transcripción está disponible en el idioma elegido; el código y los identificadores de la API no se traducen.",
   "codeLabel": "Ejemplo de la diapositiva",
-  "codeNote": "En los ejemplos JSON solo se han añadido las comas y los signos de cierre que faltaban. Los campos y valores se conservan.",
   "questionsTitle": "Preguntas después de la charla",
   "slideStatus": "Diapositiva {current} de {total}: {title}",
   "selectSlide": "Elegir una diapositiva",

@@ -14,7 +14,6 @@
   "allVideo": "Gravação completa",
   "imageNote": "As imagens originais dos slides permanecem em russo. A transcrição está disponível no idioma escolhido; código e identificadores da API não são traduzidos.",
   "codeLabel": "Exemplo do slide",
-  "codeNote": "Nos exemplos JSON, foram acrescentadas apenas as vírgulas e os delimitadores de fechamento que faltavam. Os campos e valores foram preservados.",
   "questionsTitle": "Perguntas após a palestra",
   "slideStatus": "Slide {current} de {total}: {title}",
   "selectSlide": "Escolher um slide",

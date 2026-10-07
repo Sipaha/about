@@ -14,7 +14,6 @@
   "allVideo": "完整演讲视频",
   "imageNote": "原始幻灯片图片保留俄语。文字稿可按所选语言阅读；代码和 API 标识符不翻译。",
   "codeLabel": "幻灯片中的示例",
-  "codeNote": "JSON 示例只补齐了缺失的逗号和闭合括号，字段和值保持不变。",
   "questionsTitle": "演讲后的问答",
   "slideStatus": "第 {current} 页，共 {total} 页：{title}",
   "selectSlide": "选择幻灯片",

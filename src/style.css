@@ -1190,12 +1190,6 @@ button:active,
   overflow-wrap: anywhere;
   color: var(--accent);
 }
-.talk-code-note {
-  color: var(--muted);
-  font-size: 12px;
-  border-top: 1px solid var(--line);
-  padding-top: 18px;
-}
 .talk-questions {
   margin-top: 44px;
   border-top: 1px solid var(--line);
