@@ -1,7 +1,11 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
 import { content } from "../src/content.mjs";
 import { languages, pagePath, languageTarget } from "../src/languages.mjs";
+const site = JSON.parse(
+  readFileSync(new URL("../src/site.json", import.meta.url), "utf8"),
+);
 const codes = languages.map((l) => l.code);
 const input = {
   codes,
@@ -29,7 +33,7 @@ test("every advertised language has full copy, metadata and descriptions for eac
     for (const key of keys)
       assert.equal(typeof value[key], "string", `${code}.${key}`);
     if (!["ru", "en"].includes(code)) {
-      assert.equal(value.projectDescriptions.length, 2);
+      assert.equal(value.projectDescriptions.length, site.projects.length);
       assert(
         value.projectDescriptions.every(
           (s) => typeof s === "string" && s.length,

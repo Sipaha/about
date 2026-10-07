@@ -52,6 +52,13 @@
       "icon": "chats",
       "en": "A lightweight desktop client for Mattermost.",
       "ru": "Лёгкий настольный клиент для Mattermost."
+    },
+    {
+      "name": "Citeck Launcher",
+      "url": "https://citeck.github.io/citeck-launcher/",
+      "icon": "play-circle",
+      "en": "Run and manage Citeck with Docker.",
+      "ru": "Запуск и управление Citeck через Docker."
     }
   ]
 }

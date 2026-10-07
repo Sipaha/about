@@ -44,7 +44,8 @@
   "crypto": "或使用加密货币",
   "projectDescriptions": [
     "在一个桌面工作区中管理 Kubernetes 和 Docker。",
-    "轻量级 Mattermost 桌面客户端。"
+    "轻量级 Mattermost 桌面客户端。",
+    "通过 Docker 启动和管理 Citeck。"
   ],
   "copyManual": "手动复制"
 }

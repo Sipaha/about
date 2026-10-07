@@ -44,7 +44,8 @@
   "crypto": "Oder mit Kryptowährung",
   "projectDescriptions": [
     "Kubernetes und Docker in einer gemeinsamen Desktop-Arbeitsumgebung.",
-    "Schlanker Desktop-Client für Mattermost."
+    "Schlanker Desktop-Client für Mattermost.",
+    "Citeck mit Docker starten und verwalten."
   ],
   "copyManual": "Manuell kopieren"
 }

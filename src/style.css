@@ -893,3 +893,12 @@ button:active,
 :lang(ja) {
   font-family: system-ui, sans-serif;
 }
+
+.company-link {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.company-link:hover {
+  text-decoration-thickness: 2px;
+}

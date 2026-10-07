@@ -44,7 +44,8 @@
   "crypto": "Ou en cryptomonnaie",
   "projectDescriptions": [
     "Kubernetes et Docker dans un même espace de travail sur votre ordinateur.",
-    "Un client de bureau léger pour Mattermost."
+    "Un client de bureau léger pour Mattermost.",
+    "Démarrer et gérer Citeck avec Docker."
   ],
   "copyManual": "Copier manuellement"
 }

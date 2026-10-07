@@ -16,7 +16,9 @@ the professional title. The introduction has a deliberate line break after the p
 “Для меня программирование” begins the next line; narrower screens can wrap
 naturally; Russian conjunctions stay with the following word.
 
-Featured projects are SPK Ocular and SPK MM Client (`Sipaha/spk-mm-client`).
+Featured projects are SPK Ocular, SPK MM Client (`Sipaha/spk-mm-client`) and
+Citeck Launcher (https://citeck.github.io/citeck-launcher/). The Citeck name in
+the biography links to https://www.citeck.ru/.
 SPK Ocular links to its product website: https://sipaha.github.io/spk-ocular/.
 Project descriptions address a broad audience and avoid possessives such as “my”.
 The footer says “Free software for everyone” and omits payment-method and

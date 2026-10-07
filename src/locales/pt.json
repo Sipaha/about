@@ -44,7 +44,8 @@
   "crypto": "Ou com criptomoedas",
   "projectDescriptions": [
     "Kubernetes e Docker em um único espaço de trabalho no desktop.",
-    "Cliente desktop leve para Mattermost."
+    "Cliente desktop leve para Mattermost.",
+    "Execute e gerencie o Citeck com Docker."
   ],
   "copyManual": "Copiar manualmente"
 }

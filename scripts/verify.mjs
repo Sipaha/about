@@ -90,6 +90,20 @@ try {
           await page.locator(".project").count(),
           site.projects.length,
         );
+        assert.equal(
+          await page
+            .locator(
+              '.project[href="https://citeck.github.io/citeck-launcher/"]',
+            )
+            .count(),
+          1,
+        );
+        assert.equal(
+          await page
+            .locator('.about-section a[href="https://www.citeck.ru/"]')
+            .textContent(),
+          "Citeck",
+        );
         assert.equal(await page.locator(".wallet:visible").count(), 1);
         for (const w of site.wallets) {
           await page.locator(`label[for="choose-${w.id}"]`).click();

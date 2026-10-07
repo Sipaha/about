@@ -44,7 +44,8 @@
   "crypto": "または暗号資産で",
   "projectDescriptions": [
     "Kubernetes と Docker を一つのデスクトップワークスペースで。",
-    "軽量な Mattermost デスクトップクライアント。"
+    "軽量な Mattermost デスクトップクライアント。",
+    "Docker で Citeck を起動・管理。"
   ],
   "copyManual": "手動でコピー"
 }
