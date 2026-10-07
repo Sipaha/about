@@ -57,9 +57,11 @@ PDF and YouTube links remain ordinary links; there are no embeds or remote fonts
 The home and reader each have their own locale-aware language destinations,
 canonical/hreflang links and sitemap entries.
 
-`src/talks/gorod-it-2023/source.json` records the source Russian automatic
-captions only from this speaker’s segment (2019–3338 seconds) and questions
-(3342–3755 seconds). It is not a browser asset. The edited Russian text removes
+`src/talks/gorod-it-2023/source.json` records the provenance and boundaries of
+this speaker’s segment (2019–3338 seconds, speech from 2047) and questions
+(3342–3755 seconds). It points to `ru.json` as the single edited Russian text;
+raw, error-filled automatic captions are not duplicated in the repository or
+served as a browser asset. The edited Russian text removes
 fillers and repetition, repairs technical names against the PDF and explicitly
 marks two unclear passages instead of inventing speech. Slide-supported explanations
 are included; this is not a verbatim transcript checked against the audio. Translations preserve

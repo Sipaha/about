@@ -83,12 +83,12 @@ test("all 36 original slides exist and topic timestamps stay within this talk", 
     previous = slide.start;
     assert(existsSync(new URL("../public/" + slide.image, import.meta.url)));
   }
-  assert(source.segments.length > 100);
-  assert(
-    source.segments.every(
-      (s) => s.start >= source.talkStart && s.start < source.questionsEnd,
-    ),
-  );
+  assert(source.talkStart <= source.speakerStart);
+  assert(source.speakerStart < source.talkEnd);
+  assert(source.talkEnd <= source.questionsStart);
+  assert(source.questionsStart < source.questionsEnd);
+  assert.equal(source.editedTranscript, "ru.json");
+  assert(existsSync(new URL(source.editedTranscript, directory)));
   assert(
     shared.questions.every(
       (q) => q.start >= source.questionsStart && q.start < source.questionsEnd,
