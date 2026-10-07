@@ -63,8 +63,10 @@ The owner confirmed GitHub Pages is working.
 
 Edit **`src/site.json`** to change the owner, projects, wallet addresses, or Boosty
 profile. Edit `src/content.mjs` for Russian and English copy. There is no runtime
-API, analytics, wallet connection, checkout, or private-key handling. The owner’s
-public GitHub avatar is stored locally; fonts and QR images are served locally too.
+API, analytics, wallet connection, checkout, or private-key handling. The owner-provided portrait is served locally as optimized JPEGs (768px for the
+hero/social preview and 96px for the header). The original GitHub avatar remains
+the favicon. The portrait is visible on desktop and mobile; fonts and QR images
+are served locally too.
 
 Owner-approved methods: BTC on Bitcoin (ordinary on-chain payments), USDT on
 TON, USDT on TRON, and ETH on Ethereum. Exact addresses are in `src/site.json`.

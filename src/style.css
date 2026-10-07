@@ -717,8 +717,8 @@ button:active,
   font-size: 14px;
 }
 .profile-mark img {
-  width: 160px;
-  height: 160px;
+  width: 192px;
+  height: 192px;
   border-radius: 32px;
 }
 .about-section {
@@ -784,7 +784,14 @@ button:active,
     gap: 25px;
   }
   .profile-mark {
-    display: none;
+    order: -1;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .profile-mark img {
+    width: 128px;
+    height: 128px;
+    border-radius: 24px;
   }
   .profile-hero h1 {
     font-size: 36px;

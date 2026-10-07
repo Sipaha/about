@@ -6,7 +6,11 @@
   at build time without modification to their paths.
 - **GitHub profile avatar**: public profile image for Sipaha, downloaded from
   https://avatars.githubusercontent.com/u/3995047?v=4&s=192 for this personal site.
-  The avatar is owner profile content, not covered by the font or icon licenses.
+  The avatar is used as the favicon and is owner profile content, not covered by
+  the font or icon licenses.
+- **Portrait**: supplied by the owner as `photo_about.png`; optimized JPEG
+  derivatives are served locally. The portrait is owner-provided content and
+  is not covered by the font or icon licenses.
 - **QRCode**: qrcode, MIT. Generates local QR images from public wallet addresses.
 - **bech32**: MIT. Validates configured Bitcoin donation addresses.
 
