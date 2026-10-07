@@ -44,7 +44,6 @@
   "crypto": "または暗号資産で",
   "projectDescriptions": [
     "Kubernetes と Docker を一つのデスクトップワークスペースで。",
-    "軽量な Mattermost デスクトップクライアント。",
-    "メールを自分のパソコンに保存する、軽量なメールクライアント。"
+    "軽量な Mattermost デスクトップクライアント。"
   ]
 }

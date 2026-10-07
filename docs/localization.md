@@ -6,7 +6,7 @@ is the factual baseline. Translate biography and general product descriptions,
 not imagined achievements. Keep the profile and projects primary and support
 secondary in every language.
 
-Preserve the 2015/2018 career dates, Citeck, SPK Ocular, SPK MM Client and SPK Mail.
+Preserve the 2015/2018 career dates, Citeck, SPK Ocular and SPK MM Client.
 Use “free of charge” wording where a local word for “free” might only imply a
 software license. Do not introduce possessive project descriptions, paid features,
 extra contact routes, private keys, Lightning acceptance or invented payment methods.
@@ -28,7 +28,7 @@ Keep the deliberate introduction line break and equivalent meaning across locale
 
 `src/languages.mjs` owns names, URL mapping and browser matching. `src/content.mjs`
 owns RU/EN and imports full JSON dictionaries in `src/locales/`. A new locale
-requires complete copy and all three project descriptions before being advertised.
+requires complete copy and descriptions for every featured project before being advertised.
 The root matches saved preference, ordered browser languages and English fallback;
 explicit non-root language URLs always win. When storage is unavailable, a
 manual Russian choice uses `?lang=ru` on the canonical root to override browser

@@ -44,7 +44,6 @@
   "crypto": "Ou en cryptomonnaie",
   "projectDescriptions": [
     "Kubernetes et Docker dans un même espace de travail sur votre ordinateur.",
-    "Un client de bureau léger pour Mattermost.",
-    "Un client de messagerie léger qui conserve vos e-mails sur votre ordinateur."
+    "Un client de bureau léger pour Mattermost."
   ]
 }

@@ -376,10 +376,65 @@ button:active,
   border-top: 1px solid var(--line);
   margin: 15px 0 0;
 }
-.wallet + .wallet {
-  border-top: 1px solid var(--line);
-  padding-top: 25px;
-  margin-top: 24px;
+/* Native radios keep wallet switching available without JavaScript. */
+.wallet-picker {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+.wallet-option {
+  display: contents;
+}
+.visually-hidden,
+.wallet-radio {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.wallet-choice {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 9px 3px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  font-size: 13px;
+  font-weight: 750;
+  cursor: pointer;
+}
+.wallet-choice span {
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--muted);
+}
+.wallet-radio:checked + .wallet-choice {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+.wallet-radio:focus-visible + .wallet-choice {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+.wallet-picker .wallet {
+  display: none;
+  grid-column: 1 / -1;
+  order: 1;
+  min-width: 0;
+  padding-top: 20px;
+}
+.wallet-radio:checked ~ .wallet {
+  display: block;
 }
 .boosty-note,
 .crypto-label {

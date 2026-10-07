@@ -44,7 +44,6 @@
   "crypto": "Oder mit Kryptowährung",
   "projectDescriptions": [
     "Kubernetes und Docker in einer gemeinsamen Desktop-Arbeitsumgebung.",
-    "Schlanker Desktop-Client für Mattermost.",
-    "Schlanker E-Mail-Client, der deine Nachrichten auf deinem Computer speichert."
+    "Schlanker Desktop-Client für Mattermost."
   ]
 }

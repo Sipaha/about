@@ -86,7 +86,14 @@ try {
           ),
           "Horizontal overflow",
         );
+        assert.equal(
+          await page.locator(".project").count(),
+          site.projects.length,
+        );
+        assert.equal(await page.locator(".wallet:visible").count(), 1);
         for (const w of site.wallets) {
+          await page.locator(`label[for="choose-${w.id}"]`).click();
+          assert.equal(await page.locator(".wallet:visible").count(), 1);
           assert.equal(
             await page.locator(`#address-${w.id}`).inputValue(),
             w.address,
@@ -126,6 +133,7 @@ try {
           fullPage: true,
         });
         for (const [index, wallet] of site.wallets.entries()) {
+          await page.locator(`label[for="choose-${wallet.id}"]`).click();
           await page.locator("[data-copy]").nth(index).click();
           assert.equal(
             await page.evaluate(() => navigator.clipboard.readText()),
@@ -133,7 +141,7 @@ try {
           );
         }
         assert.match(
-          await page.locator("[role=status]").first().innerText(),
+          await page.locator(".wallet:visible [role=status]").innerText(),
           new RegExp(content[lang].copied),
         );
         await page.locator("[data-theme-toggle]").click();
@@ -265,6 +273,15 @@ try {
   );
   assert(await np.locator(".qr-frame img").first().isVisible());
   assert.equal(await np.locator("[data-copy]").first().isVisible(), false);
+  for (const wallet of site.wallets) {
+    await np.locator(`label[for="choose-${wallet.id}"]`).click();
+    assert.equal(await np.locator(".wallet:visible").count(), 1);
+    assert(await np.locator(`#address-${wallet.id}`).isVisible());
+    assert.equal(
+      await np.locator(`#address-${wallet.id}`).inputValue(),
+      wallet.address,
+    );
+  }
   await nojs.close();
   for (const { code } of languages) {
     const small = await browser.newContext({

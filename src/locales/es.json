@@ -44,7 +44,6 @@
   "crypto": "O con criptomonedas",
   "projectDescriptions": [
     "Kubernetes y Docker en un único espacio de trabajo de escritorio.",
-    "Cliente de escritorio ligero para Mattermost.",
-    "Cliente de correo ligero que guarda tus mensajes en tu ordenador."
+    "Cliente de escritorio ligero para Mattermost."
   ]
 }

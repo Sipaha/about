@@ -15,7 +15,7 @@ The introduction has a deliberate line break after the professional title.
 “Для меня программирование” begins the next line; narrower screens can wrap
 naturally; Russian conjunctions stay with the following word.
 
-Featured projects are SPK Ocular, SPK MM Client (`Sipaha/spk-mm-client`), and SPK Mail.
+Featured projects are SPK Ocular and SPK MM Client (`Sipaha/spk-mm-client`).
 SPK Ocular links to its product website: https://sipaha.github.io/spk-ocular/.
 Project descriptions address a broad audience and avoid possessives such as “my”.
 The footer says “Free software for everyone” and omits payment-method and
@@ -56,12 +56,8 @@ Canonical URL: **https://sipaha.github.io/about/**; English: **https://sipaha.gi
 Repository: **https://github.com/Sipaha/about**. The local Solution directory is
 still `donate`; this does not affect the repository or public site URL.
 
-GitHub Pages must use **GitHub Actions** as its source. The previous deployment
-was blocked by disabled Pages; publishing requires that setting to be enabled.
-On 2026-10-06, [run 37483024816](https://github.com/Sipaha/about/actions/runs/37483024816)
-verified the eight-language build successfully, but deployment returned HTTP 404
-and requested that Pages be enabled. The public repository API still reported
-`has_pages: false`. The site is therefore not claimed publicly live.
+GitHub Pages must use **GitHub Actions** as its source. Publishing requires that setting to be enabled.
+The owner confirmed GitHub Pages is working.
 
 ## Content and payment details
 
@@ -74,7 +70,9 @@ Owner-approved methods: BTC on Bitcoin (ordinary on-chain payments), USDT on
 TON, USDT on TRON, and ETH on Ethereum. Exact addresses are in `src/site.json`.
 The supplied TON mainnet CRC16 and TRON Base58Check checks passed; Ethereum
 syntax is validated by the build. Checks do not prove wallet ownership.
-Each method displays its network explicitly.
+Each method displays its network explicitly. A native radio selector shows one
+wallet at a time, including its network, exact address and QR code. It works
+without JavaScript and supports keyboard navigation.
 
 Lightning remains on hold. Toncoin/GRAM and Boosty remain unconfigured.
 Never substitute sample addresses or create payment accounts on the owner's behalf.

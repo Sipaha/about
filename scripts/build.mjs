@@ -75,7 +75,10 @@ for (const meta of languages) {
   const person = lang === "ru" ? site.owner.nameRu : site.owner.name;
   const wallets = await Promise.all(
     site.wallets.map(
-      async (w) => `<section class="wallet" aria-labelledby="wallet-${w.id}">
+      async (
+        w,
+        index,
+      ) => `<div class="wallet-option"><input class="wallet-radio" type="radio" name="wallet" id="choose-${w.id}" value="${w.id}" ${index === 0 ? "checked" : ""}><label class="wallet-choice" for="choose-${w.id}">${esc(w.coin)}<span>${esc(w.network)}</span></label><section class="wallet" aria-labelledby="wallet-${w.id}">
     <div class="wallet-heading"><span class="coin-icon">${await icon(w.coin === "BTC" ? "currency-btc" : w.coin === "ETH" ? "currency-eth" : "wallet")}</span><div><div class="coin-name" id="wallet-${w.id}">${esc(w.name)} <span aria-hidden="true">/</span> ${esc(w.coin)}</div><div class="network">${t.network}: <strong>${esc(w.network)}</strong></div></div></div>
     <div class="qr-row"><div class="qr-frame"><img src="${base}assets/qr-${w.id}.svg" alt="${t.qr}: ${esc(w.coin)}, ${esc(w.network)}" width="138" height="138"></div><div class="qr-help"><p>${t.instruction}</p><strong>${t.check}</strong></div></div>
     <label class="address-label" for="address-${w.id}">${t.address} (${esc(w.coin)}, ${esc(w.network)})</label>
@@ -83,7 +86,7 @@ for (const meta of languages) {
     <button class="copy" type="button" data-copy data-success="${t.copied}" data-error="${t.copyError}">${await icon("copy")}<span>${t.copy}</span></button>
     <p class="copy-status" role="status" aria-live="polite" aria-atomic="true"></p>
     <p class="network-note" id="note-${w.id}">${w.coin === "BTC" ? t.bitcoin : `${t.network}: ${esc(w.network)}.`}</p>
-  </section>`,
+  </section></div>`,
     ),
   );
   const projects = await Promise.all(
@@ -102,7 +105,7 @@ for (const meta of languages) {
 <section class="projects" id="projects" aria-labelledby="projects-title"><div class="section-head"><h2 id="projects-title">${t.work}</h2><a class="text-link" href="${site.owner.github}?tab=repositories"><span>${t.allProjects}</span>${await icon("arrow-up-right")}</a></div><p class="section-lead">${t.workLead}</p><div class="project-list">${projects.join("")}</div></section>
 <section class="contact-section" id="contact" aria-labelledby="contact-title"><h2 id="contact-title">${t.contact}</h2><div class="contact-details"><a class="contact-email" href="mailto:${esc(site.owner.email)}">${esc(site.owner.email)}</a><p>${t.contactText}</p></div></section>
 <div class="support-layout" id="support"><div class="support-context"><h2>${t.support}</h2><p>${t.supportLead}</p><section class="purpose"><h3>${t.purpose}</h3><p>${t.purposeText}</p></section><section class="help"><h3>${t.other}</h3><p>${t.otherText}</p></section></div>
-<section class="support" aria-label="${t.support}">${site.boosty ? `<a class="boosty" href="${esc(site.boosty)}">${t.boosty}${await icon("arrow-up-right")}</a><p class="boosty-note">${t.boostyText}</p>${wallets.length ? `<p class="crypto-label">${t.crypto}</p>` : ""}` : ""}${wallets.join("")}<p class="optional">${t.optional}</p><noscript><style>.copy,.icon-button,.copy-status{display:none}</style><span class="no-js">${t.instruction}</span></noscript></section></div></main>
+<section class="support" aria-label="${t.support}">${site.boosty ? `<a class="boosty" href="${esc(site.boosty)}">${t.boosty}${await icon("arrow-up-right")}</a><p class="boosty-note">${t.boostyText}</p>${wallets.length ? `<p class="crypto-label">${t.crypto}</p>` : ""}` : ""}<fieldset class="wallet-picker"><legend class="visually-hidden">${t.support}</legend>${wallets.join("")}</fieldset><p class="optional">${t.optional}</p><noscript><style>.copy,.icon-button,.copy-status{display:none}</style><span class="no-js">${t.instruction}</span></noscript></section></div></main>
 <footer class="footer wrap"><p>${t.footer}</p><a href="https://github.com/Sipaha/about">${t.source} ↗</a></footer></body></html>`;
   if (lang !== "ru") await mkdir(new URL(`${lang}/`, out), { recursive: true });
   await writeFile(

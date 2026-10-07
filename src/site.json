@@ -52,13 +52,6 @@
       "icon": "chats",
       "en": "A lightweight desktop client for Mattermost.",
       "ru": "Лёгкий настольный клиент для Mattermost."
-    },
-    {
-      "name": "SPK Mail",
-      "url": "https://github.com/Sipaha/spk-mail",
-      "icon": "envelope-simple",
-      "en": "A lightweight email client that keeps your mail on your machine.",
-      "ru": "Лёгкий почтовый клиент, который хранит почту на твоём компьютере."
     }
   ]
 }

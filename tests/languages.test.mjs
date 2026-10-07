@@ -14,7 +14,7 @@ const input = {
   userAgent: "Browser",
   webdriver: false,
 };
-test("every advertised language has full copy, metadata and three project descriptions", () => {
+test("every advertised language has full copy, metadata and descriptions for each featured project", () => {
   const keys = Object.keys(content.en)
     .filter((k) => k !== "language")
     .sort();
@@ -29,7 +29,7 @@ test("every advertised language has full copy, metadata and three project descri
     for (const key of keys)
       assert.equal(typeof value[key], "string", `${code}.${key}`);
     if (!["ru", "en"].includes(code)) {
-      assert.equal(value.projectDescriptions.length, 3);
+      assert.equal(value.projectDescriptions.length, 2);
       assert(
         value.projectDescriptions.every(
           (s) => typeof s === "string" && s.length,
