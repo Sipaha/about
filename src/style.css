@@ -120,12 +120,7 @@ a:hover {
   font-size: 15px;
   font-weight: 700;
 }
-.identity img {
-  width: 38px;
-  height: 38px;
-  border-radius: 12px;
-  object-fit: cover;
-}
+
 .nav {
   display: flex;
   align-items: center;
@@ -560,10 +555,7 @@ button:active,
   .identity {
     font-size: 13px;
   }
-  .identity img {
-    width: 32px;
-    height: 32px;
-  }
+
   .nav {
     gap: 12px;
   }
@@ -677,9 +669,6 @@ button:active,
   .qr-frame img {
     width: 110px;
     height: 110px;
-  }
-  .identity img {
-    display: none;
   }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -816,9 +805,7 @@ button:active,
   .identity {
     font-size: 12px;
   }
-  .identity img {
-    display: none;
-  }
+
   .contact-section {
     grid-template-columns: 1fr;
     gap: 16px;

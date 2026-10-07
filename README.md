@@ -63,8 +63,8 @@ The owner confirmed GitHub Pages is working.
 
 Edit **`src/site.json`** to change the owner, projects, wallet addresses, or Boosty
 profile. Edit `src/content.mjs` for Russian and English copy. There is no runtime
-API, analytics, wallet connection, checkout, or private-key handling. The owner-provided portrait is served locally as optimized JPEGs (768px for the
-hero/social preview and 96px for the header). The original GitHub avatar remains
+API, analytics, wallet connection, checkout, or private-key handling. The owner-provided portrait is served locally as an optimized 768px JPEG for the
+hero and social preview. The header contains the owner’s name without a photo. The original GitHub avatar remains
 the favicon. The portrait is visible on desktop and mobile; fonts and QR images
 are served locally too.
 
