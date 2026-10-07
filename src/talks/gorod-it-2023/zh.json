@@ -294,5 +294,7 @@
   "layoutLabel": "幻灯片布局",
   "layoutSide": "并排显示",
   "layoutWide": "大图显示",
-  "enlargeSlide": "放大幻灯片"
+  "enlargeSlide": "放大幻灯片",
+  "presentationLabel": "演示文稿查看器",
+  "closePresentation": "关闭查看器"
 }

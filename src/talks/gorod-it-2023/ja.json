@@ -296,5 +296,7 @@
   "layoutLabel": "スライドの表示",
   "layoutSide": "横並び",
   "layoutWide": "大きなスライド",
-  "enlargeSlide": "スライドを拡大"
+  "enlargeSlide": "スライドを拡大",
+  "presentationLabel": "プレゼンテーション表示",
+  "closePresentation": "表示を閉じる"
 }

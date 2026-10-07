@@ -135,52 +135,83 @@ try {
           await page.locator("[data-reader-select]").inputValue(),
           "25",
         );
-        const beforeImage = await page.locator("#slide-26 img").boundingBox();
         const beforeURL = page.url();
         await page.locator("#slide-26 [data-image-view]").click();
-        await page.waitForFunction(
-          () =>
-            document.querySelector('input[name="reader-layout"][value="wide"]')
-              .checked,
-        );
+        const presentation = page.locator(".presentation-view");
+        await presentation.waitFor({ state: "visible" });
         assert.equal(
           page.url(),
           beforeURL,
-          "Image click must stay on the reader page",
+          "Image click opens presentation in place",
         );
-        const wideImage = await page.locator("#slide-26 img").boundingBox();
-        const wideText = await page
-          .locator("#slide-26 .talk-text")
-          .boundingBox();
+        const fitted = await presentation.evaluate((dialog) => {
+          const image = dialog.querySelector("img"),
+            panel = dialog.querySelector(".presentation-text");
+          const bounds = dialog.getBoundingClientRect(),
+            imageBounds = image.getBoundingClientRect(),
+            textBounds = panel.getBoundingClientRect();
+          return {
+            width: bounds.width,
+            height: bounds.height,
+            screenWidth: innerWidth,
+            screenHeight: innerHeight,
+            imageTop: imageBounds.top,
+            imageBottom: imageBounds.bottom,
+            textTop: textBounds.top,
+            fit: getComputedStyle(image).objectFit,
+          };
+        });
+        assert.equal(fitted.width, width);
+        assert.equal(fitted.height, 1000);
+        assert.equal(fitted.fit, "contain");
         assert(
-          wideText.y >= wideImage.y + wideImage.height,
-          "Text is below the full-width slide",
+          fitted.imageTop >= 0 && fitted.imageBottom <= fitted.textTop,
+          "Whole slide fits above transcript panel",
         );
-        if (width >= 768)
-          assert(
-            wideImage.width > beforeImage.width * 1.8,
-            "Slide is substantially larger",
-          );
-        assert(
-          await page.evaluate(
-            () => document.documentElement.scrollWidth <= innerWidth,
-          ),
-          "Wide mode has no horizontal page overflow",
+        assert.deepEqual(
+          await presentation
+            .locator("[data-presentation-text] p")
+            .allTextContents(),
+          await page.locator("#slide-26 .talk-text p").allTextContents(),
         );
-        if (["ru", "en"].includes(code)) {
-          await page.locator("#slide-26 img").evaluate((img) => img.decode());
-          await page.locator("#slide-26").screenshot({
-            path: resolve(scratch, `wide-${code}-${theme}-${width}.png`),
+        await presentation.locator("img").evaluate((img) => img.decode());
+        if (["ru", "en"].includes(code))
+          await page.screenshot({
+            path: resolve(
+              scratch,
+              `presentation-${code}-${theme}-${width}.png`,
+            ),
           });
-        }
-        await page.reload();
+        await presentation.locator("[data-presentation-slide]").click();
+        await page.waitForURL((url) => url.hash === "#slide-27");
+        await page.keyboard.press("ArrowRight");
+        await page.waitForURL((url) => url.hash === "#slide-28");
+        await page.keyboard.press("ArrowLeft");
+        await page.waitForURL((url) => url.hash === "#slide-27");
+        await presentation.locator("[data-presentation-prev]").click();
+        await page.waitForURL((url) => url.hash === "#slide-26");
         assert(
-          await page
-            .locator('input[name="reader-layout"][value="wide"]')
-            .isChecked(),
-          "Layout persists on reload",
+          (
+            await presentation
+              .locator("[data-presentation-title]")
+              .textContent()
+          ).startsWith("26 / 36"),
         );
-        assert(await page.locator("#slide-26").isVisible());
+        await page.setViewportSize({ width, height: 600 });
+        const shortView = await presentation.evaluate((dialog) => ({
+          height: dialog.getBoundingClientRect().height,
+          imageBottom: dialog.querySelector("img").getBoundingClientRect()
+            .bottom,
+          panelTop: dialog
+            .querySelector(".presentation-text")
+            .getBoundingClientRect().top,
+        }));
+        assert.equal(shortView.height, 600);
+        assert(
+          shortView.imageBottom <= shortView.panelTop,
+          "Whole slide also fits a short window",
+        );
+        await page.setViewportSize({ width, height: 1000 });
         await page.addScriptTag({
           path: require.resolve("axe-core/axe.min.js"),
         });
@@ -197,9 +228,23 @@ try {
           [],
           `${code}/${theme}/${width}: accessibility`,
         );
-        await page
-          .locator('label:has(input[name="reader-layout"][value="side"])')
-          .click();
+        await page.keyboard.press("Escape");
+        await presentation.waitFor({ state: "hidden" });
+        await page.waitForFunction(
+          () =>
+            document.querySelector('input[name="reader-layout"][value="side"]')
+              .checked,
+        );
+        assert(
+          await page
+            .locator('input[name="reader-layout"][value="side"]')
+            .isChecked(),
+        );
+        assert(
+          await page
+            .locator("#slide-26 [data-image-view]")
+            .evaluate((link) => document.activeElement === link),
+        );
         await page
           .locator(".talk-toc")
           .evaluate((element) => (element.open = true));
@@ -213,14 +258,16 @@ try {
         await page
           .locator('label:has(input[name="reader-layout"][value="wide"])')
           .click();
+        await presentation.waitFor({ state: "visible" });
+        await presentation.locator(".presentation-close button").click();
+        await presentation.waitFor({ state: "hidden" });
         const other = code === "en" ? "ru" : "en";
         await page.locator(".language").click();
         await page.locator(`[data-language="${other}"]`).click();
-        assert(
-          await page
-            .locator('input[name="reader-layout"][value="wide"]')
-            .isChecked(),
-          "Layout persists across languages",
+        assert.equal(
+          await page.locator(".presentation-view").isVisible(),
+          false,
+          "Presentation opens on interaction, not language navigation",
         );
         assert.equal(new URL(page.url()).pathname, route(other));
         assert.equal(new URL(page.url()).hash, "#slide-26");
@@ -260,7 +307,7 @@ try {
       const textBox = await page.locator("#slide-1 .talk-text").boundingBox();
       if (width === 1440)
         assert(
-          imageBox.width > initialImageBox.width * 1.8,
+          imageBox.width > initialImageBox.width,
           "Native layout switch enlarges the slide without JavaScript",
         );
       assert(

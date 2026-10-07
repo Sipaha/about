@@ -298,5 +298,7 @@
   "layoutLabel": "Вид слайда",
   "layoutSide": "Рядом с текстом",
   "layoutWide": "Слайд крупно",
-  "enlargeSlide": "Увеличить слайд"
+  "enlargeSlide": "Увеличить слайд",
+  "presentationLabel": "Просмотр презентации",
+  "closePresentation": "Закрыть просмотр"
 }

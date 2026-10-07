@@ -298,5 +298,7 @@
   "layoutLabel": "Visualização dos slides",
   "layoutSide": "Lado a lado",
   "layoutWide": "Slide grande",
-  "enlargeSlide": "Ampliar slide"
+  "enlargeSlide": "Ampliar slide",
+  "presentationLabel": "Visualizador de apresentação",
+  "closePresentation": "Fechar visualizador"
 }

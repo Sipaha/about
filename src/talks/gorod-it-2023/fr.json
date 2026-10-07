@@ -298,5 +298,7 @@
   "layoutLabel": "Affichage des diapositives",
   "layoutSide": "Côte à côte",
   "layoutWide": "Grande diapositive",
-  "enlargeSlide": "Agrandir la diapositive"
+  "enlargeSlide": "Agrandir la diapositive",
+  "presentationLabel": "Visionneuse de présentation",
+  "closePresentation": "Fermer la visionneuse"
 }

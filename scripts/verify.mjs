@@ -224,6 +224,7 @@ try {
     );
     const page = await context.newPage();
     await page.goto(origin + base + "?ref=test#support");
+    await page.waitForURL(origin + pagePath(code, base) + "?ref=test#support");
     assert.equal(
       page.url(),
       origin + pagePath(code, base) + "?ref=test#support",
@@ -235,6 +236,7 @@ try {
       origin + pagePath("de", base) + "?ref=test#support",
     );
     await page.goto(origin + base);
+    await page.waitForURL(origin + pagePath("de", base));
     assert.equal(await page.locator("html").getAttribute("lang"), "de");
     await page.goto(origin + pagePath("ja", base));
     assert.equal(await page.locator("html").getAttribute("lang"), "ja");

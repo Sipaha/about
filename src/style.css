@@ -1298,20 +1298,40 @@ button:active,
   outline: 3px solid var(--focus);
   outline-offset: 3px;
 }
-.talk-page:has(input[name="reader-layout"][value="wide"]:checked)
+body:not(.presentation-enhanced)
+  .talk-page:has(input[name="reader-layout"][value="wide"]:checked)
   .talk-columns {
   grid-template-columns: minmax(0, 1fr);
 }
-.talk-page:has(input[name="reader-layout"][value="wide"]:checked) .talk-text p {
+body:not(.presentation-enhanced)
+  .talk-page:has(input[name="reader-layout"][value="wide"]:checked)
+  .talk-figure
+  img {
+  width: auto;
+  max-width: 100%;
+  max-height: max(
+    120px,
+    calc(
+      100dvh - var(--reader-toolbar-height, 120px) -
+        var(--reader-heading-height, 80px) - 64px
+    )
+  );
+  margin-inline: auto;
+}
+body:not(.presentation-enhanced)
+  .talk-page:has(input[name="reader-layout"][value="wide"]:checked)
+  .talk-text
+  p {
   max-width: 85ch;
 }
 @media (min-width: 768px) {
-  .talk-page:has(input[name="reader-layout"][value="wide"]:checked) {
+  body:not(.presentation-enhanced)
+    .talk-page:has(input[name="reader-layout"][value="wide"]:checked) {
     width: min(1600px, calc(100% - 80px));
   }
 }
 .talk-slide {
-  scroll-margin-top: 150px;
+  scroll-margin-top: calc(var(--reader-toolbar-height, 120px) + 24px);
 }
 .talk-text p,
 .talk-question p {
@@ -1320,4 +1340,145 @@ button:active,
 
 .talk-figure > a {
   cursor: zoom-in;
+}
+
+html:has(.presentation-view[open]) {
+  overflow: hidden;
+}
+.presentation-view {
+  inset: 0;
+  width: 100vw;
+  height: 100dvh;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Noto Sans", system-ui, sans-serif;
+  overflow: hidden;
+}
+.presentation-view::backdrop {
+  background: var(--bg);
+}
+.presentation-shell {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) minmax(160px, 28dvh);
+  height: 100%;
+}
+.presentation-stage {
+  position: relative;
+  min-height: 0;
+  padding: 20px 76px;
+}
+.presentation-slide {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+}
+.presentation-slide:active {
+  transform: none;
+}
+.presentation-slide:disabled {
+  cursor: default;
+}
+.presentation-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.presentation-arrow,
+.presentation-close button {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  color: var(--text);
+  background: var(--surface);
+}
+.presentation-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.presentation-arrow:active {
+  transform: translateY(-50%);
+}
+.presentation-arrow:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+.presentation-previous {
+  left: 12px;
+}
+.presentation-next {
+  right: 12px;
+}
+.presentation-close {
+  position: absolute;
+  right: 12px;
+  top: 12px;
+  margin: 0;
+}
+.presentation-text {
+  overflow: auto;
+  min-height: 0;
+  padding: 18px max(24px, calc((100vw - 1000px) / 2));
+  background: var(--surface);
+  border-top: 1px solid var(--line);
+}
+.presentation-text h2 {
+  margin: 0 0 12px;
+  font-size: 18px;
+  line-height: 1.4;
+}
+.presentation-text p {
+  margin: 0 0 14px;
+  font-size: 16px;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+.presentation-text pre {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  overflow: auto;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  font:
+    13px/1.6 ui-monospace,
+    monospace;
+}
+.presentation-text a {
+  color: var(--accent);
+}
+@media (max-width: 600px) {
+  .presentation-stage {
+    padding: 64px 12px 12px;
+  }
+  .presentation-arrow {
+    width: 40px;
+    height: 44px;
+  }
+  .presentation-previous {
+    left: 6px;
+  }
+  .presentation-next {
+    right: 6px;
+  }
+  .presentation-shell {
+    grid-template-rows: minmax(0, 1fr) minmax(180px, 36dvh);
+  }
+  .presentation-text {
+    padding: 16px 20px;
+  }
 }

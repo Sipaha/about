@@ -298,5 +298,7 @@
   "layoutLabel": "Folienansicht",
   "layoutSide": "Nebeneinander",
   "layoutWide": "Große Folie",
-  "enlargeSlide": "Folie vergrößern"
+  "enlargeSlide": "Folie vergrößern",
+  "presentationLabel": "Präsentationsansicht",
+  "closePresentation": "Ansicht schließen"
 }

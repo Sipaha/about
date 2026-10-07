@@ -298,5 +298,7 @@
   "layoutLabel": "Slide layout",
   "layoutSide": "Side by side",
   "layoutWide": "Large slide",
-  "enlargeSlide": "Enlarge slide"
+  "enlargeSlide": "Enlarge slide",
+  "presentationLabel": "Presentation viewer",
+  "closePresentation": "Close viewer"
 }
