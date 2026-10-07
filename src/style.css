@@ -685,7 +685,7 @@ button:active,
 
 .profile-hero {
   display: grid;
-  grid-template-columns: 1fr 240px;
+  grid-template-columns: 1fr 320px;
   align-items: center;
   gap: 64px;
   padding: 70px 0 58px;
@@ -706,8 +706,8 @@ button:active,
   font-size: 14px;
 }
 .profile-mark img {
-  width: 192px;
-  height: 192px;
+  width: 288px;
+  height: 288px;
   border-radius: 32px;
 }
 .about-section {
@@ -766,6 +766,16 @@ button:active,
 .support-context .help {
   padding-top: 28px;
 }
+@media (min-width: 768px) and (max-width: 1023px) {
+  .profile-hero {
+    grid-template-columns: 1fr 224px;
+    gap: 32px;
+  }
+  .profile-mark img {
+    width: 224px;
+    height: 224px;
+  }
+}
 @media (max-width: 767px) {
   .profile-hero {
     grid-template-columns: 1fr;
@@ -823,6 +833,15 @@ button:active,
   cursor: pointer;
   list-style: none;
   border-radius: 6px;
+}
+.language-code {
+  line-height: 1;
+}
+.language-caret {
+  display: block;
+  width: 12px;
+  height: 12px;
+  flex: none;
 }
 .language-menu summary::-webkit-details-marker {
   display: none;

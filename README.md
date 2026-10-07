@@ -33,7 +33,8 @@ saved choice, then ordered browser languages, then English as fallback. Direct
 localized URLs are never redirected. Bots and automated audits retain the requested
 page. Traditional Chinese is not silently presented as simplified Chinese.
 
-The native-language menu works without JavaScript. With JavaScript it remembers
+The native-language menu works without JavaScript. Its chevron is a bundled SVG
+aligned with the language code rather than a font-dependent text glyph. With JavaScript it remembers
 choices, preserves query/fragment and supports Escape/outside-click dismissal.
 Storage denial does not prevent navigation: an explicit `?lang=ru` preserves a
 manual Russian choice on the legacy root when preference storage is unavailable. Every page has canonical/hreflang
@@ -65,7 +66,7 @@ Edit **`src/site.json`** to change the owner, projects, wallet addresses, or Boo
 profile. Edit `src/content.mjs` for Russian and English copy. There is no runtime
 API, analytics, wallet connection, checkout, or private-key handling. The owner-provided portrait is served locally as an optimized 768px JPEG for the
 hero and social preview. The header contains the owner’s name without a photo. The original GitHub avatar remains
-the favicon. The portrait is visible on desktop and mobile; fonts and QR images
+the favicon. The portrait displays at 288px on desktop, 224px on tablets and 128px on mobile; fonts and QR images
 are served locally too.
 
 Owner-approved methods: BTC on Bitcoin (ordinary on-chain payments), USDT on
