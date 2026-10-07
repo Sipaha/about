@@ -29,7 +29,9 @@ to everyone. Avoid references such as “this idea” that require reading earli
 
 ## Conference talks
 
-The `#conferences` section follows projects. Its first entry is the owner’s
+The `#conferences` section follows projects. A full-width divider and consistent
+section padding separate conferences from contact in both themes and on mobile.
+Its first entry is the owner’s
 2023 Город IT talk, “Records API: rethinking GraphQL for a low-code platform”.
 The video link preserves the supplied 33:39 start (`t=2019`). The original
 36-page Russian presentation is hosted locally as
@@ -51,7 +53,10 @@ No translated audio or rebuilt localized slide images are implied.
 
 With JavaScript, Previous/Next, the slide selector, keyboard arrows in the
 controls and the contents menu select one slide. `#slide-N` deep links survive
-language switching and reloads. Controls remain visible while reading a slide.
+language switching and reloads. Controls remain visible while reading a slide. The reader uses locally hosted Noto Sans
+type at 17px on desktop and 16px on mobile for speech and questions, with a
+bundled, clearly visible selector caret; Chinese and Japanese use system CJK
+font fallback; the native select remains keyboard accessible.
 Without JavaScript, all 36 slide/text pairs appear sequentially. The original
 PDF and YouTube links remain ordinary links; there are no embeds or remote fonts.
 The home and reader each have their own locale-aware language destinations,

@@ -48,14 +48,15 @@ await cp(new URL("public/", root), out, { recursive: true });
 await mkdir(new URL("assets/", out), { recursive: true });
 for (const file of ["style.css", "client.js", "talk-reader.js"])
   await cp(new URL(`src/${file}`, root), new URL(`assets/${file}`, out));
-for (const subset of ["latin", "cyrillic"])
-  await cp(
-    new URL(
-      `node_modules/@fontsource-variable/manrope/files/manrope-${subset}-wght-normal.woff2`,
-      root,
-    ),
-    new URL(`assets/manrope-${subset}-wght-normal.woff2`, out),
-  );
+for (const font of ["manrope", "noto-sans"])
+  for (const subset of ["latin", "cyrillic"])
+    await cp(
+      new URL(
+        `node_modules/@fontsource-variable/${font}/files/${font}-${subset}-wght-normal.woff2`,
+        root,
+      ),
+      new URL(`assets/${font}-${subset}-wght-normal.woff2`, out),
+    );
 for (const w of site.wallets) {
   // A bare public address works in wallet scanners without an external QR service.
   await writeFile(

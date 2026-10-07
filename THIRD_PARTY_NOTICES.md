@@ -2,6 +2,8 @@
 
 - **Manrope variable font**: @fontsource-variable/manrope, SIL Open Font License
   1.1. The Latin and Cyrillic WOFF2 subsets are copied from the installed package.
+- **Noto Sans variable font**: @fontsource-variable/noto-sans, SIL Open Font
+  License 1.1. Reader Latin and Cyrillic WOFF2 subsets are hosted locally.
 - **Phosphor icons**: @phosphor-icons/core, MIT. Selected SVGs are included inline
   at build time without modification to their paths.
 - **GitHub profile avatar**: public profile image for Sipaha, downloaded from
