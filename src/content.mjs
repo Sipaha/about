@@ -12,6 +12,12 @@ export const content = {
   pt,
   ja,
   ru: {
+    conferences: "Выступления",
+    recordsApiTalk:
+      "Records API: переосмысление GraphQL для low-code платформы",
+    watchTalk: "Смотреть выступление",
+    slides: "Презентация",
+    conferenceLanguage: "Видео и презентация на русском.",
     languageLabel: "Выбрать язык",
     navigation: "Навигация",
     title: "Павел Симонов · Системный архитектор",
@@ -66,6 +72,11 @@ export const content = {
     crypto: "Или криптовалютой",
   },
   en: {
+    conferences: "Conference talks",
+    recordsApiTalk: "Records API: rethinking GraphQL for a low-code platform",
+    watchTalk: "Watch the talk",
+    slides: "Slides",
+    conferenceLanguage: "Video and slides in Russian.",
     languageLabel: "Choose language",
     navigation: "Navigation",
     title: "Pavel Simonov · Systems Architect",

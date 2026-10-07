@@ -60,5 +60,15 @@
       "en": "Run and manage Citeck with Docker.",
       "ru": "Запуск и управление Citeck через Docker."
     }
+  ],
+  "conferences": [
+    {
+      "id": "gorod-it-2023",
+      "event": "Город IT",
+      "year": 2023,
+      "titleKey": "recordsApiTalk",
+      "video": "https://youtu.be/1g3Z7BGjoUg?t=2019",
+      "slides": "assets/records-api-gorod-it-2023.pdf"
+    }
   ]
 }

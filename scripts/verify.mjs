@@ -104,6 +104,26 @@ try {
             .textContent(),
           "Citeck",
         );
+        assert.equal(
+          await page.locator(".conference").count(),
+          site.conferences.length,
+        );
+        for (const talk of site.conferences) {
+          assert.equal(
+            await page
+              .locator(`#${talk.id} .conference-video`)
+              .getAttribute("href"),
+            talk.video,
+          );
+          const href = await page
+            .locator(`#${talk.id} .conference-slides`)
+            .getAttribute("href");
+          assert.equal(href, base + talk.slides);
+          const pdf = await page.request.get(origin + href);
+          assert.equal(pdf.status(), 200);
+          assert.match(pdf.headers()["content-type"], /application\/pdf/);
+          assert.equal((await pdf.body()).subarray(0, 5).toString(), "%PDF-");
+        }
         assert.equal(await page.locator(".wallet:visible").count(), 1);
         for (const w of site.wallets) {
           await page.locator(`label[for="choose-${w.id}"]`).click();

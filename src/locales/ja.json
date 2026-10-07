@@ -47,5 +47,10 @@
     "軽量な Mattermost デスクトップクライアント。",
     "Docker で Citeck を起動・管理。"
   ],
-  "copyManual": "手動でコピー"
+  "copyManual": "手動でコピー",
+  "conferences": "カンファレンスでの登壇",
+  "recordsApiTalk": "Records API：ローコードプラットフォーム向けに GraphQL を再考する",
+  "watchTalk": "講演を見る",
+  "slides": "発表資料",
+  "conferenceLanguage": "動画と発表資料はロシア語です。"
 }

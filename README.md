@@ -1,7 +1,7 @@
 # Pavel Simonov · About
 
 Multilingual personal website for [Pavel Simonov / Sipaha](https://github.com/Sipaha).
-The page introduces the developer, presents selected projects and a contact route,
+The page introduces the developer, presents selected projects, conference talks and a contact route,
 and includes optional donation details in a secondary section (`#support`).
 
 The profile introduces Pavel as a systems architect and developer at Citeck
@@ -26,6 +26,19 @@ privacy slogans. Boosty remains a possible future option awaiting a public profi
 The Mattermost repository is public; anonymous access was verified on 2026-10-06.
 The support section explicitly names its purpose: quality free software available
 to everyone. Avoid references such as “this idea” that require reading earlier sections.
+
+## Conference talks
+
+The `#conferences` section follows projects. Its first entry is the owner’s
+2023 Город IT talk, “Records API: rethinking GraphQL for a low-code platform”.
+The video link preserves the supplied 33:39 start (`t=2019`). The original
+36-page Russian presentation is hosted locally as
+`public/assets/records-api-gorod-it-2023.pdf`, without modifying its contents.
+Titles and action labels are localized in all eight languages; every locale
+identifies the video and slides as Russian. YouTube is a plain outbound link,
+with no embed, remote thumbnail, tracking or external runtime request.
+Add entries to `src/site.json` under `conferences` and provide the corresponding
+title key in every locale dictionary. A missing title or PDF blocks the build.
 
 ## Languages and shared direction
 

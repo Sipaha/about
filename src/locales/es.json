@@ -47,5 +47,10 @@
     "Cliente de escritorio ligero para Mattermost.",
     "Inicia y administra Citeck con Docker."
   ],
-  "copyManual": "Copiar manualmente"
+  "copyManual": "Copiar manualmente",
+  "conferences": "Charlas en conferencias",
+  "recordsApiTalk": "Records API: repensar GraphQL para una plataforma low-code",
+  "watchTalk": "Ver la charla",
+  "slides": "Presentación",
+  "conferenceLanguage": "El vídeo y la presentación están en ruso."
 }

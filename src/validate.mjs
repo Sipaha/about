@@ -80,5 +80,24 @@ export function validateSite(site) {
     if (!p.name || !p.ru || !p.en)
       throw new Error("Projects must have both translations");
   }
+  const conferenceIds = new Set();
+  for (const talk of site.conferences ?? []) {
+    https(talk.video);
+    if (!/^[a-z][a-z0-9-]*$/.test(talk.id) || conferenceIds.has(talk.id))
+      throw new Error("Conference IDs must be unique safe slugs");
+    conferenceIds.add(talk.id);
+    if (
+      !talk.event ||
+      !Number.isInteger(talk.year) ||
+      talk.year < 2000 ||
+      talk.year > 2100
+    )
+      throw new Error("Conference event and year are required");
+    if (
+      !/^[a-zA-Z][a-zA-Z0-9]*$/.test(talk.titleKey) ||
+      !/^assets\/[a-z0-9-]+\.pdf$/.test(talk.slides)
+    )
+      throw new Error("Conference title key and local PDF path are required");
+  }
   return site;
 }
