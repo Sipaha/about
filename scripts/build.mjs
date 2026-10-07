@@ -83,8 +83,7 @@ for (const meta of languages) {
     <div class="qr-row"><div class="qr-frame"><img src="${base}assets/qr-${w.id}.svg" alt="${t.qr}: ${esc(w.coin)}, ${esc(w.network)}" width="138" height="138"></div><div class="qr-help"><p>${t.instruction}</p><strong>${t.check}</strong></div></div>
     <label class="address-label" for="address-${w.id}">${t.address} (${esc(w.coin)}, ${esc(w.network)})</label>
     <textarea class="address" id="address-${w.id}" rows="2" readonly spellcheck="false" autocomplete="off" ${w.coin === "BTC" ? `aria-describedby="note-${w.id}"` : ""}>${esc(w.address)}</textarea>
-    <button class="copy" type="button" data-copy data-success="${t.copied}" data-error="${t.copyError}">${await icon("copy")}<span>${t.copy}</span></button>
-    <p class="copy-status" role="status" aria-live="polite" aria-atomic="true"></p>
+    <button class="copy" type="button" data-copy data-success="${t.copied}" data-error="${t.copyError}" data-manual="${t.copyManual}">${await icon("copy")}<span data-copy-label role="status" aria-live="polite" aria-atomic="true">${t.copy}</span></button>
     ${w.coin === "BTC" ? `<p class="network-note" id="note-${w.id}">${t.bitcoin}</p>` : ""}
   </section></div>`,
     ),
@@ -105,7 +104,7 @@ for (const meta of languages) {
 <section class="projects" id="projects" aria-labelledby="projects-title"><div class="section-head"><h2 id="projects-title">${t.work}</h2><a class="text-link" href="${site.owner.github}?tab=repositories"><span>${t.allProjects}</span>${await icon("arrow-up-right")}</a></div><p class="section-lead">${t.workLead}</p><div class="project-list">${projects.join("")}</div></section>
 <section class="contact-section" id="contact" aria-labelledby="contact-title"><h2 id="contact-title">${t.contact}</h2><div class="contact-details"><a class="contact-email" href="mailto:${esc(site.owner.email)}">${esc(site.owner.email)}</a><p>${t.contactText}</p></div></section>
 <div class="support-layout" id="support"><div class="support-context"><h2>${t.support}</h2><p>${t.supportLead}</p><section class="purpose"><h3>${t.purpose}</h3><p>${t.purposeText}</p></section><section class="help"><h3>${t.other}</h3><p>${t.otherText}</p></section></div>
-<section class="support" aria-label="${t.support}">${site.boosty ? `<a class="boosty" href="${esc(site.boosty)}">${t.boosty}${await icon("arrow-up-right")}</a><p class="boosty-note">${t.boostyText}</p>${wallets.length ? `<p class="crypto-label">${t.crypto}</p>` : ""}` : ""}<fieldset class="wallet-picker"><legend class="visually-hidden">${t.support}</legend>${wallets.join("")}</fieldset><p class="optional">${t.optional}</p><noscript><style>.copy,.icon-button,.copy-status{display:none}</style><span class="no-js">${t.instruction}</span></noscript></section></div></main>
+<section class="support" aria-label="${t.support}">${site.boosty ? `<a class="boosty" href="${esc(site.boosty)}">${t.boosty}${await icon("arrow-up-right")}</a><p class="boosty-note">${t.boostyText}</p>${wallets.length ? `<p class="crypto-label">${t.crypto}</p>` : ""}` : ""}<fieldset class="wallet-picker"><legend class="visually-hidden">${t.support}</legend>${wallets.join("")}</fieldset><p class="optional">${t.optional}</p><noscript><style>.copy,.icon-button{display:none}</style><span class="no-js">${t.instruction}</span></noscript></section></div></main>
 <footer class="footer wrap"><p>${t.footer}</p><a href="https://github.com/Sipaha/about">${t.source} ↗</a></footer></body></html>`;
   if (lang !== "ru") await mkdir(new URL(`${lang}/`, out), { recursive: true });
   await writeFile(

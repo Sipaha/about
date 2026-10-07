@@ -45,5 +45,6 @@
   "projectDescriptions": [
     "Kubernetes und Docker in einer gemeinsamen Desktop-Arbeitsumgebung.",
     "Schlanker Desktop-Client für Mattermost."
-  ]
+  ],
+  "copyManual": "Manuell kopieren"
 }

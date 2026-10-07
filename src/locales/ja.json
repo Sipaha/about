@@ -45,5 +45,6 @@
   "projectDescriptions": [
     "Kubernetes と Docker を一つのデスクトップワークスペースで。",
     "軽量な Mattermost デスクトップクライアント。"
-  ]
+  ],
+  "copyManual": "手動でコピー"
 }

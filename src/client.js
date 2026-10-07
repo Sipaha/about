@@ -24,20 +24,29 @@ mode.addEventListener("change", ({ matches }) => {
   if (!preference) applyTheme(matches);
 });
 for (const button of document.querySelectorAll("[data-copy]")) {
+  const label = button.querySelector("[data-copy-label]");
+  const initialLabel = label.textContent;
+  let resetTimer;
   button.addEventListener("click", async () => {
     const panel = button.closest(".wallet");
     const address = panel.querySelector("textarea");
-    const status = panel.querySelector('[role="status"]');
+    clearTimeout(resetTimer);
+    button.removeAttribute("title");
     button.disabled = true;
     try {
       await navigator.clipboard.writeText(address.value);
-      status.textContent = button.dataset.success;
+      label.textContent = button.dataset.success;
     } catch {
       address.focus();
       address.select();
-      status.textContent = button.dataset.error;
+      label.textContent = button.dataset.manual;
+      button.title = button.dataset.error;
     } finally {
       button.disabled = false;
+      resetTimer = setTimeout(() => {
+        label.textContent = initialLabel;
+        button.removeAttribute("title");
+      }, 3000);
     }
   });
 }

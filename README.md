@@ -77,7 +77,10 @@ Each method displays its network explicitly. A native radio selector shows one
 wallet at a time, including its network, exact address and QR code. It works
 without JavaScript and supports keyboard navigation. Network names appear in
 the selector, wallet heading and address label; only Bitcoin has an additional
-on-chain/Lightning clarification beneath the copy button.
+on-chain/Lightning clarification beneath the copy button. Copy feedback changes the fixed-height button label for three seconds, with
+an accessible live region inside the button. No separate status row is reserved.
+Clipboard denial selects the address and shows a short manual-copy label; the
+full explanation is available in the button tooltip.
 
 Lightning remains on hold. Toncoin/GRAM and Boosty remain unconfigured.
 Never substitute sample addresses or create payment accounts on the owner's behalf.

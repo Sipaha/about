@@ -353,11 +353,17 @@ button:active,
   width: 18px;
   height: 18px;
 }
-.copy-status {
-  font-size: 12px;
-  min-height: 20px;
-  margin: 6px 0 0;
-  color: var(--accent);
+.copy {
+  height: 46px;
+  flex-wrap: nowrap;
+}
+.copy svg {
+  flex: none;
+}
+[data-copy-label] {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .network-note {
   font-size: 11px;

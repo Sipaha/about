@@ -134,7 +134,14 @@ try {
         });
         for (const [index, wallet] of site.wallets.entries()) {
           await page.locator(`label[for="choose-${wallet.id}"]`).click();
+          const beforeCopy = await page.locator(".support").boundingBox();
           await page.locator("[data-copy]").nth(index).click();
+          const afterCopy = await page.locator(".support").boundingBox();
+          assert.equal(
+            afterCopy.height,
+            beforeCopy.height,
+            "Copy feedback must not change card height",
+          );
           assert.equal(
             await page.evaluate(() => navigator.clipboard.readText()),
             wallet.address,
@@ -251,7 +258,12 @@ try {
     }),
   );
   await page.goto(origin + base);
+  const beforeDenied = await page.locator(".support").boundingBox();
   await page.locator("[data-copy]").first().click();
+  assert.equal(
+    (await page.locator(".support").boundingBox()).height,
+    beforeDenied.height,
+  );
   assert.match(
     await page.locator("[role=status]").first().innerText(),
     /вручную/,
@@ -262,6 +274,11 @@ try {
       .first()
       .evaluate((el) => el.selectionEnd - el.selectionStart),
     site.wallets[0].address.length,
+  );
+  await page.waitForTimeout(3100);
+  assert.equal(
+    await page.locator("[data-copy-label]").first().innerText(),
+    content.ru.copy,
   );
   await fallback.close();
   const nojs = await browser.newContext({ javaScriptEnabled: false });

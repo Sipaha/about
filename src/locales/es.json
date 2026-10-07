@@ -45,5 +45,6 @@
   "projectDescriptions": [
     "Kubernetes y Docker en un único espacio de trabajo de escritorio.",
     "Cliente de escritorio ligero para Mattermost."
-  ]
+  ],
+  "copyManual": "Copiar manualmente"
 }

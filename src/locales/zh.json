@@ -45,5 +45,6 @@
   "projectDescriptions": [
     "在一个桌面工作区中管理 Kubernetes 和 Docker。",
     "轻量级 Mattermost 桌面客户端。"
-  ]
+  ],
+  "copyManual": "手动复制"
 }
