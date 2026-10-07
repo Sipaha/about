@@ -6,6 +6,33 @@ if (reader) {
   const next = reader.querySelector("[data-reader-next]");
   const select = reader.querySelector("[data-reader-select]");
   const status = reader.querySelector("[data-reader-status]");
+  const layouts = [...reader.querySelectorAll('input[name="reader-layout"]')];
+  try {
+    const saved = localStorage.getItem("about-talk-layout");
+    const choice = layouts.find((input) => input.value === saved);
+    if (choice) choice.checked = true;
+  } catch {}
+  layouts.forEach((input) =>
+    input.addEventListener("change", () => {
+      if (!input.checked) return;
+      try {
+        localStorage.setItem("about-talk-layout", input.value);
+      } catch {}
+    }),
+  );
+  reader.querySelectorAll("[data-image-view]").forEach((link) => {
+    link.addEventListener("click", (event) => {
+      if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey)
+        return;
+      event.preventDefault();
+      const wide = layouts.find((input) => input.value === "wide");
+      wide.checked = true;
+      wide.dispatchEvent(new Event("change", { bubbles: true }));
+      link
+        .closest("[data-slide]")
+        .scrollIntoView({ block: "start", behavior: "instant" });
+    });
+  });
   let selected = 0;
   function indexFromHash() {
     const match = location.hash.match(/^#slide-(\d+)$/);

@@ -292,5 +292,9 @@
   ],
   "selectLanguage": "言語を選択",
   "theme": "テーマを切り替え",
-  "skip": "本文へ移動"
+  "skip": "本文へ移動",
+  "layoutLabel": "スライドの表示",
+  "layoutSide": "横並び",
+  "layoutWide": "大きなスライド",
+  "enlargeSlide": "スライドを拡大"
 }

@@ -294,5 +294,9 @@
   ],
   "selectLanguage": "Escolher idioma",
   "theme": "Alternar tema",
-  "skip": "Ir para o conteúdo"
+  "skip": "Ir para o conteúdo",
+  "layoutLabel": "Visualização dos slides",
+  "layoutSide": "Lado a lado",
+  "layoutWide": "Slide grande",
+  "enlargeSlide": "Ampliar slide"
 }

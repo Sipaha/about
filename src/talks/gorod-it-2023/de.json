@@ -294,5 +294,9 @@
   ],
   "selectLanguage": "Sprache wählen",
   "theme": "Design wechseln",
-  "skip": "Zum Inhalt springen"
+  "skip": "Zum Inhalt springen",
+  "layoutLabel": "Folienansicht",
+  "layoutSide": "Nebeneinander",
+  "layoutWide": "Große Folie",
+  "enlargeSlide": "Folie vergrößern"
 }

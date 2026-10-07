@@ -1047,7 +1047,7 @@ button:active,
   display: grid;
   grid-template-columns: auto minmax(0, 1fr) auto;
   gap: 16px;
-  margin-bottom: 28px;
+  margin-bottom: 0;
   align-items: center;
 }
 .reader-controls[hidden] {
@@ -1257,18 +1257,67 @@ button:active,
   }
 }
 
-.reader-controls {
+.reader-toolbar {
   position: sticky;
   top: 12px;
   z-index: 3;
   background: var(--bg);
   padding-block: 8px;
+  margin-bottom: 28px;
   border-bottom: 1px solid var(--line);
 }
+.reader-layout {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.reader-layout label {
+  cursor: pointer;
+}
+.reader-layout input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  clip-path: inset(50%);
+}
+.reader-layout span {
+  display: block;
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.reader-layout input:checked + span {
+  color: var(--accent);
+  background: var(--accent-soft);
+  border-color: var(--accent);
+}
+.reader-layout input:focus-visible + span {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+.talk-page:has(input[name="reader-layout"][value="wide"]:checked)
+  .talk-columns {
+  grid-template-columns: minmax(0, 1fr);
+}
+.talk-page:has(input[name="reader-layout"][value="wide"]:checked) .talk-text p {
+  max-width: 85ch;
+}
+@media (min-width: 768px) {
+  .talk-page:has(input[name="reader-layout"][value="wide"]:checked) {
+    width: min(1600px, calc(100% - 80px));
+  }
+}
 .talk-slide {
-  scroll-margin-top: 90px;
+  scroll-margin-top: 150px;
 }
 .talk-text p,
 .talk-question p {
   overflow-wrap: anywhere;
+}
+
+.talk-figure > a {
+  cursor: zoom-in;
 }

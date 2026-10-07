@@ -290,5 +290,9 @@
   ],
   "selectLanguage": "选择语言",
   "theme": "切换主题",
-  "skip": "跳到主要内容"
+  "skip": "跳到主要内容",
+  "layoutLabel": "幻灯片布局",
+  "layoutSide": "并排显示",
+  "layoutWide": "大图显示",
+  "enlargeSlide": "放大幻灯片"
 }

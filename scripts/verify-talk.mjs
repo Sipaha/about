@@ -135,6 +135,52 @@ try {
           await page.locator("[data-reader-select]").inputValue(),
           "25",
         );
+        const beforeImage = await page.locator("#slide-26 img").boundingBox();
+        const beforeURL = page.url();
+        await page.locator("#slide-26 [data-image-view]").click();
+        await page.waitForFunction(
+          () =>
+            document.querySelector('input[name="reader-layout"][value="wide"]')
+              .checked,
+        );
+        assert.equal(
+          page.url(),
+          beforeURL,
+          "Image click must stay on the reader page",
+        );
+        const wideImage = await page.locator("#slide-26 img").boundingBox();
+        const wideText = await page
+          .locator("#slide-26 .talk-text")
+          .boundingBox();
+        assert(
+          wideText.y >= wideImage.y + wideImage.height,
+          "Text is below the full-width slide",
+        );
+        if (width >= 768)
+          assert(
+            wideImage.width > beforeImage.width * 1.8,
+            "Slide is substantially larger",
+          );
+        assert(
+          await page.evaluate(
+            () => document.documentElement.scrollWidth <= innerWidth,
+          ),
+          "Wide mode has no horizontal page overflow",
+        );
+        if (["ru", "en"].includes(code)) {
+          await page.locator("#slide-26 img").evaluate((img) => img.decode());
+          await page.locator("#slide-26").screenshot({
+            path: resolve(scratch, `wide-${code}-${theme}-${width}.png`),
+          });
+        }
+        await page.reload();
+        assert(
+          await page
+            .locator('input[name="reader-layout"][value="wide"]')
+            .isChecked(),
+          "Layout persists on reload",
+        );
+        assert(await page.locator("#slide-26").isVisible());
         await page.addScriptTag({
           path: require.resolve("axe-core/axe.min.js"),
         });
@@ -152,6 +198,9 @@ try {
           `${code}/${theme}/${width}: accessibility`,
         );
         await page
+          .locator('label:has(input[name="reader-layout"][value="side"])')
+          .click();
+        await page
           .locator(".talk-toc")
           .evaluate((element) => (element.open = true));
         await page.locator('.talk-toc a[href="#slide-18"]').click();
@@ -161,9 +210,18 @@ try {
           .locator(".talk-toc")
           .evaluate((element) => (element.open = false));
         await page.locator("[data-reader-select]").selectOption("25");
+        await page
+          .locator('label:has(input[name="reader-layout"][value="wide"])')
+          .click();
         const other = code === "en" ? "ru" : "en";
         await page.locator(".language").click();
         await page.locator(`[data-language="${other}"]`).click();
+        assert(
+          await page
+            .locator('input[name="reader-layout"][value="wide"]')
+            .isChecked(),
+          "Layout persists across languages",
+        );
         assert.equal(new URL(page.url()).pathname, route(other));
         assert.equal(new URL(page.url()).hash, "#slide-26");
         assert(await page.locator("#slide-26").isVisible());
@@ -184,27 +242,43 @@ try {
           `Talk ${code}/${theme}/${width}: slides, images, code layout, keyboard, deep links, language continuity, axe PASS`,
         );
       }
-  for (const { code } of languages) {
-    const context = await browser.newContext({
-      javaScriptEnabled: false,
-      viewport: { width: 320, height: 850 },
-    });
-    const page = await context.newPage();
-    await page.goto(origin + route(code));
-    assert.equal(await page.locator("[data-slide]:visible").count(), 36);
-    assert.equal(await page.locator(".reader-controls").isVisible(), false);
-    await page
-      .locator(".talk-toc")
-      .evaluate((element) => (element.open = true));
-    await page.locator('.talk-toc a[href="#slide-26"]').click();
-    assert.equal(new URL(page.url()).hash, "#slide-26");
-    assert(
-      await page.evaluate(
-        () => document.documentElement.scrollWidth <= innerWidth,
-      ),
-    );
-    await context.close();
-  }
+  for (const { code } of languages)
+    for (const width of [320, 1440]) {
+      const context = await browser.newContext({
+        javaScriptEnabled: false,
+        viewport: { width, height: 850 },
+      });
+      const page = await context.newPage();
+      await page.goto(origin + route(code));
+      assert.equal(await page.locator("[data-slide]:visible").count(), 36);
+      assert.equal(await page.locator(".reader-controls").isVisible(), false);
+      const initialImageBox = await page.locator("#slide-1 img").boundingBox();
+      await page
+        .locator('label:has(input[name="reader-layout"][value="wide"])')
+        .click();
+      const imageBox = await page.locator("#slide-1 img").boundingBox();
+      const textBox = await page.locator("#slide-1 .talk-text").boundingBox();
+      if (width === 1440)
+        assert(
+          imageBox.width > initialImageBox.width * 1.8,
+          "Native layout switch enlarges the slide without JavaScript",
+        );
+      assert(
+        textBox.y >= imageBox.y + imageBox.height,
+        "Native wide layout works without JavaScript",
+      );
+      await page
+        .locator(".talk-toc")
+        .evaluate((element) => (element.open = true));
+      await page.locator('.talk-toc a[href="#slide-26"]').click();
+      assert.equal(new URL(page.url()).hash, "#slide-26");
+      assert(
+        await page.evaluate(
+          () => document.documentElement.scrollWidth <= innerWidth,
+        ),
+      );
+      await context.close();
+    }
   const context = await browser.newContext();
   const page = await context.newPage();
   await page.goto(origin + route("en"));

@@ -53,10 +53,19 @@ No translated audio or rebuilt localized slide images are implied.
 
 With JavaScript, Previous/Next, the slide selector, keyboard arrows in the
 controls and the contents menu select one slide. `#slide-N` deep links survive
-language switching and reloads. Controls remain visible while reading a slide. The reader uses locally hosted Noto Sans
+language switching and reloads. Controls remain visible while reading a slide. Native layout radios switch
+between side-by-side reading and a large slide with text below it. Large-slide
+mode uses the available page width (up to 1600px); paragraph lines remain bounded
+for comfortable reading. This switch works without JavaScript; with JavaScript,
+the choice persists across slides, reloads and languages when local storage is
+available. Switching still works with storage blocked. The reader uses locally hosted Noto Sans
 type at 17px on desktop and 16px on mobile for speech and questions, with a
 bundled, clearly visible selector caret; Chinese and Japanese use system CJK
 font fallback; the native select remains keyboard accessible.
+Clicking a slide activates that same large-slide layout in place, retaining the
+text, selected slide and page URL. The layout switch returns to side-by-side
+reading; there is no separate image-only viewer. Without JavaScript, the image
+link remains an ordinary static fallback and the native layout radios still work.
 Without JavaScript, all 36 slide/text pairs appear sequentially. The original
 PDF and YouTube links remain ordinary links; there are no embeds or remote fonts.
 The home and reader each have their own locale-aware language destinations,

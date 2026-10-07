@@ -294,5 +294,9 @@
   ],
   "selectLanguage": "Choisir la langue",
   "theme": "Changer de thème",
-  "skip": "Aller au contenu"
+  "skip": "Aller au contenu",
+  "layoutLabel": "Affichage des diapositives",
+  "layoutSide": "Côte à côte",
+  "layoutWide": "Grande diapositive",
+  "enlargeSlide": "Agrandir la diapositive"
 }
