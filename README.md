@@ -11,7 +11,8 @@ no tracking, optional cloud use, and speed. AI assists design, implementation,
 and testing; donations help fund these tools. The owner-approved public contact
 is sipahabk@gmail.com, with no promise to answer every message. The page does not
 advertise job seeking. Keep this content equivalent in all supported languages.
-The introduction has a deliberate line break after the professional title.
+Desktop and tablet hero columns align at the top, with the portrait level with
+the professional title. The introduction has a deliberate line break after the professional title.
 “Для меня программирование” begins the next line; narrower screens can wrap
 naturally; Russian conjunctions stay with the following word.
 
