@@ -52,5 +52,6 @@
   "recordsApiTalk": "Records API : repenser GraphQL pour une plateforme low-code",
   "watchTalk": "Voir la conférence",
   "slides": "Présentation",
-  "conferenceLanguage": "La vidéo et la présentation sont en russe."
+  "conferenceLanguage": "La vidéo et la présentation sont en russe.",
+  "readTalk": "Diapositives et transcription"
 }

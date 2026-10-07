@@ -40,6 +40,45 @@ with no embed, remote thumbnail, tracking or external runtime request.
 Add entries to `src/site.json` under `conferences` and provide the corresponding
 title key in every locale dictionary. A missing title or PDF blocks the build.
 
+## Talk reader and transcripts
+
+The conference entry links to a static reader at
+`/about/talks/gorod-it-2023/`; the other seven languages use the corresponding
+`/about/{code}/talks/gorod-it-2023/` route. Each version contains all 36 original
+slide images, the edited speech text, shared code examples and four audience
+questions. The original slides stay in Russian; the speech text is translated.
+No translated audio or rebuilt localized slide images are implied.
+
+With JavaScript, Previous/Next, the slide selector, keyboard arrows in the
+controls and the contents menu select one slide. `#slide-N` deep links survive
+language switching and reloads. Controls remain visible while reading a slide.
+Without JavaScript, all 36 slide/text pairs appear sequentially. The original
+PDF and YouTube links remain ordinary links; there are no embeds or remote fonts.
+The home and reader each have their own locale-aware language destinations,
+canonical/hreflang links and sitemap entries.
+
+`src/talks/gorod-it-2023/source.json` records the source Russian automatic
+captions only from this speaker’s segment (2019–3338 seconds) and questions
+(3342–3755 seconds). It is not a browser asset. The edited Russian text removes
+fillers and repetition, repairs technical names against the PDF and explicitly
+marks two unclear passages instead of inventing speech. Slide-supported explanations
+are included; this is not a verbatim transcript checked against the audio. Translations preserve
+the Russian paragraph structure, substantive content, API identifiers and those
+uncertainty markers; they are not independently native-speaker certified.
+Timestamps point to the corresponding topic, not frame-exact slide transitions.
+The text preserves the 2023 context rather than claiming current platform behavior.
+
+Locale dictionaries live beside `shared.json`, which owns slide image paths,
+video timestamps and code. JSON snippets repair only obvious missing commas or
+closing braces in the source slides; fields, values and original slide images
+are unchanged. `scripts/build-talk.mjs` generates the eight reader pages.
+The 36 WebP images are faithful 1200×900 renders of the owner-provided PDF,
+generated with Poppler and encoded at quality 90. The original PDF is retained.
+`scripts/verify-all.mjs` runs home verification and the reader matrix. Reader
+checks include every slide, images, technical expression parity, code layout,
+keyboard navigation, deep links, language continuity, no-JS reading, local-only
+runtime requests, original PDF delivery and WCAG AA.
+
 ## Languages and shared direction
 
 Eight complete website languages: Russian, English, simplified Chinese, Spanish,
@@ -132,11 +171,11 @@ remain usable with JavaScript disabled. Clipboard failure selects the full
 address for manual copying. User-selected theme is stored locally; otherwise the
 system theme is used.
 
-For this Solution, keep scratch output and browser profiles inside its `.agents/tmp`:
+For this Solution, keep scratch output and browser profiles inside its `.tmp`:
 
 ```sh
-export TMPDIR="$(realpath ../.agents/tmp/about)"
-mkdir -p "$TMPDIR"
+mkdir -p ../.tmp/about
+export TMPDIR="$(realpath ../.tmp/about)"
 npm run verify
 # In another terminal while npm run preview is running:
 npm run audit
@@ -146,7 +185,7 @@ npm run audit
 light/dark themes, widths 375/768/1440, exact clipboard contents, QR decoding,
 WCAG AA checks with axe, no external runtime requests, theme persistence,
 language navigation, clipboard denial, JavaScript-disabled use, and 320px layout.
-Screenshots and results default to `../.agents/tmp/about/verify`.
+Screenshots and results default to `../.tmp/about/verify`.
 Set `CHROME_PATH` if Chrome is not at `/usr/bin/google-chrome`.
 `ABOUT_SCRATCH` overrides output; `SITE_URL` selects the Lighthouse target.
 

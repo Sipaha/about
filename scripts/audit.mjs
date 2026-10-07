@@ -2,7 +2,7 @@ import { launch } from "chrome-launcher";
 import lighthouse from "lighthouse";
 import { mkdir, mkdtemp, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
-const dir = resolve(process.env.ABOUT_SCRATCH || "../.agents/tmp/about/audit");
+const dir = resolve(process.env.ABOUT_SCRATCH || "../.tmp/about/audit");
 await mkdir(dir, { recursive: true });
 const profile = await mkdtemp(resolve(dir, "chrome-"));
 const chrome = await launch({

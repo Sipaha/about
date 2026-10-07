@@ -1,5 +1,6 @@
 import { readFile, writeFile, mkdir, rm, cp } from "node:fs/promises";
 import QRCode from "qrcode";
+import { buildTalkPages } from "./build-talk.mjs";
 import { validateSite } from "../src/validate.mjs";
 import { content } from "../src/content.mjs";
 import { languages, pagePath, languageBootstrap } from "../src/languages.mjs";
@@ -45,7 +46,7 @@ await rm(out, { recursive: true, force: true });
 await mkdir(new URL("en/", out), { recursive: true });
 await cp(new URL("public/", root), out, { recursive: true });
 await mkdir(new URL("assets/", out), { recursive: true });
-for (const file of ["style.css", "client.js"])
+for (const file of ["style.css", "client.js", "talk-reader.js"])
   await cp(new URL(`src/${file}`, root), new URL(`assets/${file}`, out));
 for (const subset of ["latin", "cyrillic"])
   await cp(
@@ -101,7 +102,7 @@ for (const meta of languages) {
       const pdf = await readFile(new URL(`public/${talk.slides}`, root));
       if (!pdf.subarray(0, 5).equals(Buffer.from("%PDF-")))
         throw new Error("Conference slides must be a PDF");
-      return `<article class="conference" id="${esc(talk.id)}"><div class="conference-year">${talk.year}</div><div class="conference-details"><p class="conference-event" lang="ru">${esc(talk.event)}</p><h3>${esc(t[talk.titleKey])}</h3><div class="conference-links"><a class="text-link conference-video" href="${esc(talk.video)}">${esc(t.watchTalk)}${await icon("arrow-up-right")}</a><a class="text-link conference-slides" href="${base}${esc(talk.slides)}">${esc(t.slides)} <span class="file-type">PDF</span>${await icon("arrow-down")}</a></div><p class="conference-language">${esc(t.conferenceLanguage)}</p></div></article>`;
+      return `<article class="conference" id="${esc(talk.id)}"><div class="conference-year">${talk.year}</div><div class="conference-details"><p class="conference-event" lang="ru">${esc(talk.event)}</p><h3>${esc(t[talk.titleKey])}</h3><div class="conference-links"><a class="text-link conference-reader" href="${pagePath(lang, base)}talks/gorod-it-2023/">${esc(t.readTalk)}${await icon("arrow-right")}</a><a class="text-link conference-video" href="${esc(talk.video)}">${esc(t.watchTalk)}${await icon("arrow-up-right")}</a><a class="text-link conference-slides" href="${base}${esc(talk.slides)}">${esc(t.slides)} <span class="file-type">PDF</span>${await icon("arrow-down")}</a></div><p class="conference-language">${esc(t.conferenceLanguage)}</p></div></article>`;
     }),
   );
   const html = `<!doctype html>
@@ -123,11 +124,20 @@ ${talks.length ? `<section class="conferences" id="conferences" aria-labelledby=
     html,
   );
 }
+const talkURLs = await buildTalkPages({
+  root,
+  out,
+  site,
+  languages,
+  icon,
+  esc,
+  themeScript,
+});
 await writeFile(new URL(".nojekyll", out), "");
 await writeFile(
   new URL("sitemap.xml", out),
-  `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${languages.map((l) => `<url><loc>${site.url + (l.code === "ru" ? "" : `${l.code}/`)}</loc></url>`).join("")}</urlset>`,
+  `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${languages.map((l) => `<url><loc>${site.url + (l.code === "ru" ? "" : `${l.code}/`)}</loc></url>`).join("")}${talkURLs.map((url) => `<url><loc>${url}</loc></url>`).join("")}</urlset>`,
 );
 console.log(
-  `Built ${languages.length} localized static pages; ${site.wallets.length} verified-format wallet(s), ${site.boosty ? 1 : 0} Boosty link. No external runtime requests.`,
+  `Built ${languages.length} home pages and ${talkURLs.length} talk pages; ${site.wallets.length} verified-format wallet(s), ${site.boosty ? 1 : 0} Boosty link. No external runtime requests.`,
 );

@@ -12,6 +12,7 @@ export const content = {
   pt,
   ja,
   ru: {
+    readTalk: "Слайды и текст",
     conferences: "Выступления",
     recordsApiTalk:
       "Records API: переосмысление GraphQL для low-code платформы",
@@ -72,6 +73,7 @@ export const content = {
     crypto: "Или криптовалютой",
   },
   en: {
+    readTalk: "Slides and transcript",
     conferences: "Conference talks",
     recordsApiTalk: "Records API: rethinking GraphQL for a low-code platform",
     watchTalk: "Watch the talk",

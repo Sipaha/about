@@ -17,3 +17,10 @@
 Dependency versions and provenance are locked in package-lock.json. Dependency
 license texts are in their installed packages; copies for assets shipped with the
 site are distributed under public/licenses/.
+
+- **Город IT 2023 slides**: owner-supplied `2.pdf`, retained unchanged as the
+  original presentation. The reader uses faithful raster renders of its 36
+  pages. Embedded images and logos retain their original provenance; no new
+  license is asserted for them. The talk text is an edited rendering of the
+  speaker’s automatic Russian captions with translations, not verbatim audio
+  certification.

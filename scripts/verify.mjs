@@ -13,9 +13,7 @@ const require = createRequire(import.meta.url);
 const site = JSON.parse(
   await readFile(new URL("../src/site.json", import.meta.url), "utf8"),
 );
-const scratch = resolve(
-  process.env.ABOUT_SCRATCH || "../.agents/tmp/about/verify",
-);
+const scratch = resolve(process.env.ABOUT_SCRATCH || "../.tmp/about/verify");
 await mkdir(scratch, { recursive: true });
 process.env.TMPDIR = resolve(scratch, "tmp");
 await mkdir(process.env.TMPDIR, { recursive: true });
@@ -119,6 +117,12 @@ try {
             .locator(`#${talk.id} .conference-slides`)
             .getAttribute("href");
           assert.equal(href, base + talk.slides);
+          assert.equal(
+            await page
+              .locator(`#${talk.id} .conference-reader`)
+              .getAttribute("href"),
+            pagePath(lang, base) + "talks/gorod-it-2023/",
+          );
           const pdf = await page.request.get(origin + href);
           assert.equal(pdf.status(), 200);
           assert.match(pdf.headers()["content-type"], /application\/pdf/);

@@ -1,0 +1,299 @@
+{
+  "title": "Records API: GraphQL für eine Low-Code-Plattform neu gedacht",
+  "back": "Alle Vorträge",
+  "intro": "Город IT · 2023 · Pavel Simonov",
+  "notice": "Redigierte Transkription auf Grundlage der automatischen russischen Untertitel der Aufnahme und der Folien; keine anhand des Audios geprüfte wortgetreue Transkription. Wiederholungen und Füllwörter wurden entfernt; Fachbegriffe wurden mit den Folien abgeglichen. Unklare Stellen sind gekennzeichnet. Der Inhalt bleibt im Kontext des Vortrags von 2023.",
+  "original": "Originalfolie",
+  "transcript": "Vortragstext",
+  "slideLabel": "Folie",
+  "previous": "Zurück",
+  "next": "Weiter",
+  "contents": "Inhalt",
+  "video": "Diese Stelle im Video",
+  "pdf": "Alle Folien PDF",
+  "allVideo": "Vollständige Aufzeichnung",
+  "imageNote": "Die Originalfolien bleiben auf Russisch. Der Vortragstext ist in der gewählten Sprache verfügbar; Code und API-Bezeichner werden nicht übersetzt.",
+  "codeLabel": "Beispiel aus der Folie",
+  "codeNote": "In JSON-Beispielen wurden nur fehlende Kommas und schließende Klammern ergänzt. Felder und Werte sind unverändert.",
+  "questionsTitle": "Fragen nach dem Vortrag",
+  "slideStatus": "Folie {current} von {total}: {title}",
+  "selectSlide": "Folie auswählen",
+  "slides": [
+    {
+      "title": "Records API",
+      "body": [
+        "Hallo! Ich bin Pavel Simonov, Systemarchitekt bei Citeck. In diesem Vortrag geht es um Records API, unsere eigene Entwicklung und eine Neuinterpretation von GraphQL für eine Low-Code-Plattform."
+      ]
+    },
+    {
+      "title": "Wie alles begann",
+      "body": [
+        "Zunächst etwas zur Vorgeschichte. Wie viele andere entwickelten wir unser System lange mit einer REST API. Alles lief gut, bis wir bemerkten, dass eine relativ einfache Tabelle mit wenigen Feldern und hundert Datensätzen zehn Sekunden oder länger zum Laden vom Backend brauchte.",
+        "Bei der Untersuchung stellte sich heraus, dass das Backend pro Zeile so viele Daten zurückgab, dass uns das Ausmaß des Problems erschreckte."
+      ]
+    },
+    {
+      "title": "Overfetching",
+      "body": [
+        "Wir waren auf Overfetching gestoßen: Der Client benötigt bestimmte Daten, der Server liefert jedoch erheblich mehr. Die Folie zeigt das mit einer Frage: Wo ist in all diesen Daten die E-Mail-Adresse des Benutzers?",
+        "Eine übliche schnelle Lösung ist, eine große Anfrage in viele kleine, auf einzelne Aufgaben zugeschnittene Anfragen aufzuteilen, die nur bestimmte Daten zurückgeben. Das war aber nicht unser Ansatz: Wir entwickelten eine Plattform."
+      ]
+    },
+    {
+      "title": "Eine Low-Code-Plattform",
+      "body": [
+        "Wir finden, dass Roboter die mühsame Arbeit erledigen sollten, nicht Menschen. Was sich automatisieren lässt, sollte automatisiert werden.",
+        "Bei klassischer Entwicklung bedeutet ein neuer Typ mit seinen Entitäten: Entität, Repository, Service, Controller und gegebenenfalls weitere Komponenten implementieren. Das ist kein Low-Code. Wir brauchten einen anderen Ansatz."
+      ]
+    },
+    {
+      "title": "Neuer Typ: Kennung und Name",
+      "body": [
+        "In unserer Plattform öffnen wir den Bereich für Typen und legen einen neuen Typ mit Kennung und Namen an. Die Folie zeigt den Vollmachtstyp «Доверенность» mit der Kennung attorney."
+      ]
+    },
+    {
+      "title": "Neuer Typ: Attribute",
+      "body": [
+        "Anschließend konfigurieren wir die Attribute. In diesem Beispiel sind es zwei: Name und Nummer. Nach der Konfiguration erstellen wir den Typ. Im Screenshot hat name den Typ Text und number den Typ Number."
+      ]
+    },
+    {
+      "title": "Eine Tabelle zum Menü hinzufügen",
+      "body": [
+        "Nach dem Anlegen des Typs wechseln wir in den Menüeditor und fügen eine Tabelle zur Anzeige seiner Entitäten hinzu. Im Screenshot heißt dieser Eintrag «Журнал»."
+      ]
+    },
+    {
+      "title": "Den neuen Typ auswählen",
+      "body": [
+        "Wir suchen den gewünschten Typ, wählen ihn aus und speichern die Menükonfiguration."
+      ]
+    },
+    {
+      "title": "Die erzeugte Tabelle",
+      "body": [
+        "Beim Öffnen des Menüs sehen wir eine fertige Tabelle mit den gerade konfigurierten Attributen. Über die Plus-Schaltfläche legen wir eine neue Entität an."
+      ]
+    },
+    {
+      "title": "Automatisch erzeugtes Formular",
+      "body": [
+        "Ein automatisch erzeugtes Formular erscheint. Wir tragen Daten ein und speichern sie. Die Vollmacht hat in diesem Beispiel einen Namen und eine Nummer."
+      ]
+    },
+    {
+      "title": "Die Detailansicht des Dokuments",
+      "body": [
+        "Nach dem Speichern erscheint die Detailansicht des Dokuments. Für den neuen Typ mussten wir weder Formular noch Detailansicht gesondert programmieren."
+      ]
+    },
+    {
+      "title": "Der Datensatz in der Tabelle",
+      "body": [
+        "Wir kehren zur Tabelle zurück, aktualisieren sie und sehen unseren Datensatz. Der Ablauf ist einfach und schnell."
+      ]
+    },
+    {
+      "title": "Was im Backend entsteht",
+      "body": [
+        "Im Backend entsteht eine relativ einfache Tabelle. Sie enthält Metadaten: wer den Datensatz wann angelegt und wer ihn wann geändert hat. Dazu kommen unsere Felder Name und Nummer.",
+        "Eine solche Low-Code-Plattform ermöglicht eine flexible Umsetzung dieser Aufgaben. Kehren wir nun zum Overfetching zurück."
+      ]
+    },
+    {
+      "title": "Warum wir GraphQL erwogen",
+      "body": [
+        "Wir suchten eine Lösung, und GraphQL schien die naheliegendste Wahl. Auf den ersten Blick passt es: Der Client nennt die benötigten Daten, und das Backend gibt nur diese zurück. Das Problem scheint gelöst."
+      ]
+    },
+    {
+      "title": "GraphQL passte nicht",
+      "body": [
+        "Als wir mit der Integration begannen, fühlte sich die Anpassung von GraphQL an unsere Low-Code-Plattform jedoch an, als wollten wir etwas Unpassendes mit Gewalt passend machen. Es passte nicht. Sehen wir uns die konkreten Probleme an."
+      ]
+    },
+    {
+      "title": "GraphQL-Nachteile für unsere Plattform",
+      "body": [
+        "Erstens das vorgeschriebene Schema. Normalerweise ist das ein großer Vorteil: ein Vertrag zwischen Client und Server, sodass beide wissen, was zurückgegeben wird. Bei uns entstehen Entitäten jedoch dynamisch. Ein Analyst kann Typen mit wenigen Klicks hinzufügen. Das Schema automatisch zu erzeugen oder universell zu gestalten, war sehr aufwendig.",
+        "Zweitens sind universelle Clients schwierig. Unser Frontend darf nicht von konkreten Geschäftsobjekten wie einer Vertragsklasse abhängen. Wir arbeiten mit Daten, Maps und Arrays, möglichst allgemein und flexibel.",
+        "Drittens kann auch das Backend ein Client sein. Microservices sollen dieselbe API verwenden: Warum sie zweimal erfinden? Auch Kunden fragen nach Integrationsmöglichkeiten. Wir möchten ihnen dieselbe API anbieten, die der Browser nutzt.",
+        "Viertens ist das GraphQL-Format nicht so verbreitet, wie wir es gern hätten. Es wird viel in seine Verbreitung investiert, und es gibt Online- und Offline-Editoren. Vertraute Formate werden jedoch von fast jedem Werkzeug unterstützt."
+      ]
+    },
+    {
+      "title": "Was uns an GraphQL gefiel",
+      "body": [
+        "Einige Vorteile gefielen uns sehr. Der Client kennt den Typ des Ergebnisses genau; bei GraphQL gewährleistet das das Schema.",
+        "Es gibt weder Underfetching noch Overfetching und nur einen gemeinsamen Endpoint. Neue Endpoints für alltägliche Aufgaben sind in unserem System unnötig. Diese Eigenschaften wollten wir beibehalten."
+      ]
+    },
+    {
+      "title": "Grundbegriffe von Records API",
+      "body": [
+        "Wir entwickelten eine eigene API und nannten sie Records API. Zum Verständnis definieren wir drei Grundbegriffe und die zugehörigen Regeln.",
+        "Ein Microservice ist hier eine Anwendung mit einem innerhalb der Plattform eindeutigen Namen. Ein Record ist jede beliebige Ressource des Systems. Eine Datenquelle ist ein DAO für Records, das alle oder einige CRUD-Operationen implementiert: Anlegen, Lesen, Ändern und Löschen. Seine Kennung ist innerhalb des Microservices eindeutig.",
+        "Jeder Record besitzt eine globale Kennung. emodel/person@admin besteht aus drei Teilen: dem Microservice emodel, der Datenquelle person nach dem Schrägstrich und der lokalen Kennung admin nach @."
+      ]
+    },
+    {
+      "title": "Ein universelles Suchformat",
+      "body": [
+        "Uns fehlte ein universelles Format für Suchanfragen. Zuvor mussten wir Objekte mit den benötigten Feldern über Parameter übergeben, was umständlich war. Wir entwickelten ein Format, das mehrere Fragen beantwortet.",
+        "Wo suchen wir? sourceId enthält den Anwendungs- oder Microservice-Namen, einen Schrägstrich und die Kennung der Datenquelle. Wie suchen wir? language bezeichnet die Abfragesprache. Für die API ist das eine beliebige Zeichenfolge; die Datenquelle muss diese Sprache aber verstehen.",
+        "Was suchen wir? query ist die eigentliche Anfrage. Sie hängt von der Sprache ab, und ihre Interpretation liegt vollständig bei der Datenquelle. Meist ist es eine Zeichenfolge oder ein Objekt.",
+        "Die übrigen Felder sind üblich: groupBy gibt Gruppierungsattribute an; sortBy das Attribut und die Sortierrichtung; page die Anzahl der zu überspringenden und abzurufenden Records."
+      ]
+    },
+    {
+      "title": "Attribute und Beziehungen",
+      "body": [
+        "Attribute sind ein wichtiger Teil der API. Damit kann der Client die benötigten Daten flexibel und bequem anfordern. Mit Kennungen zu arbeiten ist das eine; über eine Vertragsreferenz den vollständigen Namen der zugehörigen Gegenpartei zu ermitteln, ist etwas anderes.",
+        "Betrachten wir einen einfachen Datengraphen: Ein Vertrag hat einen Textnamen und eine Assoziation zu einer Gegenpartei. Diese besitzt den vollständigen Organisationsnamen und eine Adresse, ebenfalls Textfelder."
+      ]
+    },
+    {
+      "title": "Verschachtelte Attribute mit Punkten",
+      "body": [
+        "Nehmen wir an, die Entitäten enthalten die Daten aus der Folie. Jeder Record hat eine lokale Kennung. counterparty speichert eine Referenz im zuvor beschriebenen globalen Format.",
+        "Die erste Regel für Records-API-Attribute lautet: Verschachtelte Werte werden mit Punkten angesprochen. Vom Vertrag aus fragen wir den vollständigen Namen mit counterparty.fullOrgName ab. Ein längerer Pfad wäre association0.association1.someField."
+      ]
+    },
+    {
+      "title": "Skalare: der Ergebnistyp",
+      "body": [
+        "Wir wollten den GraphQL-Vorteil eines bekannten Ergebnistyps erhalten. Da wir kein Schema haben, brauchten wir eine andere Lösung. So entstanden Skalare.",
+        "Ein Wert im Graphen kann unterschiedlich dargestellt werden. Eine Zahl kann als Zahl oder Zeichenfolge erscheinen; auch ein boolescher Wert hat verschiedene Darstellungen. Bei einer Entitätsreferenz kann der Client die Referenz selbst oder den Anzeigenamen der Entität benötigen. Der Ausgangswert bleibt derselbe.",
+        "Der Skalar folgt auf das Attribut und ein Fragezeichen: attribute?scalar. Der Client legt die gewünschte Darstellung fest, und die Engine konvertiert das Ergebnis. [Ein Teil der folgenden Erklärung ist in den automatischen Untertiteln unklar.]"
+      ]
+    },
+    {
+      "title": "Den Vertragsnamen laden",
+      "body": [
+        "Für das einfache Lesen eines Namens schreiben wir name. Ohne angegebenen Skalar wird disp angenommen, also display name.",
+        "Bei einer Zeichenfolge ist das ihr Inhalt. Bei Referenzen unterscheidet sich der Anzeigename von der Referenz selbst. Daher sind name und name?disp in diesem Beispiel gleichwertig."
+      ]
+    },
+    {
+      "title": "Vollständiger Name der Gegenpartei",
+      "body": [
+        "Um über eine Vertragsreferenz den vollständigen Namen der Gegenpartei zu erhalten, folgen wir counterparty und dann fullOrgName. Für eine Zeichenfolge ergänzen wir str: counterparty.fullOrgName?str."
+      ]
+    },
+    {
+      "title": "Attribut-Postprozessoren",
+      "body": [
+        "Neben der Darstellung mit Skalaren müssen wir oft ein bereits berechnetes Ergebnis nachbearbeiten. Dafür gibt es Postprozessoren.",
+        "Der häufigste ist or. Bei null oder einer leeren Zeichenfolge liefert er den angegebenen Ersatzwert. Dafür gibt es eine Kurzschreibweise: Ausrufezeichen und Standardwert. counterparty.fullOrgName?str!\"unknown\" entspricht counterparty.fullOrgName?str|or(\"unknown\").",
+        "Allgemein folgen auf das Attribut ein senkrechter Strich und ein Prozessor mit Argumenten; weitere Prozessoren lassen sich aneinanderreihen. Häufig sind Zahlenformatierungen wie führende Nullen. [Der Name eines weiteren Postprozessors ist in den automatischen Untertiteln unklar.] Daneben gibt es speziellere Verarbeitungsschritte."
+      ]
+    },
+    {
+      "title": "HTTP API: Records suchen",
+      "body": [
+        "Wechseln wir von der Theorie zur Praxis. HTTP ist eine Möglichkeit, Records API zu verwenden. Wir nutzen immer POST-Anfragen. Wir wollten unabhängig vom Transport bleiben und verteilen die Operationen daher nicht auf verschiedene HTTP-Methoden.",
+        "Eine Suche enthält query im beschriebenen Format und die gewünschten attributes. Links in attributes steht der Ergebnisalias, rechts der Attributausdruck. Hier suchen wir einen Benutzer anhand seiner E-Mail-Adresse, nehmen einen Record und fordern die lokale Kennung als userId an."
+      ]
+    },
+    {
+      "title": "HTTP API: Suchantwort",
+      "body": [
+        "Das Ergebnis ist eine Liste von Records. Jeder enthält immer eine globale id und die angeforderten attributes. Links stehen unsere Aliasse, rechts die Werte. Bei diesem Benutzer ist userId gleich admin. totalCount gibt die Anzahl gefundener Records an."
+      ]
+    },
+    {
+      "title": "HTTP API: Attribute abrufen",
+      "body": [
+        "Sind die Kennungen bereits bekannt, senden wir sie als records-Array und geben die Attribute an. Das Prinzip entspricht dem der Suche.",
+        "Hier fordern wir die E-Mail-Adressen zweier Benutzer an. email!'undefined' definiert einen Ersatzstring für den Fall, dass die E-Mail-Adresse fehlt."
+      ]
+    },
+    {
+      "title": "HTTP API: Antwort mit Attributen",
+      "body": [
+        "Die Antwort enthält zwei Records mit id und berechneten Attributen. admin hat eine E-Mail-Adresse. Im zweiten Beispiel erscheint der String \"undefined\", der in der Anfrage als Ersatzwert festgelegt wurde."
+      ]
+    },
+    {
+      "title": "HTTP API: Records ändern",
+      "body": [
+        "Änderungen verwenden eine andere URL: /gateway/records/mutate. Wir geben den Record und neue Attributwerte an. Im Beispiel ändern wir email und address von admin."
+      ]
+    },
+    {
+      "title": "HTTP API: Änderungsantwort",
+      "body": [
+        "Bei Änderungen wird normalerweise dieselbe Kennung zurückgegeben. Hier ist attributes leer. In einer Mutationsanfrage kann neben records aber auch angegeben werden, welche Attribute aus dem Ergebnis zurückkommen sollen. Das wird unterstützt und an einigen Stellen genutzt; dann wäre attributes gefüllt.",
+        "Beim Anlegen eines Records würde die Antwort die Kennung der neuen Entität enthalten."
+      ]
+    },
+    {
+      "title": "HTTP API: Records anlegen",
+      "body": [
+        "Das Anlegen nutzt denselben Mutationsendpoint. Bei emodel/person@ steht nach @ nichts: Das kennzeichnet eine neue Entität.",
+        "Wird eine lokale id als Attribut angegeben und existiert bereits ein Record mit dieser Kennung, ist eine Aktualisierung möglich; andernfalls wird er mit der angegebenen Kennung angelegt. Hier übergeben wir pk.simonov, email und address."
+      ]
+    },
+    {
+      "title": "HTTP API: Antwort auf das Anlegen",
+      "body": [
+        "Die Antwort ist wie bei einer Änderung aufgebaut, enthält aber die Kennung des angelegten Records: hier emodel/person@pk.simonov."
+      ]
+    },
+    {
+      "title": "HTTP API: Records löschen",
+      "body": [
+        "Zum Löschen senden wir eine Liste von Kennungen. Für jeden Record enthält die Antwort einen Operationsstatus: OK oder ein anderes Ergebnis."
+      ]
+    },
+    {
+      "title": "Das Demoprojekt",
+      "body": [
+        "Damit endet der Hauptteil. Es gibt ein Demoprojekt zum Herunterladen und Ausführen. Es ist unabhängig von unserer Plattform und enthält die Records-API-Bibliothek sowie eine Testdatenquelle, die Daten im Speicher hält.",
+        "Wir sind im Frontend-Track, aber die API bietet auch im Backend interessante Aspekte. Sie ist für beide Seiten geeignet: Der Client fordert eine Darstellung an, die Quelle liefert ihre eigene, und die Attributsyntax verbindet beides. Bei Bedarf konvertiert die Engine Zeichenfolgen in Zahlen oder umgekehrt."
+      ]
+    },
+    {
+      "title": "Dokumentation und Abschluss",
+      "body": [
+        "Vielen Dank! Die Folie verlinkt die Dokumentation, die sich stärker auf unsere Plattform bezieht. Falls Sie den Demolink verpasst haben: Er steht auch am Anfang der Dokumentation."
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "title": "Gibt es einen Frontend-Client?",
+      "body": [
+        "Frage: Gibt es einen fertigen Client, oder sollen die Anfragen direkt, etwa mit Axios, versendet werden?",
+        "Antwort: Unsere Plattform hat einen Client, hauptsächlich zur Optimierung. Wenn mehrere Komponenten Benutzerdaten oder Attribute verschiedener Entitäten benötigen, fasst er die Anfragen zusammen. Aber gerade darin liegt der Vorteil: Man kann normales JSON erzeugen und jeden HTTP-Client verwenden. Eine zusätzliche Hülle gibt es innerhalb der Plattform."
+      ]
+    },
+    {
+      "title": "Kann eine universelle API alle Daten lesen?",
+      "body": [
+        "Frage: Wenn der Client nicht an Geschäftsobjekte gebunden ist, kann er dann sämtliche Informationen sammeln?",
+        "Antwort: Ich meinte, dass das Frontend nicht von bestimmten Geschäftsobjekten abhängen sollte, weil sie dynamisch sind und zur Laufzeit entstehen. Die Rechte-Engine der Plattform begrenzt den Zugriff: Records ohne Leseberechtigung können nicht abgefragt werden. Zusätzlich lassen sich Lesen und Ändern einzelner Attribute verbieten.",
+        "Die Zugriffskontrollen gehören zur Implementierung von Record Source oder Records DAO. Wir haben gemeinsame Implementierungen für unterschiedliche Typen; das liegt jedoch außerhalb des eigentlichen API-Protokolls."
+      ]
+    },
+    {
+      "title": "Wie funktionieren Filter und Suchen in verknüpften Daten?",
+      "body": [
+        "Frage: Gibt es Auswahlbedingungen und Suchmöglichkeiten, auch in verschachtelten Referenzdaten?",
+        "Antwort: Skalare können Argumente haben, oft für Suchvorgänge. Ihre Verarbeitung bestimmt die jeweilige Implementierung. Für allgemeine Suchen gibt es Records Query: Quelle, Sprache, Bedingungen und Paginierung. Eine universelle Tabelle sendet ein einheitliches Anfrageformat an die ausgewählte Quelle und erhält unabhängig vom Datentyp eine Antwort.",
+        "Auch die Suche über Assoziationen wurde ergänzt. Liegen die Daten im selben Datenbankschema, kann ein Pfad wie user.email verwendet werden. Das Backend erkennt user als Assoziation, ermittelt Typ und sourceId der verknüpften Entität, findet ihre Tabelle und fügt der SQL-Abfrage einen JOIN hinzu."
+      ]
+    },
+    {
+      "title": "Wie komplex dürfen Abfragen sein?",
+      "body": [
+        "Frage: Gibt es eine Grenze für die Komplexität von Abfragen?",
+        "Antwort: Die gemeinsame Engine deckt nicht jede denkbare Abfrage ab. Sie unterstützt Grundoperationen wie gleich, ungleich, beginnt mit und endet mit sowie die erwähnten Suchen in verknüpften Tabellen. Für komplexere Aufgaben kann eine eigene Datenquelle erforderlich sein."
+      ]
+    }
+  ],
+  "selectLanguage": "Sprache wählen",
+  "theme": "Design wechseln",
+  "skip": "Zum Inhalt springen"
+}

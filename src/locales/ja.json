@@ -52,5 +52,6 @@
   "recordsApiTalk": "Records API：ローコードプラットフォーム向けに GraphQL を再考する",
   "watchTalk": "講演を見る",
   "slides": "発表資料",
-  "conferenceLanguage": "動画と発表資料はロシア語です。"
+  "conferenceLanguage": "動画と発表資料はロシア語です。",
+  "readTalk": "スライドと文字起こし"
 }

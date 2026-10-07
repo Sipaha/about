@@ -15,6 +15,7 @@ const mime = {
   ".woff2": "font/woff2",
   ".xml": "application/xml",
   ".pdf": "application/pdf",
+  ".webp": "image/webp",
 };
 const port = Number(process.env.PORT || 4317);
 createServer(async (req, res) => {

@@ -41,3 +41,13 @@ Lighthouse audit are the release checks. Browser verification covers all eight
 languages/themes, address copying and QR decoding, language behavior, no-JavaScript
 navigation, inaccessible storage and 320px layout. Inspect screenshots as well as
 reading test output.
+
+## Conference reader
+
+The edited Russian speech text is the source for all seven translations in
+`src/talks/gorod-it-2023/`. Preserve every slide and question, paragraph structure,
+API identifier, code value and explicitly unclear passage. Original slide images
+remain Russian and must be labeled accordingly. Do not present this text as a
+verbatim audio-verified transcript or as translated audio. Topic timestamps are
+not claims of exact visual slide transitions. Shared code examples are language
+independent; obvious JSON punctuation repairs are explained on the page.

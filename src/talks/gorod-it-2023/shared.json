@@ -1,0 +1,224 @@
+{
+  "id": "gorod-it-2023",
+  "event": "Город IT",
+  "year": 2023,
+  "video": "https://www.youtube.com/watch?v=1g3Z7BGjoUg",
+  "start": 2019,
+  "pdf": "assets/records-api-gorod-it-2023.pdf",
+  "slides": [
+    {
+      "number": 1,
+      "start": 2047,
+      "image": "assets/talks/gorod-it-2023/slide-01.webp"
+    },
+    {
+      "number": 2,
+      "start": 2067,
+      "image": "assets/talks/gorod-it-2023/slide-02.webp"
+    },
+    {
+      "number": 3,
+      "start": 2111,
+      "image": "assets/talks/gorod-it-2023/slide-03.webp"
+    },
+    {
+      "number": 4,
+      "start": 2132,
+      "image": "assets/talks/gorod-it-2023/slide-04.webp"
+    },
+    {
+      "number": 5,
+      "start": 2187,
+      "image": "assets/talks/gorod-it-2023/slide-05.webp"
+    },
+    {
+      "number": 6,
+      "start": 2197,
+      "image": "assets/talks/gorod-it-2023/slide-06.webp"
+    },
+    {
+      "number": 7,
+      "start": 2210,
+      "image": "assets/talks/gorod-it-2023/slide-07.webp"
+    },
+    {
+      "number": 8,
+      "start": 2221,
+      "image": "assets/talks/gorod-it-2023/slide-08.webp"
+    },
+    {
+      "number": 9,
+      "start": 2223,
+      "image": "assets/talks/gorod-it-2023/slide-09.webp"
+    },
+    {
+      "number": 10,
+      "start": 2235,
+      "image": "assets/talks/gorod-it-2023/slide-10.webp"
+    },
+    {
+      "number": 11,
+      "start": 2242,
+      "image": "assets/talks/gorod-it-2023/slide-11.webp"
+    },
+    {
+      "number": 12,
+      "start": 2246,
+      "image": "assets/talks/gorod-it-2023/slide-12.webp"
+    },
+    {
+      "number": 13,
+      "start": 2253,
+      "image": "assets/talks/gorod-it-2023/slide-13.webp"
+    },
+    {
+      "number": 14,
+      "start": 2283,
+      "image": "assets/talks/gorod-it-2023/slide-14.webp"
+    },
+    {
+      "number": 15,
+      "start": 2307,
+      "image": "assets/talks/gorod-it-2023/slide-15.webp"
+    },
+    {
+      "number": 16,
+      "start": 2321,
+      "image": "assets/talks/gorod-it-2023/slide-16.webp"
+    },
+    {
+      "number": 17,
+      "start": 2485,
+      "image": "assets/talks/gorod-it-2023/slide-17.webp"
+    },
+    {
+      "number": 18,
+      "start": 2513,
+      "image": "assets/talks/gorod-it-2023/slide-18.webp",
+      "code": "emodel/person@admin"
+    },
+    {
+      "number": 19,
+      "start": 2575,
+      "image": "assets/talks/gorod-it-2023/slide-19.webp",
+      "code": "sourceId: String\nlanguage: String\nquery: Any\ngroupBy: String[]\nsortBy: SortBy[] { attribute: String, ascending: Bool }\npage: Page { skipCount: Int, maxItems: Int }"
+    },
+    {
+      "number": 20,
+      "start": 2654,
+      "image": "assets/talks/gorod-it-2023/slide-20.webp"
+    },
+    {
+      "number": 21,
+      "start": 2701,
+      "image": "assets/talks/gorod-it-2023/slide-21.webp",
+      "code": "association0.association1.someField\ncounterparty.fullOrgName"
+    },
+    {
+      "number": 22,
+      "start": 2758,
+      "image": "assets/talks/gorod-it-2023/slide-22.webp",
+      "code": "association0.association1.someField?scalar"
+    },
+    {
+      "number": 23,
+      "start": 2848,
+      "image": "assets/talks/gorod-it-2023/slide-23.webp",
+      "code": "name\nname?disp"
+    },
+    {
+      "number": 24,
+      "start": 2876,
+      "image": "assets/talks/gorod-it-2023/slide-24.webp",
+      "code": "counterparty.fullOrgName?str"
+    },
+    {
+      "number": 25,
+      "start": 2894,
+      "image": "assets/talks/gorod-it-2023/slide-25.webp",
+      "code": "counterparty.fullOrgName?str!\"unknown\"\n==\ncounterparty.fullOrgName?str|or(\"unknown\")\n\nattribute|processor0(arg0,arg1,argN)|processor1(arg0,arg1,argN)"
+    },
+    {
+      "number": 26,
+      "start": 2980,
+      "image": "assets/talks/gorod-it-2023/slide-26.webp",
+      "code": "POST /gateway/records/query\n\n{\n  \"query\": {\n    \"sourceId\": \"emodel/person\",\n    \"language\": \"predicate\",\n    \"query\": {\n      \"t\": \"eq\",\n      \"a\": \"email\",\n      \"v\": \"admin@citeck.ru\"\n    },\n    \"page\": {\n      \"maxItems\": 1\n    }\n  },\n  \"attributes\": {\n    \"userId\": \"?localId\"\n  }\n}"
+    },
+    {
+      "number": 27,
+      "start": 3057,
+      "image": "assets/talks/gorod-it-2023/slide-27.webp",
+      "code": "{\n  \"records\": [\n    {\n      \"id\": \"emodel/person@admin\",\n      \"attributes\": {\n        \"userId\": \"admin\"\n      }\n    }\n  ],\n  \"totalCount\": 1\n}"
+    },
+    {
+      "number": 28,
+      "start": 3077,
+      "image": "assets/talks/gorod-it-2023/slide-28.webp",
+      "code": "POST /gateway/records/query\n\n{\n  \"records\": [\n    \"emodel/person@admin\",\n    \"emodel/person@pushkin\"\n  ],\n  \"attributes\": {\n    \"email\": \"email!'undefined'\"\n  }\n}"
+    },
+    {
+      "number": 29,
+      "start": 3089,
+      "image": "assets/talks/gorod-it-2023/slide-29.webp",
+      "code": "{\n  \"records\": [\n    {\n      \"id\": \"emodel/person@admin\",\n      \"attributes\": {\n        \"email\": \"admin@citeck.ru\"\n      }\n    },\n    {\n      \"id\": \"emodel/person@pushkin\",\n      \"attributes\": {\n        \"email\": \"undefined\"\n      }\n    }\n  ]\n}"
+    },
+    {
+      "number": 30,
+      "start": 3101,
+      "image": "assets/talks/gorod-it-2023/slide-30.webp",
+      "code": "POST /gateway/records/mutate\n\n{\n  \"records\": [\n    {\n      \"id\": \"emodel/person@admin\",\n      \"attributes\": {\n        \"email\": \"new-email@citeck.ru\",\n        \"address\": \"Moscow, Pushkina st.\"\n      }\n    }\n  ]\n}"
+    },
+    {
+      "number": 31,
+      "start": 3114,
+      "image": "assets/talks/gorod-it-2023/slide-31.webp",
+      "code": "{\n  \"records\": [\n    {\n      \"id\": \"emodel/person@admin\",\n      \"attributes\": {}\n    }\n  ]\n}"
+    },
+    {
+      "number": 32,
+      "start": 3137,
+      "image": "assets/talks/gorod-it-2023/slide-32.webp",
+      "code": "POST /gateway/records/mutate\n\n{\n  \"records\": [\n    {\n      \"id\": \"emodel/person@\",\n      \"attributes\": {\n        \"id\": \"pk.simonov\",\n        \"email\": \"pavel.simonov@citeck.ru\",\n        \"address\": \"Tomsk, Pushkina st.\"\n      }\n    }\n  ]\n}"
+    },
+    {
+      "number": 33,
+      "start": 3199,
+      "image": "assets/talks/gorod-it-2023/slide-33.webp",
+      "code": "{\n  \"records\": [\n    {\n      \"id\": \"emodel/person@pk.simonov\",\n      \"attributes\": {}\n    }\n  ]\n}"
+    },
+    {
+      "number": 34,
+      "start": 3210,
+      "image": "assets/talks/gorod-it-2023/slide-34.webp",
+      "code": "POST /gateway/records/delete\n\n{\n  \"records\": [\n    \"emodel/person@admin\",\n    \"emodel/person@pushkin\"\n  ]\n}\n\n{\n  \"statuses\": [\n    \"OK\",\n    \"OK\"\n  ]\n}"
+    },
+    {
+      "number": 35,
+      "start": 3222,
+      "image": "assets/talks/gorod-it-2023/slide-35.webp",
+      "links": ["https://github.com/Citeck/ecos-records-demo"]
+    },
+    {
+      "number": 36,
+      "start": 3317,
+      "image": "assets/talks/gorod-it-2023/slide-36.webp",
+      "links": [
+        "https://citeck-ecos.readthedocs.io/ru/latest/general/ECOS_Records.html"
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "start": 3354
+    },
+    {
+      "start": 3436
+    },
+    {
+      "start": 3535
+    },
+    {
+      "start": 3679
+    }
+  ]
+}
