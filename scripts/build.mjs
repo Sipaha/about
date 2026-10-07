@@ -82,10 +82,10 @@ for (const meta of languages) {
     <div class="wallet-heading"><span class="coin-icon">${await icon(w.coin === "BTC" ? "currency-btc" : w.coin === "ETH" ? "currency-eth" : "wallet")}</span><div><div class="coin-name" id="wallet-${w.id}">${esc(w.name)} <span aria-hidden="true">/</span> ${esc(w.coin)}</div><div class="network">${t.network}: <strong>${esc(w.network)}</strong></div></div></div>
     <div class="qr-row"><div class="qr-frame"><img src="${base}assets/qr-${w.id}.svg" alt="${t.qr}: ${esc(w.coin)}, ${esc(w.network)}" width="138" height="138"></div><div class="qr-help"><p>${t.instruction}</p><strong>${t.check}</strong></div></div>
     <label class="address-label" for="address-${w.id}">${t.address} (${esc(w.coin)}, ${esc(w.network)})</label>
-    <textarea class="address" id="address-${w.id}" rows="2" readonly spellcheck="false" autocomplete="off" aria-describedby="note-${w.id}">${esc(w.address)}</textarea>
+    <textarea class="address" id="address-${w.id}" rows="2" readonly spellcheck="false" autocomplete="off" ${w.coin === "BTC" ? `aria-describedby="note-${w.id}"` : ""}>${esc(w.address)}</textarea>
     <button class="copy" type="button" data-copy data-success="${t.copied}" data-error="${t.copyError}">${await icon("copy")}<span>${t.copy}</span></button>
     <p class="copy-status" role="status" aria-live="polite" aria-atomic="true"></p>
-    <p class="network-note" id="note-${w.id}">${w.coin === "BTC" ? t.bitcoin : `${t.network}: ${esc(w.network)}.`}</p>
+    ${w.coin === "BTC" ? `<p class="network-note" id="note-${w.id}">${t.bitcoin}</p>` : ""}
   </section></div>`,
     ),
   );

@@ -72,7 +72,9 @@ The supplied TON mainnet CRC16 and TRON Base58Check checks passed; Ethereum
 syntax is validated by the build. Checks do not prove wallet ownership.
 Each method displays its network explicitly. A native radio selector shows one
 wallet at a time, including its network, exact address and QR code. It works
-without JavaScript and supports keyboard navigation.
+without JavaScript and supports keyboard navigation. Network names appear in
+the selector, wallet heading and address label; only Bitcoin has an additional
+on-chain/Lightning clarification beneath the copy button.
 
 Lightning remains on hold. Toncoin/GRAM and Boosty remain unconfigured.
 Never substitute sample addresses or create payment accounts on the owner's behalf.
