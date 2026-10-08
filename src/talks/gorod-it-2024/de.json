@@ -2,7 +2,7 @@
   "title": "Verteilte Transaktionen mit garantierter Konsistenz: Mythos oder Realität?",
   "back": "Alle Vorträge",
   "intro": "Город IT · 2024 · Pavel Simonov",
-  "notice": "Rekonstruktion anhand der Folien, des Entwurfs und der Ankündigung. Es gibt weder Video noch Transkript; dies ist keine wortgetreue Wiedergabe. Reihenfolge und Fakten folgen den 23 Folien; Lücken sind gekennzeichnet. Der Code erläutert Mechanismen, belegt aber nicht deren genaue Umsetzung 2024.",
+  "notice": "Der Text wurde anhand der Präsentation, des Plans, der Ankündigung und des Quellcodes rekonstruiert. Eine Aufnahme liegt nicht vor; dies ist kein wortgetreues Transkript. Die Themen folgen den 23 Folien des Vortrags von 2024.",
   "original": "Originalfolie",
   "transcript": "Rekonstruierter Text",
   "slideLabel": "Folie",
@@ -114,8 +114,7 @@
       "title": "Zweck der Aktionen",
       "body": [
         "Vor dem Speichern müssen wir vielleicht Berechtigungen neu berechnen, danach ein Ereignis oder eine E-Mail verschicken. Verschicken wir die E-Mail sofort und die Transaktion wird zurückgerollt, erfährt jemand von einer Änderung, die am Ende gar nicht existiert.",
-        "Wir registrieren solche Aktionen daher vorher und führen sie in der passenden Phase aus: Berechtigungen vor Commit, Benachrichtigungen nach erfolgreichem Commit.",
-        "Anmerkung zur Rekonstruktion: Die Ausführung nach Commit garantiert allein keine Zustellung von E-Mails oder externen Nachrichten."
+        "Wir registrieren solche Aktionen daher vorher und führen sie in der passenden Phase aus: Berechtigungen vor Commit, Benachrichtigungen nach erfolgreichem Commit."
       ]
     },
     {
@@ -130,7 +129,7 @@
       "body": [
         "Eine weitere Schwierigkeit sind Threads. Anwendung A ruft B auf und wartet. B kann bei der Arbeit aber synchron A zurückrufen, innerhalb derselben Transaktion.",
         "In A läuft bereits Arbeit, mit einem belegten Thread und dessen Kontext. Das ist besonders wichtig, wenn der Aufruf in denselben Geschäftsprozess zurückkehrt. Dazu ein Beispiel.",
-        "Anmerkung zur Rekonstruktion: Der genaue Algorithmus zur Thread-Wiederverwendung von 2024 ist in den Materialien nicht beschrieben."
+        "Dafür verwenden wir WebApiThreadChain. Während der ursprüngliche Thread auf die HTTP-Antwort wartet, kann er verschachtelte Aufrufe aus einer Warteschlange bearbeiten. Ein Rückruf an A in derselben Transaktion kann an diesen wartenden Thread übergeben werden. Er erledigt die Arbeit mit dem vorhandenen Prozesskontext und setzt nach der Antwort von B den ursprünglichen Aufruf fort."
       ]
     },
     {
@@ -144,24 +143,22 @@
       "title": "Rückruf und Übergangsprüfung",
       "body": [
         "Über die Dienste verteilt sieht das so aus: ecos-process ruft ecos-model auf und setzt den Status. ecos-model sendet „Status geändert“, und wir kehren zu ecos-process zurück, um im selben Thread weiterzuarbeiten.",
-        "Die Übergangsprüfung schlägt in der Skizze fehl. Hier müssen wir wissen, welcher Prozess gerade läuft und in welcher Transaktion wir uns befinden. Die Transaktionskennung allein reicht nicht, wenn der Ausführungskontext des Prozesses verloren geht.",
-        "Anmerkung zur Rekonstruktion: Die Skizze zeigt nicht, wie dieser Prüfungsfehler genau behandelt wird."
+        "Die Übergangsprüfung schlägt in der Skizze fehl. Hier müssen wir wissen, welcher Prozess gerade läuft und in welcher Transaktion wir uns befinden. Die Transaktionskennung allein reicht nicht, wenn der Ausführungskontext des Prozesses verloren geht."
       ]
     },
     {
       "title": "Transaktionale Listener",
       "body": [
         "Dafür brauchen wir transaktionale Ereignis-Listener. Soll ein anderer Dienst innerhalb unserer Operation auf Erstellung, Änderung oder Löschung reagieren, rufen wir ihn synchron über HTTP(S) in der aktuellen Transaktion auf.",
-        "Der Handler kann seine Arbeit dann vor dem Transaktionsabschluss erledigen. Eine Nachricht, dass alles gespeichert wurde, lässt sich als eigene Aktion nach Commit senden.",
-        "Anmerkung zur Rekonstruktion: Zookeeper ist ebenfalls abgebildet, aber die Einzelheiten der Listener-Registrierung sind nicht erhalten."
+        "Damit der Absender weiß, wen er aufrufen soll, führen wir in Zookeeper ein Verzeichnis der Abonnements. Eine Anwendung registriert die gewünschten Ereignisse, ihren Filter und die Attribute für den Handler. Auch die transaktionale Verarbeitung wird dort vermerkt. Die Dienste beobachten Änderungen und aktualisieren ihre Empfängerlisten.",
+        "Der Handler kann seine Arbeit dann vor dem Transaktionsabschluss erledigen. Eine Nachricht, dass alles gespeichert wurde, lässt sich als eigene Aktion nach Commit senden."
       ]
     },
     {
       "title": "Lasttestbedingungen",
       "body": [
         "Jetzt zum Lasttest. Wir verwendeten JMeter. Als Fehler galt eine Antwort ungleich 200 oder eine Anfrage mit mehr als 10 Sekunden Laufzeit. Jeder Thread arbeitete mit einem eigenen Benutzer.",
-        "Vorab lagen 100 000 Benutzer und 10 000 000 Verträge im System. Die Last lief eine Stunde lang mit 10 000 Benutzern.",
-        "Anmerkung zur Rekonstruktion: Hardwarekonfiguration und Instanzanzahl fehlen in den Materialien."
+        "Vorab lagen 100 000 Benutzer und 10 000 000 Verträge im System. Die Last lief eine Stunde lang mit 10 000 Benutzern."
       ]
     },
     {
@@ -175,8 +172,7 @@
       "title": "Ergebnisse",
       "body": [
         "In dieser Stunde kamen 20 447 914 Anfragen zusammen. Davon scheiterten 221 oder überschritten das Zeitlimit. Die Folie rundet auf 0.00%; genauer sind es etwa 0.00108%.",
-        "Die mittlere Antwortzeit lag bei 21.88 ms, der Median bei 6 ms. 90% der Anfragen dauerten weniger als 18 ms.",
-        "Anmerkung zur Rekonstruktion: Das sind Ergebnisse der gesamten Last. Sie messen weder isoliert den XA-Aufwand noch versprechen sie dieselbe Geschwindigkeit auf anderer Hardware."
+        "Die mittlere Antwortzeit lag bei 21.88 ms, der Median bei 6 ms. 90% der Anfragen dauerten weniger als 18 ms."
       ]
     },
     {

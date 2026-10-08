@@ -270,7 +270,8 @@ Escape or Close returns focus to the opening thumbnail without changing the sele
 slide. The single-photo 2023 gallery disables navigation. Without JavaScript or
 dialog support, ordinary image links and the native gallery remain usable. There is no video or transcript: the reader explicitly identifies
 its text as a reconstruction from the presentation, draft and announcement.
-The reconstructed text uses conversational speaker wording; editorial notes are
-separate paragraphs. Unrecoverable implementation details are marked; no timestamps or audience
+The reconstructed text uses conversational speaker wording. Thread reuse and the
+Zookeeper subscription registry are checked against source revisions preceding
+the talk; provenance and source limitations are recorded separately in metadata; no timestamps or audience
 questions are invented. See [reconstruction provenance](docs/gorod-it-2024.md).
 The reader generator supports each configured conference and optional video/questions.

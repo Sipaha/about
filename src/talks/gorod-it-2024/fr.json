@@ -2,7 +2,7 @@
   "title": "Transactions distribuées avec cohérence garantie : mythe ou réalité ?",
   "back": "Toutes les conférences",
   "intro": "Город IT · 2024 · Pavel Simonov",
-  "notice": "Reconstitution à partir des diapositives, du plan et de l’annonce. Aucun enregistrement ni transcription : ce texte n’est pas mot à mot. Il suit les 23 diapositives et signale les lacunes. Le code éclaire les mécanismes sans établir leur implémentation exacte en 2024.",
+  "notice": "Ce texte a été reconstitué à partir des diapositives, du plan, de l’annonce et du code source. Aucun enregistrement n’est disponible : ce n’est pas une transcription mot à mot. Les sujets suivent les 23 diapositives de la conférence de 2024.",
   "original": "Diapositive originale",
   "transcript": "Texte reconstitué",
   "slideLabel": "Diapositive",
@@ -114,8 +114,7 @@
       "title": "Utilité des actions",
       "body": [
         "Nous devons peut-être recalculer les droits avant d’enregistrer, puis publier un événement ou envoyer un courriel. Si le courriel part immédiatement et que la transaction est annulée, quelqu’un reçoit une notification pour un changement finalement absent.",
-        "Nous enregistrons donc ces actions à l’avance et les exécutons dans la bonne phase : droits avant Commit, notifications après une validation réussie.",
-        "Note de reconstitution : l’exécution après Commit ne garantit pas à elle seule la livraison d’un courriel ou message externe."
+        "Nous enregistrons donc ces actions à l’avance et les exécutons dans la bonne phase : droits avant Commit, notifications après une validation réussie."
       ]
     },
     {
@@ -130,7 +129,7 @@
       "body": [
         "Les threads posent une autre difficulté. L’application A appelle B et attend. Mais B peut rappeler A de façon synchrone pendant son travail, dans la même transaction.",
         "A travaille déjà, avec un thread occupé et son contexte. C’est particulièrement important si l’appel revient dans le même processus métier. Prenons un exemple.",
-        "Note de reconstitution : les documents ne décrivent pas l’algorithme exact de réutilisation des threads en 2024."
+        "Nous utilisons WebApiThreadChain pour cela. Pendant qu’il attend la réponse HTTP, le thread initial peut traiter des appels imbriqués depuis une file. Un rappel vers A dans la même transaction peut être transmis à ce thread. Il exécute le travail avec le contexte du processus déjà ouvert, puis reprend l’appel initial quand B répond."
       ]
     },
     {
@@ -144,24 +143,22 @@
       "title": "Rappel et vérification",
       "body": [
         "Entre services, la chaîne est la suivante. ecos-process appelle ecos-model pour définir le statut. ecos-model envoie « Statut modifié » et nous revenons dans ecos-process pour poursuivre dans le même thread.",
-        "Le schéma montre une vérification de transition qui échoue. Il faut savoir quel processus s’exécute et dans quelle transaction nous sommes. L’identifiant seul ne suffit pas si le contexte d’exécution du processus a été perdu.",
-        "Note de reconstitution : le schéma ne montre pas le traitement exact de cet échec."
+        "Le schéma montre une vérification de transition qui échoue. Il faut savoir quel processus s’exécute et dans quelle transaction nous sommes. L’identifiant seul ne suffit pas si le contexte d’exécution du processus a été perdu."
       ]
     },
     {
       "title": "Écouteurs transactionnels",
       "body": [
         "Ces cas demandent des écouteurs transactionnels. Si un autre service doit réagir à une création, modification ou suppression dans notre opération, nous l’appelons de manière synchrone via HTTP(S), dans la transaction courante.",
-        "Le gestionnaire peut faire son travail avant la fin de la transaction. Une notification indiquant que tout est enregistré peut être envoyée par une action distincte après Commit.",
-        "Note de reconstitution : Zookeeper apparaît aussi, mais les détails d’enregistrement des écouteurs n’ont pas été conservés."
+        "Pour savoir qui appeler, nous tenons un registre des abonnements dans Zookeeper. Une application enregistre les événements souhaités, son filtre et les attributs à transmettre au gestionnaire. L’abonnement indique aussi que l’écouteur est transactionnel. Les services suivent les changements du registre et actualisent leurs destinataires.",
+        "Le gestionnaire peut faire son travail avant la fin de la transaction. Une notification indiquant que tout est enregistré peut être envoyée par une action distincte après Commit."
       ]
     },
     {
       "title": "Conditions du test",
       "body": [
         "Passons au test de charge. Nous avons utilisé JMeter. Une réponse autre que 200 ou une requête de plus de 10 secondes comptait comme erreur. Chaque thread travaillait avec un utilisateur distinct.",
-        "La base initiale contenait 100 000 utilisateurs et 10 000 000 contrats. Nous avons appliqué une charge avec 10 000 utilisateurs pendant une heure.",
-        "Note de reconstitution : la configuration matérielle et le nombre d’instances ne figurent pas dans les documents."
+        "La base initiale contenait 100 000 utilisateurs et 10 000 000 contrats. Nous avons appliqué une charge avec 10 000 utilisateurs pendant une heure."
       ]
     },
     {
@@ -175,8 +172,7 @@
       "title": "Résultats",
       "body": [
         "Sur une heure, nous avons obtenu 20 447 914 requêtes. Parmi elles, 221 ont échoué ou dépassé la limite. La diapositive arrondit à 0.00%; plus précisément, environ 0.00108%.",
-        "Le temps moyen était de 21.88 ms, la médiane de 6 ms. 90% des requêtes prenaient moins de 18 ms.",
-        "Note de reconstitution : ces chiffres couvrent toute la charge. Ils n’isolent pas le coût XA et ne promettent pas la même vitesse sur un autre matériel."
+        "Le temps moyen était de 21.88 ms, la médiane de 6 ms. 90% des requêtes prenaient moins de 18 ms."
       ]
     },
     {

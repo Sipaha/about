@@ -11,7 +11,7 @@
   "reconstructedText": "ru.json",
   "video": null,
   "transcript": null,
-  "editorialNote": "No recording or transcript is available. Text explains the actual slides in their original order; no spoken quotations, timestamps or audience questions are invented. Draft-only topics (3PC, Java products) are not presented as delivered. Current source code clarifies mechanisms, but does not establish their exact 2024 implementation. Rewritten in a conversational speaker voice at the owner’s request; first-person wording is reconstructed, not a quotation. Editorial limitations are separate paragraphs.",
+  "editorialNote": "No recording or transcript is available. Text explains the actual slides in their original order; no spoken quotations, timestamps or audience questions are invented. Draft-only topics (3PC, Java products) are not presented as delivered. Current ecos-txn-lib/ecos-model source clarifies mechanisms but does not establish their exact 2024 implementation. Thread reuse is additionally checked against the August 2024 ecos-webapp-commons revision. Rewritten in a conversational speaker voice at the owner’s request; first-person wording is reconstructed, not a quotation. Editorial caveats were removed from the reader at the owner’s request; provenance and source limitations remain in metadata.",
   "codeCrossChecks": [
     {
       "project": "ecos-txn-lib",
@@ -28,10 +28,30 @@
         "src/main/java/ru/citeck/ecos/model/domain/contentcheckout/listener/ContentCheckoutListener.kt"
       ],
       "commit": "b62310342e519b48a8b444223e4e4583e26ae0fc"
+    },
+    {
+      "project": "ecos-webapp-commons",
+      "commit": "c0f6ec3db6bbcd72cc50d5da7209641d72cdc4b9",
+      "date": "2024-08-29",
+      "files": [
+        "ecos-webapp-lib/src/main/java/ru/citeck/ecos/webapp/lib/web/webapi/txn/WebApiThreadChain.kt",
+        "ecos-webapp-lib/src/main/java/ru/citeck/ecos/webapp/lib/web/webapi/client/EcosWebClient.kt",
+        "ecos-webapp-lib/src/main/java/ru/citeck/ecos/webapp/lib/web/webapi/executor/EcosWebExecutorsService.kt"
+      ],
+      "note": "Checked the historical revision preceding the talk, not just the current implementation. doAndPark processes queued ExtAction callbacks on the waiting thread; the active transaction holds the thread-chain reference."
+    },
+    {
+      "project": "ecos-events",
+      "commit": "25d1ed048b95d716e585d7e05437c2f8c22c5cd6",
+      "date": "2023-04-05",
+      "files": [
+        "ecos-events2-rabbitmq/src/main/java/ru/citeck/ecos/events2/rabbitmq/RabbitMqEventsService.kt",
+        "ecos-events2-rabbitmq/src/main/java/ru/citeck/ecos/events2/rabbitmq/ZkAppEventListener.kt"
+      ],
+      "note": "Owner clarified that Zookeeper holds the subscription registry. Verified registration, attribute/filter/transactional metadata, recursive watches and HTTP dispatch for transactional listeners in code predating the 2024 talk."
     }
   ],
   "limitations": [
-    "The exact thread-reuse mechanism is not recoverable from the slides.",
     "Load-test figures describe the supplied workload, not an isolated XA benchmark; hardware and topology are unspecified.",
     "0.00% is the rounded figure on the slide: 221 / 20447914 is approximately 0.00108%.",
     "The PDF filename is not treated as a confirmed event date."

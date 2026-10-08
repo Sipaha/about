@@ -2,7 +2,7 @@
   "title": "Distributed transactions with guaranteed consistency: myth or reality?",
   "back": "All conference talks",
   "intro": "Город IT · 2024 · Pavel Simonov",
-  "notice": "Reconstructed from the slides, draft outline and announcement. No recording or transcript is available: this is not verbatim speech. The sequence and facts follow the 23 slides; gaps are marked. Code clarifies mechanisms but does not establish their exact 2024 implementation.",
+  "notice": "This text was reconstructed from the slides, outline, announcement and source code. No recording is available, so it is not a verbatim transcript. The topics follow the 23 slides of the 2024 talk.",
   "original": "Original slide",
   "transcript": "Reconstructed text",
   "slideLabel": "Slide",
@@ -114,8 +114,7 @@
       "title": "Why actions are needed",
       "body": [
         "Suppose we need to recalculate permissions before saving changes, then publish an event or send an email afterward. If we send the email immediately and the transaction rolls back, someone gets notified about a change that never took effect.",
-        "So we register these actions beforehand and execute them in the right phase: permissions before commit, notifications after a successful commit.",
-        "Reconstruction note: execution after commit alone does not guarantee email or external message delivery."
+        "So we register these actions beforehand and execute them in the right phase: permissions before commit, notifications after a successful commit."
       ]
     },
     {
@@ -130,7 +129,7 @@
       "body": [
         "Threads are another challenge. Application A calls B and waits for a response. But B may synchronously call back into A while working, in the same transaction.",
         "A already has work in progress, with an occupied thread and its context. That matters particularly when the call returns to the same business process. Let’s look at an example.",
-        "Reconstruction note: the available materials do not describe the exact thread-reuse algorithm used in 2024."
+        "We use WebApiThreadChain for this. While the original thread waits for an HTTP response, it can process nested calls from a queue. When a callback reaches A in the same transaction, we can hand it to that waiting thread. It does the work with the existing process context, then resumes the original call once B responds."
       ]
     },
     {
@@ -144,24 +143,22 @@
       "title": "Callback and transition checks",
       "body": [
         "Across services, the call chain looks like this. ecos-process calls ecos-model to set the status. ecos-model sends a “Status changed” event, and we return to ecos-process to continue on the same thread.",
-        "The diagram shows a failed transition check. Here we need to know which process is running and which transaction we’re in. A transaction identifier alone isn’t enough if we lose the process execution context.",
-        "Reconstruction note: the diagram does not show exactly how the failed transition check is handled."
+        "The diagram shows a failed transition check. Here we need to know which process is running and which transaction we’re in. A transaction identifier alone isn’t enough if we lose the process execution context."
       ]
     },
     {
       "title": "Transactional event listeners",
       "body": [
         "These cases need transactional event listeners. When another service must react to data creation, update or deletion as part of our operation, we call it synchronously over HTTP(S) in the current transaction.",
-        "The handler can then do its work before the transaction finishes. A notification that everything has been saved can be sent by a separate action after commit.",
-        "Reconstruction note: Zookeeper also appears in the diagram, but the details of listener registration have not survived."
+        "To tell the sender whom to call, we keep a subscription registry in Zookeeper. An application registers the events it needs, its filter and the attributes to pass to its handler. The subscription also marks the listener as transactional. Services watch the registry and update their recipient lists when it changes.",
+        "The handler can then do its work before the transaction finishes. A notification that everything has been saved can be sent by a separate action after commit."
       ]
     },
     {
       "title": "Load-test conditions",
       "body": [
         "Now let’s look at the load test. We used JMeter and counted a non-200 response or a request taking more than 10 seconds as an error. Each thread used a separate user.",
-        "The system started with 100 000 users and 10 000 000 contracts. The workload ran as 10 000 users for one hour.",
-        "Reconstruction note: hardware configuration and instance counts are not provided."
+        "The system started with 100 000 users and 10 000 000 contracts. The workload ran as 10 000 users for one hour."
       ]
     },
     {
@@ -175,8 +172,7 @@
       "title": "Load-test results",
       "body": [
         "Over the hour we handled 20 447 914 requests. Of these, 221 failed or exceeded the time limit. The slide rounds this to 0.00%; more precisely, it’s about 0.00108%.",
-        "Mean response time was 21.88 ms, with a median of 6 ms. 90% of requests took less than 18 ms.",
-        "Reconstruction note: these results cover the whole workload. They don’t isolate XA overhead or promise the same speed on other hardware."
+        "Mean response time was 21.88 ms, with a median of 6 ms. 90% of requests took less than 18 ms."
       ]
     },
     {

@@ -2,7 +2,7 @@
   "title": "Transações distribuídas com consistência garantida: mito ou realidade?",
   "back": "Todas as palestras",
   "intro": "Город IT · 2024 · Pavel Simonov",
-  "notice": "Reconstrução com base nos slides, no esboço e no anúncio. Não há vídeo nem transcrição; o texto não é literal. Segue os 23 slides e indica as lacunas. O código esclarece mecanismos, mas não comprova a implementação exata de 2024.",
+  "notice": "Texto reconstruído com base na apresentação, no plano, no anúncio e no código-fonte. Não há gravação disponível, portanto não é uma transcrição literal. Os temas seguem os 23 slides da palestra de 2024.",
   "original": "Slide original",
   "transcript": "Texto reconstruído",
   "slideLabel": "Slide",
@@ -114,8 +114,7 @@
       "title": "Objetivo das ações",
       "body": [
         "Podemos precisar recalcular permissões antes de salvar e publicar um evento ou enviar um e-mail depois. Se o e-mail sair imediatamente e a transação for revertida, alguém recebe uma notificação sobre uma alteração que acabou não acontecendo.",
-        "Registramos essas ações antecipadamente e executamos na fase certa: permissões antes de Commit, notificações após a confirmação bem-sucedida.",
-        "Nota da reconstrução: executar após Commit não garante por si só a entrega de e-mails ou mensagens externas."
+        "Registramos essas ações antecipadamente e executamos na fase certa: permissões antes de Commit, notificações após a confirmação bem-sucedida."
       ]
     },
     {
@@ -130,7 +129,7 @@
       "body": [
         "Outra dificuldade são as threads. A chama B e espera a resposta. Mas B pode chamar A de volta, de forma síncrona, durante o trabalho e na mesma transação.",
         "A já está trabalhando, com uma thread ocupada e seu contexto. Isso importa especialmente quando voltamos ao mesmo processo de negócio. Vamos ver um exemplo.",
-        "Nota da reconstrução: os materiais não descrevem o algoritmo exato de reutilização de threads de 2024."
+        "Para isso usamos WebApiThreadChain. Enquanto espera a resposta HTTP, a thread original pode processar chamadas aninhadas de uma fila. Uma chamada de volta a A na mesma transação pode ser encaminhada a essa thread. Ela faz o trabalho com o contexto do processo já aberto e retoma a chamada original quando B responde."
       ]
     },
     {
@@ -144,24 +143,22 @@
       "title": "Retorno e condições",
       "body": [
         "Entre serviços, a sequência é esta. ecos-process chama ecos-model para definir o status. ecos-model envia «Status alterado», e voltamos a ecos-process para continuar na mesma thread.",
-        "A verificação de transição falha no esquema. Precisamos saber qual processo está rodando e em qual transação estamos. O identificador sozinho não basta se perdermos o contexto de execução do processo.",
-        "Nota da reconstrução: o esquema não mostra o tratamento exato dessa falha."
+        "A verificação de transição falha no esquema. Precisamos saber qual processo está rodando e em qual transação estamos. O identificador sozinho não basta se perdermos o contexto de execução do processo."
       ]
     },
     {
       "title": "Ouvintes transacionais",
       "body": [
         "Esses casos precisam de ouvintes transacionais. Se outro serviço deve reagir à criação, alteração ou exclusão dentro da nossa operação, chamamos de forma síncrona via HTTP(S), na transação atual.",
-        "O manipulador pode fazer sua parte antes do fim da transação. Uma notificação de que tudo foi salvo pode sair por uma ação separada após Commit.",
-        "Nota da reconstrução: Zookeeper também aparece, mas os detalhes do registro dos ouvintes não foram preservados."
+        "Para o emissor saber quem chamar, mantemos um registro de assinaturas no Zookeeper. A aplicação registra os eventos necessários, seu filtro e os atributos que o manipulador deve receber. A assinatura também indica que o ouvinte é transacional. Os serviços acompanham mudanças no registro e atualizam seus destinatários.",
+        "O manipulador pode fazer sua parte antes do fim da transação. Uma notificação de que tudo foi salvo pode sair por uma ação separada após Commit."
       ]
     },
     {
       "title": "Condições do teste",
       "body": [
         "Agora vamos ao teste de carga. Usamos JMeter. Consideramos erro uma resposta diferente de 200 ou uma requisição que levou mais de 10 segundos. Cada thread usou um usuário separado.",
-        "Havia 100 000 usuários e 10 000 000 contratos inicialmente. Aplicamos carga com 10 000 usuários por uma hora.",
-        "Nota da reconstrução: a configuração do hardware e o número de instâncias não foram informados."
+        "Havia 100 000 usuários e 10 000 000 contratos inicialmente. Aplicamos carga com 10 000 usuários por uma hora."
       ]
     },
     {
@@ -175,8 +172,7 @@
       "title": "Resultados",
       "body": [
         "Em uma hora tivemos 20 447 914 requisições. Dessas, 221 falharam ou ultrapassaram o tempo limite. O slide arredonda para 0.00%; mais precisamente, cerca de 0.00108%.",
-        "O tempo médio foi 21.88 ms, e a mediana, 6 ms. 90% das requisições levaram menos de 18 ms.",
-        "Nota da reconstrução: os números cobrem toda a carga. Não isolam o custo XA nem prometem a mesma velocidade em outro hardware."
+        "O tempo médio foi 21.88 ms, e a mediana, 6 ms. 90% das requisições levaram menos de 18 ms."
       ]
     },
     {

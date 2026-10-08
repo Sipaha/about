@@ -2,7 +2,7 @@
   "title": "Transacciones distribuidas con consistencia garantizada: ¿mito o realidad?",
   "back": "Todas las charlas",
   "intro": "Город IT · 2024 · Pavel Simonov",
-  "notice": "Reconstrucción a partir de las diapositivas, el borrador y el anuncio. No hay vídeo ni transcripción; no es un texto literal. Sigue las 23 diapositivas y señala las lagunas. El código aclara mecanismos, pero no acredita la implementación exacta de 2024.",
+  "notice": "Texto reconstruido a partir de la presentación, el plan, el anuncio y el código fuente. No hay una grabación disponible, por lo que no es una transcripción literal. Los temas siguen las 23 diapositivas de la charla de 2024.",
   "original": "Diapositiva original",
   "transcript": "Texto reconstruido",
   "slideLabel": "Diapositiva",
@@ -114,8 +114,7 @@
       "title": "Finalidad de las acciones",
       "body": [
         "Podemos necesitar recalcular permisos antes de guardar y publicar un evento o enviar un correo después. Si enviamos el correo inmediatamente y luego revertimos, alguien recibe un aviso de un cambio que finalmente no existe.",
-        "Registramos las acciones previamente y las ejecutamos en la fase adecuada: permisos antes de Commit, avisos después de una confirmación exitosa.",
-        "Nota de reconstrucción: ejecutar después de Commit no garantiza por sí solo la entrega de un correo o mensaje externo."
+        "Registramos las acciones previamente y las ejecutamos en la fase adecuada: permisos antes de Commit, avisos después de una confirmación exitosa."
       ]
     },
     {
@@ -130,7 +129,7 @@
       "body": [
         "Otra dificultad son los hilos. A llama a B y espera la respuesta. Pero B puede llamar síncronamente de vuelta a A mientras trabaja, en la misma transacción.",
         "En A ya hay trabajo en curso, un hilo ocupado y su contexto. Esto importa especialmente cuando volvemos al mismo proceso de negocio. Veamos un ejemplo.",
-        "Nota de reconstrucción: los materiales no describen el algoritmo exacto de reutilización de hilos de 2024."
+        "Para esto usamos WebApiThreadChain. Mientras espera la respuesta HTTP, el hilo original puede procesar llamadas anidadas desde una cola. Una llamada de vuelta a A en la misma transacción puede pasarse a ese hilo. Ejecuta el trabajo con el contexto del proceso ya abierto y retoma la llamada original cuando B responde."
       ]
     },
     {
@@ -144,24 +143,22 @@
       "title": "Retorno y comprobaciones",
       "body": [
         "Entre servicios, la cadena es esta. ecos-process llama a ecos-model para establecer el estado. ecos-model envía «Estado cambiado» y volvemos a ecos-process para continuar en el mismo hilo.",
-        "El esquema muestra una comprobación fallida. Necesitamos saber qué proceso está ejecutándose y en qué transacción estamos. El identificador solo no basta si perdemos el contexto de ejecución del proceso.",
-        "Nota de reconstrucción: el esquema no muestra cómo se trata exactamente este fallo."
+        "El esquema muestra una comprobación fallida. Necesitamos saber qué proceso está ejecutándose y en qué transacción estamos. El identificador solo no basta si perdemos el contexto de ejecución del proceso."
       ]
     },
     {
       "title": "Escuchadores transaccionales",
       "body": [
         "Para estos casos necesitamos escuchadores transaccionales. Si otro servicio debe reaccionar a una creación, modificación o eliminación dentro de nuestra operación, lo llamamos síncronamente por HTTP(S), en la transacción actual.",
-        "El manejador puede hacer su trabajo antes de terminar la transacción. El aviso de que todo se ha guardado puede enviarse mediante otra acción después de Commit.",
-        "Nota de reconstrucción: también aparece Zookeeper, pero no se conservaron los detalles del registro de escuchadores."
+        "Para que el emisor sepa a quién llamar, mantenemos un registro de suscripciones en Zookeeper. Cada aplicación registra los eventos que necesita, su filtro y los atributos que debe recibir el manejador. La suscripción también indica si el escuchador es transaccional. Los servicios observan los cambios y actualizan sus destinatarios.",
+        "El manejador puede hacer su trabajo antes de terminar la transacción. El aviso de que todo se ha guardado puede enviarse mediante otra acción después de Commit."
       ]
     },
     {
       "title": "Condiciones de carga",
       "body": [
         "Veamos la prueba de carga. Usamos JMeter y contamos como error una respuesta distinta de 200 o una petición de más de 10 segundos. Cada hilo trabajaba con un usuario separado.",
-        "Había 100 000 usuarios y 10 000 000 contratos al comenzar. Aplicamos carga con 10 000 usuarios durante una hora.",
-        "Nota de reconstrucción: no se indica la configuración del hardware ni el número de instancias."
+        "Había 100 000 usuarios y 10 000 000 contratos al comenzar. Aplicamos carga con 10 000 usuarios durante una hora."
       ]
     },
     {
@@ -175,8 +172,7 @@
       "title": "Resultados",
       "body": [
         "Durante la hora obtuvimos 20 447 914 peticiones. De ellas, 221 fallaron o superaron el límite. La diapositiva redondea a 0.00%; con más precisión, aproximadamente 0.00108%.",
-        "La media fue de 21.88 ms y la mediana de 6 ms. El 90% tardó menos de 18 ms.",
-        "Nota de reconstrucción: los resultados corresponden a toda la carga. No aíslan el coste XA ni prometen la misma velocidad en otro hardware."
+        "La media fue de 21.88 ms y la mediana de 6 ms. El 90% tardó menos de 18 ms."
       ]
     },
     {
