@@ -107,27 +107,20 @@ try {
           site.conferences.length,
         );
         for (const talk of site.conferences) {
-          if (talk.video)
-            assert.equal(
-              await page
-                .locator(`#${talk.id} .conference-video`)
-                .getAttribute("href"),
-              talk.video,
-            );
-          const href = await page
-            .locator(`#${talk.id} .conference-slides`)
-            .getAttribute("href");
-          assert.equal(href, base + talk.slides);
+          const link = page.locator(`#${talk.id} h3 .conference-reader`);
           assert.equal(
-            await page
-              .locator(`#${talk.id} .conference-reader`)
-              .getAttribute("href"),
+            await link.getAttribute("href"),
             pagePath(lang, base) + `talks/${talk.id}/`,
           );
-          const pdf = await page.request.get(origin + href);
-          assert.equal(pdf.status(), 200);
-          assert.match(pdf.headers()["content-type"], /application\/pdf/);
-          assert.equal((await pdf.body()).subarray(0, 5).toString(), "%PDF-");
+          assert((await link.textContent()).trim());
+          assert.equal(
+            await page
+              .locator(
+                `#${talk.id} .conference-video, #${talk.id} .conference-slides, #${talk.id} .conference-links`,
+              )
+              .count(),
+            0,
+          );
         }
         assert.equal(await page.locator(".wallet:visible").count(), 1);
         for (const w of site.wallets) {

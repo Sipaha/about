@@ -48,7 +48,7 @@
     },
     {
       "name": "SPK MM Client",
-      "url": "https://github.com/Sipaha/spk-mm-client",
+      "url": "https://sipaha.github.io/spk-mm-client/",
       "icon": "chats",
       "en": "A lightweight desktop client for Mattermost.",
       "ru": "Лёгкий настольный клиент для Mattermost."

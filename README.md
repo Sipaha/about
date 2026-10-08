@@ -16,10 +16,11 @@ the professional title. The introduction has a deliberate line break after the p
 “Для меня программирование” begins the next line; narrower screens can wrap
 naturally; Russian conjunctions stay with the following word.
 
-Featured projects are SPK Ocular, SPK MM Client (`Sipaha/spk-mm-client`) and
+Featured projects are SPK Ocular, SPK MM Client and
 Citeck Launcher (https://citeck.github.io/citeck-launcher/). The Citeck name in
 the biography links to https://www.citeck.ru/.
 SPK Ocular links to its product website: https://sipaha.github.io/spk-ocular/.
+SPK MM Client links to its product website: https://sipaha.github.io/spk-mm-client/.
 Project descriptions address a broad audience and avoid possessives such as “my”.
 The footer says “Free software for everyone” and omits payment-method and
 privacy slogans. Boosty remains a possible future option awaiting a public profile link. Outwall is omitted at the owner’s request.
@@ -31,6 +32,9 @@ to everyone. Avoid references such as “this idea” that require reading earli
 
 The `#conferences` section follows projects. A full-width divider and consistent
 section padding separate conferences from contact in both themes and on mobile.
+Each talk title links to its localized reader. The home page has no separate
+reader, video or download action row; PDF downloads and video links live on
+the talk pages.
 Entries are ordered newest first and include the owner’s
 2023 Город IT talk, “Records API: rethinking GraphQL for a low-code platform”.
 The video link preserves the supplied 33:39 start (`t=2019`). The original
