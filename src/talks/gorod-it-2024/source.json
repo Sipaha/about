@@ -1,0 +1,39 @@
+{
+  "kind": "Reconstruction, not a transcript",
+  "year": 2024,
+  "basis": [
+    "Owner-provided 23-page Russian presentation: Симонов Павел Город ИТ 110924.pdf",
+    "Owner-provided draft: plan.txt (speaker section only)",
+    "Owner-provided announcement",
+    "Owner-provided photograph: image (1).png",
+    "Five additional owner-provided 2024 conference photographs: gorodid_2024-0.jpg through gorodid_2024-4.jpg"
+  ],
+  "reconstructedText": "ru.json",
+  "video": null,
+  "transcript": null,
+  "editorialNote": "No recording or transcript is available. Text explains the actual slides in their original order; no spoken quotations, timestamps or audience questions are invented. Draft-only topics (3PC, Java products) are not presented as delivered. Current source code clarifies mechanisms, but does not establish their exact 2024 implementation. Rewritten in a conversational speaker voice at the owner’s request; first-person wording is reconstructed, not a quotation. Editorial limitations are separate paragraphs.",
+  "codeCrossChecks": [
+    {
+      "project": "ecos-txn-lib",
+      "files": [
+        "ecos-txn-lib/src/main/java/ru/citeck/ecos/txn/lib/commit/CommitCoordinatorImpl.kt",
+        "ecos-txn-lib/src/main/java/ru/citeck/ecos/txn/lib/manager/TransactionManagerImpl.kt",
+        "ecos-txn-lib/src/main/java/ru/citeck/ecos/txn/lib/manager/action/TxnActionsManager.kt"
+      ],
+      "commit": "6abd8fb9506e29c575300ff4c4e2162db1b23df6"
+    },
+    {
+      "project": "ecos-model",
+      "files": [
+        "src/main/java/ru/citeck/ecos/model/domain/contentcheckout/listener/ContentCheckoutListener.kt"
+      ],
+      "commit": "b62310342e519b48a8b444223e4e4583e26ae0fc"
+    }
+  ],
+  "limitations": [
+    "The exact thread-reuse mechanism is not recoverable from the slides.",
+    "Load-test figures describe the supplied workload, not an isolated XA benchmark; hardware and topology are unspecified.",
+    "0.00% is the rounded figure on the slide: 221 / 20447914 is approximately 0.00108%.",
+    "The PDF filename is not treated as a confirmed event date."
+  ]
+}

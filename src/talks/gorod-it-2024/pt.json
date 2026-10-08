@@ -1,0 +1,212 @@
+{
+  "title": "Transações distribuídas com consistência garantida: mito ou realidade?",
+  "back": "Todas as palestras",
+  "intro": "Город IT · 2024 · Pavel Simonov",
+  "notice": "Reconstrução com base nos slides, no esboço e no anúncio. Não há vídeo nem transcrição; o texto não é literal. Segue os 23 slides e indica as lacunas. O código esclarece mecanismos, mas não comprova a implementação exata de 2024.",
+  "original": "Slide original",
+  "transcript": "Texto reconstruído",
+  "slideLabel": "Slide",
+  "previous": "Anterior",
+  "next": "Próximo",
+  "contents": "Conteúdo",
+  "video": "Este trecho no vídeo",
+  "pdf": "Todos os slides PDF",
+  "allVideo": "Gravação completa",
+  "imageNote": "As imagens originais dos slides permanecem em russo. A transcrição está disponível no idioma escolhido; código e identificadores da API não são traduzidos.",
+  "codeLabel": "Exemplo do slide",
+  "questionsTitle": "Perguntas após a palestra",
+  "slideStatus": "Slide {current} de {total}: {title}",
+  "selectSlide": "Escolher um slide",
+  "slides": [
+    {
+      "title": "Transações distribuídas",
+      "body": [
+        "Olá! Sou Pavel Simonov, arquiteto de sistemas da Citeck. Hoje vou contar como implementamos transações distribuídas, quais dificuldades surgem e como lidar com elas.",
+        "Vamos começar pelo commit em duas fases e depois passar às ações e aos ouvintes transacionais. Queremos facilitar o código entre microsserviços e manter os dados consistentes."
+      ]
+    },
+    {
+      "title": "Fronteira da transação",
+      "body": [
+        "Já estamos acostumados com transações comuns. Você coloca uma anotação no método e espera que todas as alterações sejam salvas ou que tudo seja revertido em caso de erro. Com um banco, isso é simples de entender.",
+        "Aqui começamos a transação, fazemos algumas alterações e terminamos com Commit. Elas precisam ser salvas juntas."
+      ]
+    },
+    {
+      "title": "Reversão",
+      "body": [
+        "E se algo der errado no meio? As duas primeiras alterações funcionam, mas a próxima falha. Fazemos Rollback, e o banco volta ao estado anterior às alterações. Não precisamos descobrir quais escritas funcionaram nem desfazê-las manualmente.",
+        "Mas o rollback tem limites. Se já enviamos um e-mail, reverter o banco não vai trazê-lo de volta. Voltaremos a essas ações."
+      ]
+    },
+    {
+      "title": "Vários bancos",
+      "body": [
+        "Agora imagine dois microsserviços, cada um com seu banco. Iniciamos transações em DB1 e DB2 e fizemos as alterações. O que acontece depois?",
+        "Se confirmarmos uma após a outra, a primeira pode salvar e a segunda falhar. O primeiro Commit já terminou. Um Rollback comum não o desfaz, e os dados deixam de combinar."
+      ]
+    },
+    {
+      "title": "Voltar ao monólito?",
+      "body": [
+        "Podemos manter um único banco e voltar ao monólito. Tudo caberia novamente em uma transação, como nos esquemas anteriores.",
+        "Isso funciona bem para algumas tarefas. Mas, se a operação já envolve serviços independentes, precisamos combinar como eles vão salvar as alterações juntos."
+      ]
+    },
+    {
+      "title": "Saga e compensação",
+      "body": [
+        "Outra opção é uma saga. Cada serviço salva suas alterações separadamente. Se um passo posterior falhar, executamos uma compensação: outra operação que corrige o resultado do passo anterior.",
+        "Essa compensação precisa ser escrita. Depende da lógica de negócio: desfazer um documento criado, restaurar um status ou corrigir outras consequências. É útil para processos longos. Aqui queremos manter a facilidade de concluir a operação inteira ou reverter suas alterações."
+      ]
+    },
+    {
+      "title": "Exemplos práticos",
+      "body": [
+        "Onde isso é necessário? A Camunda pode cuidar de um processo enquanto os dados do documento estão em outro serviço. Concluir uma tarefa também altera o documento. Queremos salvar as duas coisas juntas.",
+        "O mesmo acontece com integrações ou um microsserviço personalizado que usa dados da plataforma. Uma requisição pode atingir vários bancos, embora o usuário veja uma única operação."
+      ]
+    },
+    {
+      "title": "Participantes 2PC",
+      "body": [
+        "Para isso usamos o commit em duas fases, ou 2PC. O padrão XA descreve como trabalhar com recursos transacionais. Vamos conhecer os participantes primeiro.",
+        "O gerenciador, TM, administra a transação. Um recurso XA prepara suas alterações e depois confirma ou reverte; um banco compatível com XA é um exemplo. Também precisamos de TM Repo, onde o gerenciador registra informações para saber o que fazer com uma transação incompleta após uma falha."
+      ]
+    },
+    {
+      "title": "Preparar e confirmar",
+      "body": [
+        "Primeiro alteramos os dois recursos. Ao terminar, não confirmamos imediatamente: perguntamos a cada um se está pronto para salvar sua parte. Essa é a fase Prepare.",
+        "Se algum não estiver pronto, revertemos. Se todos estiverem, salvamos a decisão e pedimos Commit aos recursos. Depois podemos limpar as informações de coordenação.",
+        "Em uma falha, importa saber se a decisão já foi registrada. Se for confirmar, a recuperação precisa concluí-la; não podemos simplesmente escolher rollback. Recursos preparados podem manter bloqueios durante a espera. Precisamos levar isso em conta."
+      ]
+    },
+    {
+      "title": "Coordenador em ecos-model",
+      "body": [
+        "Aqui temos nossos serviços. Uma requisição entra por ecos-gateway e envolve ecos-process e ecos-model. Cada um tem seu PostgreSQL com dados de negócio.",
+        "O gateway delega a coordenação a ecos-model, onde também fica o repositório do gerenciador. ecos-model coordena a conclusão: quais recursos participam, se estão prontos e qual decisão devem executar."
+      ]
+    },
+    {
+      "title": "Contexto HTTP",
+      "body": [
+        "Como outro serviço sabe que foi chamado dentro de uma transação? Enviamos o identificador junto com a requisição HTTP. Assim ele associa a chamada ao trabalho correto.",
+        "Também enviamos rotas de instâncias. Aqui emodel está ligado a wbag7dya54yq e eproc a za7iyygilrr4. Quando há várias instâncias, a próxima chamada precisa chegar àquela que já guarda o estado da transação."
+      ]
+    },
+    {
+      "title": "Propagação de rotas",
+      "body": [
+        "Também precisamos aprender rotas pelas respostas. App A-0 chama App B-0, que chama App C-1. A ainda não sabe qual instância de C participou.",
+        "Então B-0 devolve App C → C-1. Se A precisar chamar C na mesma transação, saberá onde ir. Escolher qualquer instância pelo balanceador pode levar a uma que não conhece essa transação."
+      ]
+    },
+    {
+      "title": "Metadados da resposta",
+      "body": [
+        "Devolvemos três coisas: recursos transacionais, rotas e ações. Já vimos as rotas. A lista de recursos informa ao chamador quem precisa participar da conclusão.",
+        "As ações permitem que um serviço peça para executar código em um momento específico, antes ou depois de Commit, por exemplo. Vamos ver por quê."
+      ]
+    },
+    {
+      "title": "Objetivo das ações",
+      "body": [
+        "Podemos precisar recalcular permissões antes de salvar e publicar um evento ou enviar um e-mail depois. Se o e-mail sair imediatamente e a transação for revertida, alguém recebe uma notificação sobre uma alteração que acabou não acontecendo.",
+        "Registramos essas ações antecipadamente e executamos na fase certa: permissões antes de Commit, notificações após a confirmação bem-sucedida.",
+        "Nota da reconstrução: executar após Commit não garante por si só a entrega de e-mails ou mensagens externas."
+      ]
+    },
+    {
+      "title": "Descrição da ação",
+      "body": [
+        "O que precisamos saber sobre uma ação? A aplicação onde foi registrada, seu identificador, quando executar e em qual ordem.",
+        "Temos três tipos: before commit, after commit e after rollback. Podemos reunir ações de vários serviços e executá-las na sequência necessária."
+      ]
+    },
+    {
+      "title": "Reutilização de threads",
+      "body": [
+        "Outra dificuldade são as threads. A chama B e espera a resposta. Mas B pode chamar A de volta, de forma síncrona, durante o trabalho e na mesma transação.",
+        "A já está trabalhando, com uma thread ocupada e seu contexto. Isso importa especialmente quando voltamos ao mesmo processo de negócio. Vamos ver um exemplo.",
+        "Nota da reconstrução: os materiais não descrevem o algoritmo exato de reutilização de threads de 2024."
+      ]
+    },
+    {
+      "title": "Exemplo BPMN",
+      "body": [
+        "Há dois subprocessos. No primeiro, assumimos a tarefa e colocamos o status «Em andamento no suporte de nível 1». Depois cancelamos as notificações SLA 1 e concluímos SLA 1.",
+        "Essa mudança também inicia outra ramificação: verificar condições de transição, avisar o iniciador e tratar a solicitação. Uma mudança de status nos leva de volta ao motor antes de terminar a primeira ramificação."
+      ]
+    },
+    {
+      "title": "Retorno e condições",
+      "body": [
+        "Entre serviços, a sequência é esta. ecos-process chama ecos-model para definir o status. ecos-model envia «Status alterado», e voltamos a ecos-process para continuar na mesma thread.",
+        "A verificação de transição falha no esquema. Precisamos saber qual processo está rodando e em qual transação estamos. O identificador sozinho não basta se perdermos o contexto de execução do processo.",
+        "Nota da reconstrução: o esquema não mostra o tratamento exato dessa falha."
+      ]
+    },
+    {
+      "title": "Ouvintes transacionais",
+      "body": [
+        "Esses casos precisam de ouvintes transacionais. Se outro serviço deve reagir à criação, alteração ou exclusão dentro da nossa operação, chamamos de forma síncrona via HTTP(S), na transação atual.",
+        "O manipulador pode fazer sua parte antes do fim da transação. Uma notificação de que tudo foi salvo pode sair por uma ação separada após Commit.",
+        "Nota da reconstrução: Zookeeper também aparece, mas os detalhes do registro dos ouvintes não foram preservados."
+      ]
+    },
+    {
+      "title": "Condições do teste",
+      "body": [
+        "Agora vamos ao teste de carga. Usamos JMeter. Consideramos erro uma resposta diferente de 200 ou uma requisição que levou mais de 10 segundos. Cada thread usou um usuário separado.",
+        "Havia 100 000 usuários e 10 000 000 contratos inicialmente. Aplicamos carga com 10 000 usuários por uma hora.",
+        "Nota da reconstrução: a configuração do hardware e o número de instâncias não foram informados."
+      ]
+    },
+    {
+      "title": "Cenários de carga",
+      "body": [
+        "Os usuários fizeram login e abriram a página inicial, 20%; consultaram contratos, 30%; abriram uma página de contrato com todos os widgets, 30%.",
+        "Também viram tarefas ativas, 30%; criaram documentos, 20%; iniciaram processos, 10%; concluíram tarefas, 50%. São parcelas dos usuários em cada cenário. Um usuário podia fazer várias ações, então os percentuais não precisam somar cem."
+      ]
+    },
+    {
+      "title": "Resultados",
+      "body": [
+        "Em uma hora tivemos 20 447 914 requisições. Dessas, 221 falharam ou ultrapassaram o tempo limite. O slide arredonda para 0.00%; mais precisamente, cerca de 0.00108%.",
+        "O tempo médio foi 21.88 ms, e a mediana, 6 ms. 90% das requisições levaram menos de 18 ms.",
+        "Nota da reconstrução: os números cobrem toda a carga. Não isolam o custo XA nem prometem a mesma velocidade em outro hardware."
+      ]
+    },
+    {
+      "title": "Código e encerramento",
+      "body": [
+        "Para ver como funciona no código, a biblioteca de transações distribuídas está disponível no link.",
+        "Começamos com um objetivo simples: salvar juntos os dados alterados em vários serviços. Precisamos de 2PC, transmitir contexto e rotas e integrar ações e ouvintes. Isso facilita escrever código para microsserviços com a conveniência de um único banco. Obrigado!"
+      ]
+    }
+  ],
+  "questions": [],
+  "selectLanguage": "Escolher idioma",
+  "theme": "Alternar tema",
+  "skip": "Ir para o conteúdo",
+  "layoutLabel": "Visualização dos slides",
+  "layoutSide": "Lado a lado",
+  "layoutWide": "Slide grande",
+  "enlargeSlide": "Ampliar slide",
+  "presentationLabel": "Visualizador de apresentação",
+  "closePresentation": "Fechar visualizador",
+  "photo": "Pavel Simonov durante a palestra · Город IT, 2024",
+  "photosTitle": "Fotos da conferência",
+  "photoAlts": [
+    "Pavel Simonov durante a palestra",
+    "Participantes no estande da Citeck",
+    "Foto de grupo no estande da Citeck",
+    "Palestra: ouvintes transacionais",
+    "Palestra: reutilização de threads",
+    "Palestrante e público junto à tela"
+  ],
+  "closePhotos": "Fechar foto",
+  "photoStatus": "Foto {current} de {total}"
+}

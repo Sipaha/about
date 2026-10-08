@@ -300,5 +300,9 @@
   "layoutWide": "Große Folie",
   "enlargeSlide": "Folie vergrößern",
   "presentationLabel": "Präsentationsansicht",
-  "closePresentation": "Ansicht schließen"
+  "closePresentation": "Ansicht schließen",
+  "photosTitle": "Fotos von der Konferenz",
+  "photoAlts": ["Pavel Simonov beim Vortrag"],
+  "closePhotos": "Foto schließen",
+  "photoStatus": "Foto {current} von {total}"
 }

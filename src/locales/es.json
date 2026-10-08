@@ -53,5 +53,7 @@
   "watchTalk": "Ver la charla",
   "slides": "Presentación",
   "conferenceLanguage": "El vídeo y la presentación están en ruso.",
-  "readTalk": "Diapositivas y transcripción"
+  "readTalk": "Diapositivas y transcripción",
+  "transactionsTalk": "Transacciones distribuidas con consistencia garantizada: ¿mito o realidad?",
+  "reconstructedLanguage": "Texto reconstruido · diapositivas en ruso."
 }

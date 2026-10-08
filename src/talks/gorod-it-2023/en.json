@@ -300,5 +300,9 @@
   "layoutWide": "Large slide",
   "enlargeSlide": "Enlarge slide",
   "presentationLabel": "Presentation viewer",
-  "closePresentation": "Close viewer"
+  "closePresentation": "Close viewer",
+  "photosTitle": "Conference photos",
+  "photoAlts": ["Pavel Simonov speaking"],
+  "closePhotos": "Close photo",
+  "photoStatus": "Photo {current} of {total}"
 }

@@ -82,7 +82,7 @@ export function validateSite(site) {
   }
   const conferenceIds = new Set();
   for (const talk of site.conferences ?? []) {
-    https(talk.video);
+    if (talk.video != null) https(talk.video);
     if (!/^[a-z][a-z0-9-]*$/.test(talk.id) || conferenceIds.has(talk.id))
       throw new Error("Conference IDs must be unique safe slugs");
     conferenceIds.add(talk.id);

@@ -1342,10 +1342,12 @@ body:not(.presentation-enhanced)
   cursor: zoom-in;
 }
 
-html:has(.presentation-view[open]) {
+html:has(.presentation-view[open]),
+html:has(.photo-view[open]) {
   overflow: hidden;
 }
-.presentation-view {
+.presentation-view,
+.photo-view {
   inset: 0;
   width: 100vw;
   height: 100dvh;
@@ -1359,7 +1361,8 @@ html:has(.presentation-view[open]) {
   font-family: "Noto Sans", system-ui, sans-serif;
   overflow: hidden;
 }
-.presentation-view::backdrop {
+.presentation-view::backdrop,
+.photo-view::backdrop {
   background: var(--bg);
 }
 .presentation-shell {
@@ -1481,4 +1484,134 @@ html:has(.presentation-view[open]) {
   .presentation-text {
     padding: 16px 20px;
   }
+}
+
+.talk-gallery {
+  margin: 40px 0 0;
+  padding: 22px 0;
+  border-top: 1px solid var(--line);
+}
+.talk-gallery summary {
+  cursor: pointer;
+  font-weight: 700;
+}
+.talk-gallery summary span {
+  color: var(--muted);
+  font-weight: 400;
+}
+.talk-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  margin-top: 24px;
+}
+.talk-gallery figure {
+  margin: 0;
+}
+.talk-gallery a {
+  display: block;
+}
+.talk-gallery img {
+  display: block;
+  width: 100%;
+  height: 200px;
+  object-fit: contain;
+  background: var(--surface);
+  border-radius: 8px;
+}
+.talk-gallery figcaption {
+  margin-top: 8px;
+  font-size: 14px;
+  color: var(--muted);
+}
+@media (max-width: 767px) {
+  .talk-gallery-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+  .talk-gallery img {
+    height: 150px;
+  }
+}
+@media (max-width: 479px) {
+  .talk-gallery-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .talk-gallery img {
+    height: auto;
+    max-height: 240px;
+  }
+}
+
+.photo-shell {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  height: 100%;
+}
+.photo-stage {
+  position: relative;
+  min-height: 0;
+  padding: 64px 76px 20px;
+}
+.photo-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+.photo-image:active {
+  transform: none;
+}
+.photo-image:disabled {
+  cursor: default;
+}
+.photo-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.photo-footer {
+  padding: 16px 24px;
+  text-align: center;
+  border-top: 1px solid var(--line);
+  background: var(--surface);
+  font-size: 14px;
+  max-height: 25dvh;
+  overflow: auto;
+}
+.photo-footer p {
+  margin: 0;
+}
+.photo-footer [data-photo-status] {
+  margin-top: 6px;
+  color: var(--muted);
+}
+.talk-gallery a {
+  cursor: zoom-in;
+}
+@media (max-width: 767px) {
+  .photo-stage {
+    padding: 64px 12px 12px;
+  }
+  .photo-view .presentation-arrow {
+    width: 44px;
+    height: 44px;
+  }
+  .photo-view .presentation-previous {
+    left: 6px;
+  }
+  .photo-view .presentation-next {
+    right: 6px;
+  }
+  .photo-footer {
+    padding: 12px 16px;
+  }
+}
+
+.photo-view {
+  overflow: clip;
 }

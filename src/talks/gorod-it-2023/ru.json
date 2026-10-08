@@ -300,5 +300,9 @@
   "layoutWide": "Слайд крупно",
   "enlargeSlide": "Увеличить слайд",
   "presentationLabel": "Просмотр презентации",
-  "closePresentation": "Закрыть просмотр"
+  "closePresentation": "Закрыть просмотр",
+  "photosTitle": "Фото с конференции",
+  "photoAlts": ["Павел Симонов во время выступления"],
+  "closePhotos": "Закрыть фото",
+  "photoStatus": "Фото {current} из {total}"
 }

@@ -1,3 +1,4 @@
+import { verifyPhotoViewer } from "./verify-photo-viewer.mjs";
 import { chromium } from "@playwright/test";
 import { readFile, mkdir, writeFile } from "node:fs/promises";
 import { createRequire } from "node:module";
@@ -85,6 +86,23 @@ try {
         await page.waitForURL((url) => url.hash === "#slide-1");
         await page.locator("#slide-1").waitFor({ state: "visible" });
         assert(await page.locator("#slide-1").isVisible());
+        assert.equal(
+          await page.locator(".talk-gallery img").count(),
+          shared.photos.length,
+        );
+        await page.locator("#photos summary").click();
+        for (const image of await page.locator(".talk-gallery img").all()) {
+          await image.scrollIntoViewIfNeeded();
+          await image.evaluate((img) => img.decode());
+          assert(await image.evaluate((img) => img.naturalWidth > 0));
+        }
+        await verifyPhotoViewer({
+          page,
+          shared,
+          scratch,
+          tag: `${code}/${theme}/${width}`,
+        });
+        await page.locator("#photos summary").click();
         const numbers =
           width === 320 && theme === "light"
             ? Array.from({ length: 36 }, (_, i) => i + 1)

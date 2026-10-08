@@ -220,5 +220,13 @@
     {
       "start": 3679
     }
+  ],
+  "photos": [
+    {
+      "image": "assets/talks/gorod-it-2023/conference.jpg",
+      "thumbnail": "assets/talks/gorod-it-2023/conference-thumb.webp",
+      "width": 1280,
+      "height": 853
+    }
   ]
 }

@@ -53,5 +53,7 @@
   "watchTalk": "Vortrag ansehen",
   "slides": "Präsentation",
   "conferenceLanguage": "Video und Präsentation auf Russisch.",
-  "readTalk": "Folien und Transkript"
+  "readTalk": "Folien und Transkript",
+  "transactionsTalk": "Verteilte Transaktionen mit garantierter Konsistenz: Mythos oder Realität?",
+  "reconstructedLanguage": "Rekonstruierter Text · Folien auf Russisch."
 }

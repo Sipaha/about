@@ -296,5 +296,9 @@
   "layoutWide": "大图显示",
   "enlargeSlide": "放大幻灯片",
   "presentationLabel": "演示文稿查看器",
-  "closePresentation": "关闭查看器"
+  "closePresentation": "关闭查看器",
+  "photosTitle": "会议照片",
+  "photoAlts": ["Pavel Simonov演讲现场"],
+  "closePhotos": "关闭照片",
+  "photoStatus": "第 {current} 张，共 {total} 张"
 }

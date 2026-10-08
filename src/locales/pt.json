@@ -53,5 +53,7 @@
   "watchTalk": "Assistir à palestra",
   "slides": "Apresentação",
   "conferenceLanguage": "O vídeo e a apresentação estão em russo.",
-  "readTalk": "Slides e transcrição"
+  "readTalk": "Slides e transcrição",
+  "transactionsTalk": "Transações distribuídas com consistência garantida: mito ou realidade?",
+  "reconstructedLanguage": "Texto reconstruído · slides em russo."
 }

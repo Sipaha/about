@@ -53,5 +53,7 @@
   "watchTalk": "講演を見る",
   "slides": "発表資料",
   "conferenceLanguage": "動画と発表資料はロシア語です。",
-  "readTalk": "スライドと文字起こし"
+  "readTalk": "スライドと文字起こし",
+  "transactionsTalk": "整合性を保証する分散トランザクション：神話か現実か？",
+  "reconstructedLanguage": "再構成した本文 · スライドはロシア語。"
 }

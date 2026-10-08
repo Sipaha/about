@@ -26,3 +26,15 @@ site are distributed under public/licenses/.
   license is asserted for them. The talk text is an edited rendering of the
   speaker’s automatic Russian captions with translations, not verbatim audio
   certification.
+
+- **Город IT 2024 slides and photograph**: owner-supplied
+  `Симонов Павел Город ИТ 110924.pdf` and `image (1).png`. The original PDF is
+  unchanged; slide renders and the photograph are local WebP derivatives.
+  Embedded logos and photographs retain their original provenance; no new
+  license is asserted. The text is an explicitly marked reconstruction based
+  on slides, draft and announcement, translated into eight languages.
+
+- **Additional conference photographs**: owner-supplied `gorodit_2023.jpg`
+  and `gorodid_2024-0.jpg` through `gorodid_2024-4.jpg`. JPEG files are copied
+  unchanged, with local WebP thumbnails that preserve the full frame. No new
+  license is asserted.

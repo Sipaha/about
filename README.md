@@ -31,7 +31,7 @@ to everyone. Avoid references such as “this idea” that require reading earli
 
 The `#conferences` section follows projects. A full-width divider and consistent
 section padding separate conferences from contact in both themes and on mobile.
-Its first entry is the owner’s
+Entries are ordered newest first and include the owner’s
 2023 Город IT talk, “Records API: rethinking GraphQL for a low-code platform”.
 The video link preserves the supplied 33:39 start (`t=2019`). The original
 36-page Russian presentation is hosted locally as
@@ -258,3 +258,19 @@ override. Native CSS; no UI framework is needed for a static personal page.
 Manrope is self-hosted. Phosphor icons are bundled inline; Bitcoin QR codes are
 functional images generated locally. No fabricated photos, testimonials, stats,
 or balances. `THIRD_PARTY_NOTICES.md` records asset provenance and licenses.
+
+The 2024 Город IT talk, “Distributed transactions with guaranteed consistency:
+myth or reality?”, is available at `talks/gorod-it-2024/` in all eight languages.
+Its 23 Russian slides, original PDF and six owner-provided photographs are
+hosted locally. The 2023 reader also has an owner-provided conference photograph.
+Each reader has a collapsed photo gallery after the slides, with localized captions
+and links to larger images. With JavaScript, photos open in a native modal with
+Previous/Next buttons, arrow keys and click-on-photo navigation; navigation wraps.
+Escape or Close returns focus to the opening thumbnail without changing the selected
+slide. The single-photo 2023 gallery disables navigation. Without JavaScript or
+dialog support, ordinary image links and the native gallery remain usable. There is no video or transcript: the reader explicitly identifies
+its text as a reconstruction from the presentation, draft and announcement.
+The reconstructed text uses conversational speaker wording; editorial notes are
+separate paragraphs. Unrecoverable implementation details are marked; no timestamps or audience
+questions are invented. See [reconstruction provenance](docs/gorod-it-2024.md).
+The reader generator supports each configured conference and optional video/questions.

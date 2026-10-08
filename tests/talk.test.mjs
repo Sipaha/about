@@ -13,9 +13,11 @@ test("all eight talk locales retain every slide, paragraph, question and interfa
     const locale = load(code);
     assert.deepEqual(Object.keys(locale).sort(), Object.keys(ru).sort(), code);
     for (const [key, value] of Object.entries(locale)) {
-      if (!["slides", "questions"].includes(key))
+      if (!["slides", "questions", "photoAlts"].includes(key))
         assert.equal(typeof value, "string", `${code}.${key}`);
     }
+    assert.equal(locale.photoAlts.length, shared.photos.length);
+    assert(locale.photoAlts.every((p) => typeof p === "string" && p.trim()));
     for (const section of ["slides", "questions"]) {
       assert.equal(
         locale[section].length,
@@ -107,4 +109,44 @@ test("normalised JSON examples remain parseable without changing API values", ()
   assert.equal(count, 10);
   assert(shared.slides[25].code.includes('"admin@citeck.ru"'));
   assert(shared.slides[31].code.includes('"pk.simonov"'));
+});
+
+test("2024 reconstruction keeps every locale and source boundary without inventing recording metadata", () => {
+  const folder = new URL("../src/talks/gorod-it-2024/", import.meta.url);
+  const read = (name) =>
+    JSON.parse(readFileSync(new URL(`${name}.json`, folder), "utf8"));
+  const shared = read("shared"),
+    source = read("source"),
+    ru = read("ru");
+  assert.equal(shared.video, null);
+  assert.equal(source.transcript, null);
+  assert.equal(shared.slides.length, 23);
+  assert.deepEqual(shared.questions, []);
+  for (const slide of shared.slides) {
+    assert(!("start" in slide));
+    assert(existsSync(new URL("../public/" + slide.image, import.meta.url)));
+  }
+  for (const { code } of languages) {
+    const locale = read(code);
+    assert.deepEqual(Object.keys(locale).sort(), Object.keys(ru).sort());
+    assert.equal(locale.slides.length, 23);
+    assert.deepEqual(locale.questions, []);
+    for (const [index, entry] of locale.slides.entries()) {
+      assert.equal(
+        entry.body.length,
+        ru.slides[index].body.length,
+        `${code}/slide-${index + 1}: paragraphs`,
+      );
+      assert(entry.title && entry.body.length && entry.body.every(Boolean));
+    }
+    assert.equal(locale.photoAlts.length, shared.photos.length);
+    const results = locale.slides[21].body.join(" ");
+    for (const number of ["20 447 914", "221", "0.00108%", "21.88", "6", "18"])
+      assert(results.includes(number), `${code}: ${number}`);
+    for (const term of ["Prepare", "Commit"])
+      assert(
+        locale.slides[8].body.join(" ").includes(term),
+        `${code}: ${term}`,
+      );
+  }
 });

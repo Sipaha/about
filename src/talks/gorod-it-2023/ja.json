@@ -298,5 +298,9 @@
   "layoutWide": "大きなスライド",
   "enlargeSlide": "スライドを拡大",
   "presentationLabel": "プレゼンテーション表示",
-  "closePresentation": "表示を閉じる"
+  "closePresentation": "表示を閉じる",
+  "photosTitle": "カンファレンスの写真",
+  "photoAlts": ["講演中のPavel Simonov"],
+  "closePhotos": "写真を閉じる",
+  "photoStatus": "写真 {current} / {total}"
 }

@@ -53,5 +53,7 @@
   "watchTalk": "观看演讲",
   "slides": "演示文稿",
   "conferenceLanguage": "视频和演示文稿为俄语。",
-  "readTalk": "幻灯片与讲稿"
+  "readTalk": "幻灯片与讲稿",
+  "transactionsTalk": "保证一致性的分布式事务：神话还是现实？",
+  "reconstructedLanguage": "重建文本 · 俄语幻灯片。"
 }

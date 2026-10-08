@@ -300,5 +300,9 @@
   "layoutWide": "Grande diapositive",
   "enlargeSlide": "Agrandir la diapositive",
   "presentationLabel": "Visionneuse de présentation",
-  "closePresentation": "Fermer la visionneuse"
+  "closePresentation": "Fermer la visionneuse",
+  "photosTitle": "Photos de la conférence",
+  "photoAlts": ["Pavel Simonov pendant son intervention"],
+  "closePhotos": "Fermer la photo",
+  "photoStatus": "Photo {current} sur {total}"
 }

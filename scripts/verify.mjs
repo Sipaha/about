@@ -107,12 +107,13 @@ try {
           site.conferences.length,
         );
         for (const talk of site.conferences) {
-          assert.equal(
-            await page
-              .locator(`#${talk.id} .conference-video`)
-              .getAttribute("href"),
-            talk.video,
-          );
+          if (talk.video)
+            assert.equal(
+              await page
+                .locator(`#${talk.id} .conference-video`)
+                .getAttribute("href"),
+              talk.video,
+            );
           const href = await page
             .locator(`#${talk.id} .conference-slides`)
             .getAttribute("href");
@@ -121,7 +122,7 @@ try {
             await page
               .locator(`#${talk.id} .conference-reader`)
               .getAttribute("href"),
-            pagePath(lang, base) + "talks/gorod-it-2023/",
+            pagePath(lang, base) + `talks/${talk.id}/`,
           );
           const pdf = await page.request.get(origin + href);
           assert.equal(pdf.status(), 200);

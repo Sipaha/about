@@ -1,0 +1,212 @@
+{
+  "title": "Distributed transactions with guaranteed consistency: myth or reality?",
+  "back": "All conference talks",
+  "intro": "Город IT · 2024 · Pavel Simonov",
+  "notice": "Reconstructed from the slides, draft outline and announcement. No recording or transcript is available: this is not verbatim speech. The sequence and facts follow the 23 slides; gaps are marked. Code clarifies mechanisms but does not establish their exact 2024 implementation.",
+  "original": "Original slide",
+  "transcript": "Reconstructed text",
+  "slideLabel": "Slide",
+  "previous": "Previous",
+  "next": "Next",
+  "contents": "Contents",
+  "video": "This part in the video",
+  "pdf": "All slides PDF",
+  "allVideo": "Full talk recording",
+  "imageNote": "The original slide images remain in Russian. The transcript is available in the selected language; code and API identifiers are not translated.",
+  "codeLabel": "Example from the slide",
+  "questionsTitle": "Questions after the talk",
+  "slideStatus": "Slide {current} of {total}: {title}",
+  "selectSlide": "Choose a slide",
+  "slides": [
+    {
+      "title": "Distributed transactions",
+      "body": [
+        "Hello! I’m Pavel Simonov, a systems architect at Citeck. Today I’ll explain how we implemented distributed transactions, the difficulties involved and how to handle them.",
+        "We’ll start with two-phase commit, then move on to transactional actions and event listeners. The goal is to make operations across microservices easier to write while keeping the data consistent."
+      ]
+    },
+    {
+      "title": "Transaction boundary",
+      "body": [
+        "We’re all used to ordinary transactions. Put an annotation on a method, and you expect either all its changes to be saved or everything to roll back on error. With one database, that’s straightforward.",
+        "Here we begin a transaction, make several changes and finish with Commit. Those changes need to be saved together."
+      ]
+    },
+    {
+      "title": "Rolling back changes",
+      "body": [
+        "What if something goes wrong halfway through? Say the first two changes succeed, but the next one fails. We call Rollback, and the database returns to the state before those changes. We don’t have to work out which writes succeeded and undo them ourselves.",
+        "Rollback has limits, though. If we’ve already sent an email, rolling back the database won’t bring it back. We’ll return to those actions later."
+      ]
+    },
+    {
+      "title": "Multiple databases",
+      "body": [
+        "Now imagine the data is in two microservices, each with its own database. We’ve started transactions in DB1 and DB2 and made our changes. What next?",
+        "If we commit them one after another, the first may save its changes while the second fails. The first Commit is already complete. An ordinary Rollback won’t undo it, and the data will disagree."
+      ]
+    },
+    {
+      "title": "Back to a monolith?",
+      "body": [
+        "One option is to keep a single database and return to a monolith. Everything would fit into one transaction, just as in the earlier diagrams.",
+        "That can work well for some tasks. But when an operation already involves independent services, we still need to agree how they’ll save their changes together."
+      ]
+    },
+    {
+      "title": "Sagas and compensation",
+      "body": [
+        "Another option is a saga. Each service saves its own changes. If a later step fails, we run compensation: a separate operation to correct the result of an earlier step.",
+        "We have to write that compensation ourselves. It depends on the business logic: undoing a document creation, restoring a status or fixing other consequences. That’s useful for long-running processes, but here we want the familiar convenience of completing an operation or rolling back its changes."
+      ]
+    },
+    {
+      "title": "Practical scenarios",
+      "body": [
+        "Where does this come up? Camunda might manage a process while the document’s business data lives in another service. Completing a task also updates the document. We want both changes to be saved together.",
+        "The same issue arises with integrations or a custom microservice using the platform’s business data. One request may touch several databases even though the user sees a single operation."
+      ]
+    },
+    {
+      "title": "2PC participants",
+      "body": [
+        "We use two-phase commit, or 2PC, for this. XA is a standard for working with transactional resources. Let’s first look at the participants.",
+        "The transaction manager, TM, manages the transaction. An XA resource can prepare its changes, then commit or roll them back; a database with XA support is one example. We also need TM Repo, where the manager records information so it can work out what to do with an unfinished transaction after a failure."
+      ]
+    },
+    {
+      "title": "Prepare and commit",
+      "body": [
+        "First we make changes in both resources. When it’s time to finish, we don’t commit immediately. We ask each resource whether it’s ready to save its part. That’s Prepare.",
+        "If anyone isn’t ready, we roll back. If everyone is ready, we store the commit decision and tell the resources to Commit. Once finished, we can remove the coordination records.",
+        "Failures matter here. Once the commit decision has been recorded, recovery must carry it through. We can’t simply choose rollback anymore. Prepared resources may hold locks while waiting, which is a trade-off we need to account for."
+      ]
+    },
+    {
+      "title": "Coordinator in ecos-model",
+      "body": [
+        "Here’s an example with our services. A request enters through ecos-gateway and involves ecos-process and ecos-model. Each has its own PostgreSQL database containing business data.",
+        "The gateway delegates commit coordination to ecos-model, which also holds the transaction manager’s repository. ecos-model tracks the participants, checks their readiness and coordinates the decision they need to carry out."
+      ]
+    },
+    {
+      "title": "HTTP request context",
+      "body": [
+        "How does another service know it was called within a transaction? We pass the transaction identifier along with the HTTP request. It tells the service which work the call belongs to.",
+        "We also pass instance routes. Here emodel maps to wbag7dya54yq, and eproc to za7iyygilrr4. With several running instances, the next call needs to reach the one that already holds our transaction’s state."
+      ]
+    },
+    {
+      "title": "Propagating routes",
+      "body": [
+        "We need to learn routes from responses too. Suppose App A-0 calls App B-0, which then calls App C-1. A doesn’t yet know which C instance took part.",
+        "B-0 returns the route App C → C-1. If A later needs to call C in the same transaction, it can reach the right instance. Picking any instance through a load balancer could reach one that knows nothing about this transaction."
+      ]
+    },
+    {
+      "title": "Response metadata",
+      "body": [
+        "We return three things: transactional resources, routes and transactional actions. We’ve covered routes. The resource list tells the caller who needs to participate in completing the transaction.",
+        "Actions let a service say that some code must run at a particular moment, such as before or after commit. Let’s look at why we need that."
+      ]
+    },
+    {
+      "title": "Why actions are needed",
+      "body": [
+        "Suppose we need to recalculate permissions before saving changes, then publish an event or send an email afterward. If we send the email immediately and the transaction rolls back, someone gets notified about a change that never took effect.",
+        "So we register these actions beforehand and execute them in the right phase: permissions before commit, notifications after a successful commit.",
+        "Reconstruction note: execution after commit alone does not guarantee email or external message delivery."
+      ]
+    },
+    {
+      "title": "Action description",
+      "body": [
+        "What do we need to know about an action? The application where it’s registered, its identifier, when it should run and its order.",
+        "There are three timing types: before commit, after commit and after rollback. We can collect actions from different services and execute them in the required sequence."
+      ]
+    },
+    {
+      "title": "Reusing threads",
+      "body": [
+        "Threads are another challenge. Application A calls B and waits for a response. But B may synchronously call back into A while working, in the same transaction.",
+        "A already has work in progress, with an occupied thread and its context. That matters particularly when the call returns to the same business process. Let’s look at an example.",
+        "Reconstruction note: the available materials do not describe the exact thread-reuse algorithm used in 2024."
+      ]
+    },
+    {
+      "title": "BPMN example",
+      "body": [
+        "There are two subprocesses here. In the first, we take a task and set its status to “In progress at support tier 1”. We then cancel the SLA 1 notifications and complete SLA 1.",
+        "That status change also starts a second branch: checking transition conditions, notifying the initiator and handling the request. A simple status update takes us back into the process engine before the first branch has finished."
+      ]
+    },
+    {
+      "title": "Callback and transition checks",
+      "body": [
+        "Across services, the call chain looks like this. ecos-process calls ecos-model to set the status. ecos-model sends a “Status changed” event, and we return to ecos-process to continue on the same thread.",
+        "The diagram shows a failed transition check. Here we need to know which process is running and which transaction we’re in. A transaction identifier alone isn’t enough if we lose the process execution context.",
+        "Reconstruction note: the diagram does not show exactly how the failed transition check is handled."
+      ]
+    },
+    {
+      "title": "Transactional event listeners",
+      "body": [
+        "These cases need transactional event listeners. When another service must react to data creation, update or deletion as part of our operation, we call it synchronously over HTTP(S) in the current transaction.",
+        "The handler can then do its work before the transaction finishes. A notification that everything has been saved can be sent by a separate action after commit.",
+        "Reconstruction note: Zookeeper also appears in the diagram, but the details of listener registration have not survived."
+      ]
+    },
+    {
+      "title": "Load-test conditions",
+      "body": [
+        "Now let’s look at the load test. We used JMeter and counted a non-200 response or a request taking more than 10 seconds as an error. Each thread used a separate user.",
+        "The system started with 100 000 users and 10 000 000 contracts. The workload ran as 10 000 users for one hour.",
+        "Reconstruction note: hardware configuration and instance counts are not provided."
+      ]
+    },
+    {
+      "title": "Workload scenarios",
+      "body": [
+        "Users performed different tasks: logging in and opening the home page, 20%; browsing contracts, 30%; opening a contract page with all widgets, 30%.",
+        "They also viewed active tasks, 30%; created documents, 20%; started processes, 10%; and completed tasks, 50%. These are shares of users participating in each scenario. One user could perform several actions, so the percentages don’t need to add up to 100."
+      ]
+    },
+    {
+      "title": "Load-test results",
+      "body": [
+        "Over the hour we handled 20 447 914 requests. Of these, 221 failed or exceeded the time limit. The slide rounds this to 0.00%; more precisely, it’s about 0.00108%.",
+        "Mean response time was 21.88 ms, with a median of 6 ms. 90% of requests took less than 18 ms.",
+        "Reconstruction note: these results cover the whole workload. They don’t isolate XA overhead or promise the same speed on other hardware."
+      ]
+    },
+    {
+      "title": "Source code and closing",
+      "body": [
+        "If you’d like to see how this works in code, the distributed transaction library’s source is available at the link.",
+        "We started with a simple goal: saving changes across several services together. That required two-phase commit, context and route propagation, then actions and listeners that work within that setup. It helps us write microservice code with the convenience we’re used to from a single database. Thank you!"
+      ]
+    }
+  ],
+  "questions": [],
+  "selectLanguage": "Choose language",
+  "theme": "Switch theme",
+  "skip": "Skip to content",
+  "layoutLabel": "Slide layout",
+  "layoutSide": "Side by side",
+  "layoutWide": "Large slide",
+  "enlargeSlide": "Enlarge slide",
+  "presentationLabel": "Presentation viewer",
+  "closePresentation": "Close viewer",
+  "photo": "Pavel Simonov speaking · Город IT, 2024",
+  "photosTitle": "Conference photos",
+  "photoAlts": [
+    "Pavel Simonov speaking",
+    "Conference participants at the Citeck stand",
+    "Group photo at the Citeck stand",
+    "Talk: transactional event listeners",
+    "Talk: reusing threads",
+    "Speaker and audience beside the presentation screen"
+  ],
+  "closePhotos": "Close photo",
+  "photoStatus": "Photo {current} of {total}"
+}

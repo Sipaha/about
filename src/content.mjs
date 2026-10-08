@@ -13,6 +13,9 @@ export const content = {
   ja,
   ru: {
     readTalk: "Слайды и текст",
+    transactionsTalk:
+      "Распределенные транзакции с гарантией консистенции — миф или реальность?",
+    reconstructedLanguage: "Реконструкция · презентация на русском.",
     conferences: "Выступления",
     recordsApiTalk:
       "Records API: переосмысление GraphQL для low-code платформы",
@@ -74,6 +77,9 @@ export const content = {
   },
   en: {
     readTalk: "Slides and transcript",
+    transactionsTalk:
+      "Distributed transactions with guaranteed consistency: myth or reality?",
+    reconstructedLanguage: "Reconstructed text \u00b7 slides in Russian.",
     conferences: "Conference talks",
     recordsApiTalk: "Records API: rethinking GraphQL for a low-code platform",
     watchTalk: "Watch the talk",

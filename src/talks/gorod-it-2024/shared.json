@@ -1,0 +1,143 @@
+{
+  "id": "gorod-it-2024",
+  "event": "Город IT",
+  "year": 2024,
+  "video": null,
+  "pdf": "assets/distributed-transactions-gorod-it-2024.pdf",
+  "slides": [
+    {
+      "number": 1,
+      "image": "assets/talks/gorod-it-2024/slide-01.webp"
+    },
+    {
+      "number": 2,
+      "image": "assets/talks/gorod-it-2024/slide-02.webp"
+    },
+    {
+      "number": 3,
+      "image": "assets/talks/gorod-it-2024/slide-03.webp"
+    },
+    {
+      "number": 4,
+      "image": "assets/talks/gorod-it-2024/slide-04.webp"
+    },
+    {
+      "number": 5,
+      "image": "assets/talks/gorod-it-2024/slide-05.webp"
+    },
+    {
+      "number": 6,
+      "image": "assets/talks/gorod-it-2024/slide-06.webp"
+    },
+    {
+      "number": 7,
+      "image": "assets/talks/gorod-it-2024/slide-07.webp"
+    },
+    {
+      "number": 8,
+      "image": "assets/talks/gorod-it-2024/slide-08.webp"
+    },
+    {
+      "number": 9,
+      "image": "assets/talks/gorod-it-2024/slide-09.webp"
+    },
+    {
+      "number": 10,
+      "image": "assets/talks/gorod-it-2024/slide-10.webp"
+    },
+    {
+      "number": 11,
+      "image": "assets/talks/gorod-it-2024/slide-11.webp"
+    },
+    {
+      "number": 12,
+      "image": "assets/talks/gorod-it-2024/slide-12.webp"
+    },
+    {
+      "number": 13,
+      "image": "assets/talks/gorod-it-2024/slide-13.webp"
+    },
+    {
+      "number": 14,
+      "image": "assets/talks/gorod-it-2024/slide-14.webp"
+    },
+    {
+      "number": 15,
+      "image": "assets/talks/gorod-it-2024/slide-15.webp"
+    },
+    {
+      "number": 16,
+      "image": "assets/talks/gorod-it-2024/slide-16.webp"
+    },
+    {
+      "number": 17,
+      "image": "assets/talks/gorod-it-2024/slide-17.webp"
+    },
+    {
+      "number": 18,
+      "image": "assets/talks/gorod-it-2024/slide-18.webp"
+    },
+    {
+      "number": 19,
+      "image": "assets/talks/gorod-it-2024/slide-19.webp"
+    },
+    {
+      "number": 20,
+      "image": "assets/talks/gorod-it-2024/slide-20.webp"
+    },
+    {
+      "number": 21,
+      "image": "assets/talks/gorod-it-2024/slide-21.webp"
+    },
+    {
+      "number": 22,
+      "image": "assets/talks/gorod-it-2024/slide-22.webp"
+    },
+    {
+      "number": 23,
+      "image": "assets/talks/gorod-it-2024/slide-23.webp",
+      "links": ["https://github.com/Citeck/ecos-txn-lib"]
+    }
+  ],
+  "questions": [],
+  "width": 1200,
+  "height": 675,
+  "photos": [
+    {
+      "image": "assets/talks/gorod-it-2024/speaker.webp",
+      "thumbnail": "assets/talks/gorod-it-2024/speaker-thumb.webp",
+      "width": 800,
+      "height": 1200
+    },
+    {
+      "image": "assets/talks/gorod-it-2024/conference-0.jpg",
+      "thumbnail": "assets/talks/gorod-it-2024/conference-0-thumb.webp",
+      "width": 2560,
+      "height": 1777
+    },
+    {
+      "image": "assets/talks/gorod-it-2024/conference-1.jpg",
+      "thumbnail": "assets/talks/gorod-it-2024/conference-1-thumb.webp",
+      "width": 2560,
+      "height": 1920
+    },
+    {
+      "image": "assets/talks/gorod-it-2024/conference-2.jpg",
+      "thumbnail": "assets/talks/gorod-it-2024/conference-2-thumb.webp",
+      "width": 2560,
+      "height": 1707
+    },
+    {
+      "image": "assets/talks/gorod-it-2024/conference-3.jpg",
+      "thumbnail": "assets/talks/gorod-it-2024/conference-3-thumb.webp",
+      "width": 2560,
+      "height": 1707
+    },
+    {
+      "image": "assets/talks/gorod-it-2024/conference-4.jpg",
+      "thumbnail": "assets/talks/gorod-it-2024/conference-4-thumb.webp",
+      "width": 2560,
+      "height": 1707
+    }
+  ]
+}

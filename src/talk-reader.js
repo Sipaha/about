@@ -193,3 +193,63 @@ if (reader) {
   if (initial !== null)
     slides[initial].scrollIntoView({ block: "start", behavior: "instant" });
 }
+
+const gallery = document.querySelector(".talk-gallery");
+const photoViewer = document.querySelector(".photo-view");
+if (gallery && photoViewer && typeof photoViewer.showModal === "function") {
+  const photos = [...gallery.querySelectorAll("a")];
+  const image = photoViewer.querySelector("img");
+  const caption = photoViewer.querySelector("[data-photo-caption]");
+  const status = photoViewer.querySelector("[data-photo-status]");
+  let selectedPhoto = 0;
+  let opener;
+  function showPhoto(index) {
+    selectedPhoto = (index + photos.length) % photos.length;
+    const link = photos[selectedPhoto];
+    const thumbnail = link.querySelector("img");
+    image.src = link.href;
+    image.alt = thumbnail.alt;
+    caption.textContent = thumbnail.alt;
+    status.textContent = photoViewer.dataset.photoStatusLabel
+      .replace("{current}", selectedPhoto + 1)
+      .replace("{total}", photos.length);
+    for (const button of photoViewer.querySelectorAll(
+      "[data-photo-prev], [data-photo-next]",
+    ))
+      button.disabled = photos.length < 2;
+  }
+  photos.forEach((link, index) => {
+    link.addEventListener("click", (event) => {
+      if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey)
+        return;
+      event.preventDefault();
+      opener = link;
+      showPhoto(index);
+      photoViewer.showModal();
+    });
+  });
+  photoViewer
+    .querySelector("[data-photo-prev]")
+    .addEventListener("click", () => showPhoto(selectedPhoto - 1));
+  for (const button of photoViewer.querySelectorAll("[data-photo-next]"))
+    button.addEventListener("click", () => showPhoto(selectedPhoto + 1));
+  photoViewer.addEventListener("keydown", (event) => {
+    if (event.altKey || event.ctrlKey || event.metaKey || photos.length < 2)
+      return;
+    if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+      event.preventDefault();
+      showPhoto(selectedPhoto + (event.key === "ArrowLeft" ? -1 : 1));
+    }
+  });
+  photoViewer.addEventListener("close", () =>
+    opener?.focus({ preventScroll: true }),
+  );
+}
+if (gallery) {
+  if (location.hash === "#photos") gallery.open = true;
+  document
+    .querySelector('.talk-source-links a[href="#photos"]')
+    ?.addEventListener("click", () => {
+      gallery.open = true;
+    });
+}
