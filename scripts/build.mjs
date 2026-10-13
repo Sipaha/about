@@ -1,3 +1,4 @@
+import { openExternalLinks } from "./external-links.mjs";
 import { readFile, writeFile, mkdir, rm, cp } from "node:fs/promises";
 import QRCode from "qrcode";
 import { createHash } from "node:crypto";
@@ -124,13 +125,13 @@ for (const meta of languages) {
 <section class="projects" id="projects" aria-labelledby="projects-title"><div class="section-head"><h2 id="projects-title">${t.work}</h2><a class="text-link" href="${site.owner.github}?tab=repositories"><span>${t.allProjects}</span>${await icon("arrow-up-right")}</a></div><p class="section-lead">${t.workLead}</p><div class="project-list">${projects.join("")}</div></section>
 ${talks.length ? `<section class="conferences" id="conferences" aria-labelledby="conferences-title"><div class="section-head"><h2 id="conferences-title">${esc(t.conferences)}</h2></div><div class="conference-list">${talks.join("")}</div></section>` : ""}
 <section class="contact-section" id="contact" aria-labelledby="contact-title"><h2 id="contact-title">${t.contact}</h2><div class="contact-details"><a class="contact-email" href="mailto:${esc(site.owner.email)}">${esc(site.owner.email)}</a><p>${t.contactText}</p></div></section>
-<div class="support-layout" id="support"><div class="support-context"><h2>${t.support}</h2><p>${t.supportLead}</p>${site.boosty ? `<div class="boosty-option"><a class="boosty" href="${esc(site.boosty)}" target="_blank" rel="noopener noreferrer"><img src="${base}assets/boosty-mark.svg" width="24" height="28" alt="" /><span class="boosty-copy"><span>${t.boosty}</span><span class="boosty-note">${t.boostyText}</span></span>${await icon("arrow-up-right")}</a></div>` : ""}<section class="purpose"><h3>${t.purpose}</h3><p>${t.purposeText}</p></section><section class="help"><h3>${t.other}</h3><p>${t.otherText}</p><div class="project-idea"><p>${esc(t.otherIdeas)}</p><a class="idea-email" href="mailto:${esc(site.owner.email)}">${esc(site.owner.email)}${await icon("arrow-up-right")}</a></div></section></div>
+<div class="support-layout" id="support"><div class="support-context"><h2>${t.support}</h2><p>${t.supportLead}</p>${site.boosty ? `<div class="boosty-option"><a class="boosty" href="${esc(site.boosty)}"><img src="${base}assets/boosty-mark.svg" width="24" height="28" alt="" /><span class="boosty-copy"><span>${t.boosty}</span><span class="boosty-note">${t.boostyText}</span></span>${await icon("arrow-up-right")}</a></div>` : ""}<section class="purpose"><h3>${t.purpose}</h3><p>${t.purposeText}</p></section><section class="help"><h3>${t.other}</h3><p>${t.otherText}</p><div class="project-idea"><p>${esc(t.otherIdeas)}</p><a class="idea-email" href="mailto:${esc(site.owner.email)}">${esc(site.owner.email)}${await icon("arrow-up-right")}</a></div></section></div>
 <section class="support" aria-label="${t.support}">${site.boosty ? `<p class="crypto-label">${t.crypto}</p>` : ""}<fieldset class="wallet-picker"><legend class="visually-hidden">${t.support}</legend>${wallets.join("")}</fieldset><noscript><style>.copy,.icon-button{display:none}</style><span class="no-js">${t.instruction}</span></noscript></section><p class="optional">${t.optional}</p></div></main>
 <footer class="footer wrap"><p>${t.footer}</p><a href="https://github.com/Sipaha/about">${t.source} ↗</a></footer></body></html>`;
   if (lang !== "ru") await mkdir(new URL(`${lang}/`, out), { recursive: true });
   await writeFile(
     new URL(lang === "ru" ? "index.html" : `${lang}/index.html`, out),
-    html,
+    openExternalLinks(html, site.url),
   );
 }
 const talkURLs = await buildTalkPages({

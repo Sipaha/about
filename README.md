@@ -18,7 +18,8 @@ naturally; Russian conjunctions stay with the following word.
 
 Featured projects are SPK Ocular, SPK MM Client and
 Citeck Launcher (https://citeck.github.io/citeck-launcher/). The Citeck name in
-the biography links to https://www.citeck.ru/.
+the biography links to https://www.citeck.ru/ in a new browser tab with
+`noopener noreferrer`.
 SPK Ocular links to its product website: https://sipaha.github.io/spk-ocular/.
 SPK MM Client links to its product website: https://sipaha.github.io/spk-mm-client/.
 Project descriptions address a broad audience and avoid possessives such as “my”.
@@ -224,6 +225,9 @@ language navigation, clipboard denial, JavaScript-disabled use, and 320px layout
 Screenshots and results default to `../.tmp/about/verify`.
 Set `CHROME_PATH` if Chrome is not at `/usr/bin/google-chrome`.
 `ABOUT_SCRATCH` overrides output; `SITE_URL` selects the Lighthouse target.
+Keep the scratch path short: Chromium creates a Unix socket below it and exits
+before tests start if that socket path exceeds the platform limit. For example,
+use solution `.tmp/el` for a full verification run.
 
 ## Publish to GitHub Pages
 
@@ -289,3 +293,9 @@ Zookeeper subscription registry are checked against source revisions preceding
 the talk; provenance and source limitations are recorded separately in metadata; no timestamps or audience
 questions are invented. See [reconstruction provenance](docs/gorod-it-2024.md).
 The reader generator supports each configured conference and optional video/questions.
+
+All outbound HTTP(S) links on home and talk pages open a new browser tab with
+`noopener noreferrer`, including project sites, Citeck, GitHub, Boosty and YouTube.
+Links within `/about/`, local files, section anchors and email keep their normal
+behavior. The shared build-time rule also covers product sites on the same GitHub
+Pages host outside `/about/`. No JavaScript is needed for this behavior.
