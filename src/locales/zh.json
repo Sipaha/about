@@ -35,7 +35,7 @@
   "purpose": "支持款项的用途",
   "purposeText": "你的支持用于支付 AI 工具费用，帮助我开发更多免费软件。",
   "other": "不捐款也能提供帮助",
-  "otherText": "报告问题、提出改进建议，或分享项目，都能帮上忙。",
+  "otherText": "欢迎在项目的 Issues 中报告错误、提出改进建议，也欢迎把项目分享给其他人。",
   "allProjects": "所有代码仓库",
   "footer": "人人都能使用的免费软件。",
   "source": "网站源代码",
@@ -55,5 +55,6 @@
   "conferenceLanguage": "视频和演示文稿为俄语。",
   "readTalk": "幻灯片与讲稿",
   "transactionsTalk": "保证一致性的分布式事务：神话还是现实？",
-  "reconstructedLanguage": "重建文本 · 俄语幻灯片。"
+  "reconstructedLanguage": "重建文本 · 俄语幻灯片。",
+  "otherIdeas": "有想法解决某个领域缺少良好方案的问题？欢迎发邮件给我，一起讨论。"
 }

@@ -35,7 +35,7 @@
   "purpose": "Wofür die Unterstützung verwendet wird",
   "purposeText": "Deine Unterstützung hilft, KI-Werkzeuge zu finanzieren und mehr kostenlose Software zu entwickeln.",
   "other": "Du kannst auch ohne Spende helfen",
-  "otherText": "Melde einen Fehler, schlage eine Verbesserung vor oder teile ein Projekt. All das hilft.",
+  "otherText": "Melde Fehler und schlage Verbesserungen in den Issues der Projekte vor. Empfiehl die Projekte weiter.",
   "allProjects": "Alle Repositorys",
   "footer": "Kostenlose Software für alle.",
   "source": "Quellcode der Website",
@@ -55,5 +55,6 @@
   "conferenceLanguage": "Video und Präsentation auf Russisch.",
   "readTalk": "Folien und Transkript",
   "transactionsTalk": "Verteilte Transaktionen mit garantierter Konsistenz: Mythos oder Realität?",
-  "reconstructedLanguage": "Rekonstruierter Text · Folien auf Russisch."
+  "reconstructedLanguage": "Rekonstruierter Text · Folien auf Russisch.",
+  "otherIdeas": "Hast du eine Idee für eine Nische ohne gute Lösungen? Schreib mir — lass uns darüber sprechen."
 }

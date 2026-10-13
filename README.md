@@ -23,7 +23,17 @@ SPK Ocular links to its product website: https://sipaha.github.io/spk-ocular/.
 SPK MM Client links to its product website: https://sipaha.github.io/spk-mm-client/.
 Project descriptions address a broad audience and avoid possessives such as “my”.
 The footer says “Free software for everyone” and omits payment-method and
-privacy slogans. Boosty remains a possible future option awaiting a public profile link. Outwall is omitted at the owner’s request.
+privacy slogans. The support section includes the owner-provided Boosty profile at https://boosty.to/sipaha, in the support text column, alongside a separate cryptocurrency card.
+The locally bundled official Boosty mark identifies the link. Boosty opens in a
+new browser tab with `noopener noreferrer`.
+The shared voluntary-donation policy appears beneath both support columns.
+The Boosty payment caption is part of its link. The support text uses a bounded
+reading width shared by every paragraph, consistent 14px text with ordinary
+width-based wrapping, short paragraphs and a separate email action for project ideas.
+On desktop and tablet, the visible top of the left heading aligns with the upper edge
+of the adjacent cryptocurrency card; mobile keeps the natural stacked layout.
+The non-financial support section directs bug reports and improvements to project
+Issues and invites email suggestions for useful projects in underserved niches. Outwall is omitted at the owner’s request.
 The Mattermost repository is public; anonymous access was verified on 2026-10-06.
 The support section explicitly names its purpose: quality free software available
 to everyone. Avoid references such as “this idea” that require reading earlier sections.
@@ -151,13 +161,13 @@ syntax is validated by the build. Checks do not prove wallet ownership.
 Each method displays its network explicitly. A native radio selector shows one
 wallet at a time, including its network, exact address and QR code. It works
 without JavaScript and supports keyboard navigation. Network names appear in
-the selector, wallet heading and address label; only Bitcoin has an additional
-on-chain/Lightning clarification beneath the copy button. Copy feedback changes the fixed-height button label for three seconds, with
+the selector, wallet heading and address label; Bitcoin retains its on-chain/Lightning clarification as an address tooltip,
+without adding a row or changing the support section height. Copy feedback changes the fixed-height button label for three seconds, with
 an accessible live region inside the button. No separate status row is reserved.
 Clipboard denial selects the address and shows a short manual-copy label; the
 full explanation is available in the button tooltip.
 
-Lightning remains on hold. Toncoin/GRAM and Boosty remain unconfigured.
+Lightning remains on hold. Toncoin/GRAM remains unconfigured.
 Never substitute sample addresses or create payment accounts on the owner's behalf.
 
 Each wallet has `id`, `coin`, `name`, `network`, and `address`. Use an explicit
@@ -169,7 +179,7 @@ prove ownership of any wallet. QR codes are generated from the exact address;
 the browser checks decode the rendered codes and compare them with configuration.
 
 A non-null `boosty` must be the owner’s actual HTTPS profile on `boosty.to`.
-A future Boosty option on this personal site does not change any individual
+The Boosty option on this personal site does not change any individual
 project’s funding policy. Ocular retains voluntary cryptocurrency-only funding.
 
 ## Local development

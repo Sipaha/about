@@ -35,7 +35,7 @@
   "purpose": "O que seu apoio financia",
   "purposeText": "Seu apoio ajuda a pagar ferramentas de IA e a criar mais software gratuito.",
   "other": "Você também pode ajudar sem doar",
-  "otherText": "Relate um problema, sugira uma melhoria ou compartilhe um projeto. Tudo isso ajuda.",
+  "otherText": "Relate erros e sugira melhorias nas Issues dos projetos. Compartilhe os projetos com outras pessoas.",
   "allProjects": "Todos os repositórios",
   "footer": "Software gratuito para todos.",
   "source": "Código-fonte do site",
@@ -55,5 +55,6 @@
   "conferenceLanguage": "O vídeo e a apresentação estão em russo.",
   "readTalk": "Slides e transcrição",
   "transactionsTalk": "Transações distribuídas com consistência garantida: mito ou realidade?",
-  "reconstructedLanguage": "Texto reconstruído · slides em russo."
+  "reconstructedLanguage": "Texto reconstruído · slides em russo.",
+  "otherIdeas": "Tem uma ideia para um nicho sem boas soluções? Escreva para mim — vamos conversar."
 }

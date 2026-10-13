@@ -239,7 +239,7 @@ h1 span {
   margin: 0;
 }
 .support {
-  padding: 27px 28px 21px;
+  padding: 22px 24px 18px;
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--radius);
@@ -288,7 +288,7 @@ h1 span {
   display: flex;
   align-items: center;
   gap: 22px;
-  margin: 22px 0;
+  margin: 16px 0;
 }
 .qr-frame {
   padding: 8px;
@@ -298,8 +298,8 @@ h1 span {
 }
 .qr-frame img {
   display: block;
-  width: 138px;
-  height: 138px;
+  width: 112px;
+  height: 112px;
   image-rendering: pixelated;
 }
 .qr-help {
@@ -384,17 +384,13 @@ button:active,
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.network-note {
-  font-size: 11px;
-  color: var(--muted);
-  margin: 5px 0 0;
-}
 .optional {
-  font-size: 11px;
+  grid-column: 1 / -1;
+  font-size: 12px;
   color: var(--muted);
   padding-top: 15px;
   border-top: 1px solid var(--line);
-  margin: 15px 0 0;
+  margin: 0;
 }
 /* Native radios keep wallet switching available without JavaScript. */
 .wallet-picker {
@@ -451,7 +447,7 @@ button:active,
   grid-column: 1 / -1;
   order: 1;
   min-width: 0;
-  padding-top: 20px;
+  padding-top: 16px;
 }
 .wallet-radio:checked ~ .wallet {
   display: block;
@@ -462,7 +458,45 @@ button:active,
   color: var(--muted);
 }
 .crypto-label {
+  font-size: 17px;
+  font-weight: 650;
+  color: var(--text);
+  line-height: 20px;
+  margin: 0 0 14px;
+}
+.boosty-option {
   margin-top: 24px;
+  max-width: 360px;
+}
+.boosty-option .boosty {
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--line);
+  justify-content: flex-start;
+  gap: 14px;
+  padding: 12px 18px;
+  min-height: 56px;
+}
+.boosty-option .boosty:hover {
+  background: var(--bg);
+  color: var(--text);
+}
+.boosty img {
+  object-fit: contain;
+  flex: none;
+}
+.boosty .icon {
+  margin-left: auto;
+}
+.boosty-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  white-space: normal;
+}
+.boosty-note {
+  margin: 0;
+  font-weight: 400;
 }
 .projects {
   border-top: 1px solid var(--line);
@@ -780,12 +814,13 @@ button:active,
 .support-layout {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 470px);
-  gap: 70px;
+  column-gap: 70px;
+  row-gap: 22px;
   border-top: 1px solid var(--line);
   padding: 45px 0 60px;
 }
 .support-context .purpose {
-  margin-top: 30px;
+  margin-top: 28px;
 }
 .purpose h3,
 .help h3 {
@@ -793,7 +828,7 @@ button:active,
   margin: 0 0 9px;
 }
 .support-context .help {
-  padding-top: 28px;
+  padding-top: 24px;
 }
 @media (min-width: 768px) and (max-width: 1023px) {
   .profile-hero {
@@ -1607,4 +1642,55 @@ html:has(.photo-view[open]) {
 
 .photo-view {
   overflow: clip;
+}
+
+.help p + p {
+  margin-top: 12px;
+}
+.help a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  overflow-wrap: anywhere;
+}
+
+.support-context {
+  align-self: start;
+  max-width: 520px;
+}
+.support-context p {
+  font-size: 14px;
+  line-height: 1.65;
+  text-wrap: wrap;
+}
+.support-context .purpose,
+.support-context .help {
+  max-width: none;
+}
+.support-context .help {
+  padding-bottom: 0;
+}
+.project-idea {
+  margin-top: 16px;
+}
+.idea-email {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 7px;
+  font-size: 14px;
+}
+.idea-email .icon {
+  width: 16px;
+  height: 16px;
+}
+.boosty-option .boosty {
+  margin-top: 0;
+}
+
+@media (min-width: 768px) {
+  .support-context > h2 {
+    line-height: 1;
+    margin-top: -3px;
+  }
 }

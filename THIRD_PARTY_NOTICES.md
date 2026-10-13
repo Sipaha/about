@@ -38,3 +38,10 @@ site are distributed under public/licenses/.
   and `gorodid_2024-0.jpg` through `gorodid_2024-4.jpg`. JPEG files are copied
   unchanged, with local WebP thumbnails that preserve the full frame. No new
   license is asserted.
+
+## Boosty brand mark
+
+`public/assets/boosty-mark.svg` is the unmodified color brand mark from
+[Boosty’s official brand assets](https://boosty.to/app/brand), downloaded from
+https://static.boosty.to/static/brand_mark_svg.zip (`SVG/Color.svg`).
+Used to identify the owner’s outbound Boosty profile; Boosty retains its trademark rights.

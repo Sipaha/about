@@ -46,8 +46,7 @@ export const content = {
     leadSecond: "Для меня программирование — и работа, и хобби.",
     profile: "Мой GitHub",
     support: "Поддержать разработку",
-    supportLead:
-      "Поддержите создание качественного бесплатного софта, доступного всем.",
+    supportLead: "Помогите создавать качественный бесплатный софт для всех.",
     network: "Сеть",
     address: "Адрес получения",
     copy: "Скопировать адрес",
@@ -67,7 +66,9 @@ export const content = {
       "Поддержка помогает оплачивать ИИ-инструменты и создавать больше бесплатного софта.",
     other: "Помочь можно и без доната",
     otherText:
-      "Рассказать об ошибке, предложить улучшение или поделиться проектом. Всё это тоже помогает.",
+      "Сообщайте об ошибках и предлагайте улучшения в Issues проектов. Делитесь проектами с другими.",
+    otherIdeas:
+      "Есть идея для ниши без хороших решений? Напишите мне — обсудим.",
     allProjects: "Все репозитории",
     footer: "Бесплатный софт для всех.",
     source: "Исходный код сайта",
@@ -130,7 +131,9 @@ export const content = {
       "Your support helps pay for AI tools and create more free software.",
     other: "You can help without donating",
     otherText:
-      "Report a bug, suggest an improvement, or share a project. It all makes a difference.",
+      "Report bugs and suggest improvements in project Issues. Share the projects with others.",
+    otherIdeas:
+      "Have an idea for a niche without good solutions? Email me — let’s discuss it.",
     allProjects: "All repositories",
     footer: "Free software for everyone.",
     source: "Website source",

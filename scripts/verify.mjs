@@ -123,9 +123,26 @@ try {
           );
         }
         assert.equal(await page.locator(".wallet:visible").count(), 1);
+        if (site.boosty) {
+          assert.equal(
+            await page.locator(".boosty").getAttribute("href"),
+            site.boosty,
+          );
+          assert(await page.locator(".boosty").isVisible());
+        }
+        const supportHeight = (
+          await page.locator("section.support").boundingBox()
+        ).height;
         for (const w of site.wallets) {
           await page.locator(`label[for="choose-${w.id}"]`).click();
           assert.equal(await page.locator(".wallet:visible").count(), 1);
+          assert(
+            Math.abs(
+              (await page.locator("section.support").boundingBox()).height -
+                supportHeight,
+            ) < 1,
+            `Wallet ${w.id} must not change support section height`,
+          );
           assert.equal(
             await page.locator(`#address-${w.id}`).inputValue(),
             w.address,
