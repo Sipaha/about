@@ -150,8 +150,8 @@ The owner confirmed GitHub Pages is working.
 Edit **`src/site.json`** to change the owner, projects, wallet addresses, or Boosty
 profile. Edit `src/content.mjs` for Russian and English copy. There is no runtime
 API, analytics, wallet connection, checkout, or private-key handling. The owner-provided portrait is served locally as an optimized 768px JPEG for the
-hero and social preview. The header contains the owner’s name without a photo. The original GitHub avatar remains
-the favicon. The portrait displays at 288px on desktop, 224px on tablets and 128px on mobile; fonts and QR images
+hero and social preview. The header contains the owner’s name without a photo. The favicon is a custom geometric white S for Sipaha on a blue rounded square,
+served from `public/assets/favicon-sipaha.svg` on every home and talk page. The portrait displays at 288px on desktop, 224px on tablets and 128px on mobile; fonts and QR images
 are served locally too.
 
 Owner-approved methods: BTC on Bitcoin (ordinary on-chain payments), USDT on
