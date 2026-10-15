@@ -56,5 +56,7 @@
   "readTalk": "Folien und Transkript",
   "transactionsTalk": "Verteilte Transaktionen mit garantierter Konsistenz: Mythos oder Realität?",
   "reconstructedLanguage": "Rekonstruierter Text · Folien auf Russisch.",
-  "otherIdeas": "Hast du eine Idee für eine Nische ohne gute Lösungen? Schreib mir — lass uns darüber sprechen."
+  "otherIdeas": "Hast du eine Idee für eine Nische ohne gute Lösungen? Schreib mir — lass uns darüber sprechen.",
+  "blogNav": "Blog",
+  "supportDream": "Ich träume davon, einen Server aufzubauen, um führende KI-Modelle lokal zu betreiben."
 }

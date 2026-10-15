@@ -8,7 +8,7 @@
   at build time without modification to their paths.
 - **GitHub profile avatar**: public profile image for Sipaha, downloaded from
   https://avatars.githubusercontent.com/u/3995047?v=4&s=192 for this personal site.
-  The avatar is used as the favicon and is owner profile content, not covered by
+  The avatar is retained as an asset and is owner profile content, not covered by
   the font or icon licenses.
 - **Portrait**: supplied by the owner as `photo_about.png`; optimized JPEG
   derivatives are served locally. The portrait is owner-provided content and
@@ -45,3 +45,9 @@ site are distributed under public/licenses/.
 [Boosty’s official brand assets](https://boosty.to/app/brand), downloaded from
 https://static.boosty.to/static/brand_mark_svg.zip (`SVG/Color.svg`).
 Used to identify the owner’s outbound Boosty profile; Boosty retains its trademark rights.
+
+- **VK brand icon**: Simple Icons, CC0-1.0, from
+  https://github.com/simple-icons/simple-icons/blob/develop/icons/vk.svg.
+  Bundled in `public/assets/vk.svg`; license in `public/licenses/Simple-Icons-LICENSE.md`.
+  Brand marks remain the property of their respective owners. Telegram and X
+  use the existing locally bundled Phosphor icons.

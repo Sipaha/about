@@ -5,7 +5,21 @@
     "nameRu": "Павел Симонов",
     "handle": "Sipaha",
     "email": "sipahabk@gmail.com",
-    "github": "https://github.com/Sipaha"
+    "github": "https://github.com/Sipaha",
+    "socials": [
+      {
+        "name": "VK",
+        "url": "https://vk.ru/sipaha"
+      },
+      {
+        "name": "Telegram",
+        "url": "https://t.me/Sipaha"
+      },
+      {
+        "name": "X",
+        "url": "https://x.com/Siqaha"
+      }
+    ]
   },
   "boosty": "https://boosty.to/sipaha",
   "wallets": [

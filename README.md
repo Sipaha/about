@@ -10,7 +10,14 @@ principles take priority over individual technical achievements: free software,
 no tracking, optional cloud use, and speed. AI assists design, implementation,
 and testing; donations help fund these tools. The owner-approved public contact
 is sipahabk@gmail.com, with no promise to answer every message. The page does not
-advertise job seeking. Keep this content equivalent in all supported languages.
+advertise job seeking. The contact section also lists the owner-provided VK
+(https://vk.ru/sipaha), Telegram (https://t.me/Sipaha), and X
+(https://x.com/Siqaha) profiles, configured in `owner.socials` in `src/site.json`.
+Each social link pairs a locally bundled brand icon with its visible name.
+Hover/focus highlights the whole link with a shared surface instead of underlining
+only its text.
+These are ordinary outbound links opening new tabs; no social embeds or tracking
+are loaded. Keep this content equivalent in all supported languages.
 Desktop and tablet hero columns align at the top, with the portrait level with
 the professional title. The introduction has a deliberate line break after the professional title.
 “Для меня программирование” begins the next line; narrower screens can wrap
@@ -299,3 +306,9 @@ All outbound HTTP(S) links on home and talk pages open a new browser tab with
 Links within `/about/`, local files, section anchors and email keep their normal
 behavior. The shared build-time rule also covers product sites on the same GitHub
 Pages host outside `/about/`. No JavaScript is needed for this behavior.
+
+The header includes a localized Blog link to the owner's Boosty profile on home
+and talk pages. It follows the shared external-link new-tab policy. The support
+text also states the owner's aspiration to build a server for running frontier
+AI models locally; it does not imply the server already exists or promise a
+fundraising target or delivery date.

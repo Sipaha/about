@@ -11,6 +11,10 @@ export function validateSite(site) {
       throw new Error("Links must use HTTPS");
   };
   https(site.owner.github);
+  for (const social of site.owner.socials || []) {
+    if (!social.name) throw new Error("Social link name is required");
+    https(social.url);
+  }
   if (site.boosty) {
     https(site.boosty);
     if (new URL(site.boosty).hostname !== "boosty.to")

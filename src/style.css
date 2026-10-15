@@ -1694,3 +1694,44 @@ html:has(.photo-view[open]) {
     margin-top: -3px;
   }
 }
+
+.social-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 8px;
+  list-style: none;
+  margin: 18px 0 0;
+  padding: 0;
+}
+.social-links a {
+  padding: 7px 10px;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background-color 150ms ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 36px;
+  color: var(--accent);
+  font-size: 14px;
+  font-weight: 650;
+}
+.social-links a:hover,
+.social-links a:focus-visible {
+  text-decoration: none;
+  background: var(--surface);
+}
+.social-links .icon {
+  width: 21px;
+  height: 21px;
+  flex: none;
+}
+
+.purpose .support-dream {
+  margin-top: 12px;
+}
+@media (max-width: 767px) {
+  .nav-blog {
+    font-size: 12px;
+  }
+}

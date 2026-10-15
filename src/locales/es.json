@@ -56,5 +56,7 @@
   "readTalk": "Diapositivas y transcripción",
   "transactionsTalk": "Transacciones distribuidas con consistencia garantizada: ¿mito o realidad?",
   "reconstructedLanguage": "Texto reconstruido · diapositivas en ruso.",
-  "otherIdeas": "¿Tienes una idea para un nicho sin buenas soluciones? Escríbeme y lo hablamos."
+  "otherIdeas": "¿Tienes una idea para un nicho sin buenas soluciones? Escríbeme y lo hablamos.",
+  "blogNav": "Blog",
+  "supportDream": "Sueño con montar un servidor para ejecutar modelos de IA de vanguardia de forma local."
 }

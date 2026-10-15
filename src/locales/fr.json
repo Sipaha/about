@@ -56,5 +56,7 @@
   "readTalk": "Diapositives et transcription",
   "transactionsTalk": "Transactions distribuées avec cohérence garantie : mythe ou réalité ?",
   "reconstructedLanguage": "Texte reconstitué · diapositives en russe.",
-  "otherIdeas": "Une idée pour un domaine sans bonnes solutions ? Écrivez-moi pour en discuter."
+  "otherIdeas": "Une idée pour un domaine sans bonnes solutions ? Écrivez-moi pour en discuter.",
+  "blogNav": "Blog",
+  "supportDream": "Je rêve de monter un serveur pour faire tourner localement des modèles d’IA de pointe."
 }

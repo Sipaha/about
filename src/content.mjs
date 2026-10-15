@@ -29,6 +29,9 @@ export const content = {
       "Павел Симонов (Sipaha), системный архитектор и разработчик. Создаю бесплатные инструменты без слежки и обязательного облака.",
     skip: "К содержимому",
     projectsNav: "Проекты",
+    blogNav: "Блог",
+    supportDream:
+      "Мечтаю собрать сервер для локальной работы с передовыми ИИ-моделями.",
     supportNav: "Поддержать",
     about: "Обо мне",
     aboutText:
@@ -93,6 +96,9 @@ export const content = {
       "Pavel Simonov (Sipaha), systems architect and developer. I build free tools without tracking or a mandatory cloud connection.",
     skip: "Skip to content",
     projectsNav: "Projects",
+    blogNav: "Blog",
+    supportDream:
+      "I dream of building a server to run frontier AI models locally.",
     supportNav: "Support",
     about: "About me",
     aboutText:

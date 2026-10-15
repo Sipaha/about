@@ -56,5 +56,7 @@
   "readTalk": "Slides e transcrição",
   "transactionsTalk": "Transações distribuídas com consistência garantida: mito ou realidade?",
   "reconstructedLanguage": "Texto reconstruído · slides em russo.",
-  "otherIdeas": "Tem uma ideia para um nicho sem boas soluções? Escreva para mim — vamos conversar."
+  "otherIdeas": "Tem uma ideia para um nicho sem boas soluções? Escreva para mim — vamos conversar.",
+  "blogNav": "Blog",
+  "supportDream": "Sonho em montar um servidor para executar modelos de IA de ponta localmente."
 }

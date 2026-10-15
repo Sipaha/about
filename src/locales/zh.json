@@ -56,5 +56,7 @@
   "readTalk": "幻灯片与讲稿",
   "transactionsTalk": "保证一致性的分布式事务：神话还是现实？",
   "reconstructedLanguage": "重建文本 · 俄语幻灯片。",
-  "otherIdeas": "有想法解决某个领域缺少良好方案的问题？欢迎发邮件给我，一起讨论。"
+  "otherIdeas": "有想法解决某个领域缺少良好方案的问题？欢迎发邮件给我，一起讨论。",
+  "blogNav": "博客",
+  "supportDream": "我希望组建一台服务器，在本地运行前沿 AI 模型。"
 }
